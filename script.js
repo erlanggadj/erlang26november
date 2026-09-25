@@ -719,6 +719,9 @@
   // --- WHATSAPP CHAT BERDUA ENGINE (ERLANG & CINDY) ---
   const DEFAULT_CHAT_MESSAGES = [];
   const CHAT_STORAGE_KEY = 'erlangCindyChatMessages_v2';
+  const CHAT_PAGE_SIZE = 12; // Ukuran pesan per halaman lazy loading
+  let chatVisibleCount = CHAT_PAGE_SIZE;
+  let isLazyLoadingChat = false;
 
   let chatMessages = [];
   let cloudDbUrl = localStorage.getItem('erlangCindyFirebaseUrl') || '';
@@ -791,7 +794,43 @@
     setTimeout(doScroll, 300);
   }
 
-  // Render WhatsApp Bubbles (Sort by timestamp, latest at bottom)
+  // Load older messages lazily when scrolling up
+  function loadOlderChatMessages() {
+    if (isLazyLoadingChat) return;
+    const totalCount = chatMessages.length;
+    if (chatVisibleCount >= totalCount) return;
+
+    isLazyLoadingChat = true;
+    const lazyLoader = document.getElementById('waLazyLoader');
+    if (lazyLoader) {
+      lazyLoader.classList.add('loading');
+      lazyLoader.innerHTML = `<span class="wa-lazy-spinner"></span> <span>Memuat pesan terdahulu... ⏳</span>`;
+    }
+
+    setTimeout(() => {
+      if (!waMessagesBox) {
+        isLazyLoadingChat = false;
+        return;
+      }
+      const oldScrollHeight = waMessagesBox.scrollHeight;
+      const oldScrollTop = waMessagesBox.scrollTop;
+
+      // Increase visible message count by CHAT_PAGE_SIZE
+      chatVisibleCount = Math.min(totalCount, chatVisibleCount + CHAT_PAGE_SIZE);
+
+      // Re-render WITHOUT scrolling to bottom
+      renderWhatsAppChat(false);
+
+      // Seamless scroll position retention so user doesn't feel any jump
+      const newScrollHeight = waMessagesBox.scrollHeight;
+      const heightDiff = newScrollHeight - oldScrollHeight;
+      waMessagesBox.scrollTop = oldScrollTop + heightDiff;
+
+      isLazyLoadingChat = false;
+    }, 280);
+  }
+
+  // Render WhatsApp Bubbles (Sort by timestamp, latest at bottom, lazy loading older messages)
   function renderWhatsAppChat(scrollToBottom = true) {
     if (!waMessagesList) return;
     waMessagesList.innerHTML = '';
@@ -813,10 +852,37 @@
     chatMessages.sort((a, b) => (Number(a.timestamp) || 0) - (Number(b.timestamp) || 0));
 
     const totalCount = chatMessages.length;
+    if (chatVisibleCount < CHAT_PAGE_SIZE) chatVisibleCount = CHAT_PAGE_SIZE;
 
-    chatMessages.forEach((msg, idx) => {
+    const startIndex = Math.max(0, totalCount - chatVisibleCount);
+    const visibleMessages = chatMessages.slice(startIndex);
+
+    // If there are older messages remaining, render lazy load trigger
+    if (startIndex > 0) {
+      const loaderDiv = document.createElement('div');
+      loaderDiv.className = 'wa-lazy-loader';
+      loaderDiv.id = 'waLazyLoader';
+      loaderDiv.title = 'Scroll ke atas atau klik untuk memuat pesan terdahulu';
+      loaderDiv.innerHTML = `
+        <span class="wa-lazy-spinner"></span>
+        <span class="wa-lazy-text">Gulir ke atas untuk memuat pesan lama (${startIndex} tersisa)...</span>
+      `;
+      loaderDiv.addEventListener('click', () => {
+        loadOlderChatMessages();
+      });
+      waMessagesList.appendChild(loaderDiv);
+    } else {
+      // Reached the very beginning of conversation
+      const startDiv = document.createElement('div');
+      startDiv.className = 'wa-start-indicator';
+      startDiv.innerHTML = `<span>🥀 Awal mula cerita obrolan • 2 Juli 2026</span>`;
+      waMessagesList.appendChild(startDiv);
+    }
+
+    visibleMessages.forEach((msg, idx) => {
       const isErlang = msg.sender === 'Erlang' || (msg.sender && msg.sender.includes('Erlang'));
-      const isLatest = (idx === totalCount - 1);
+      const globalIdx = startIndex + idx;
+      const isLatest = (globalIdx === totalCount - 1);
 
       const row = document.createElement('div');
       row.className = `wa-row ${isErlang ? 'wa-row-erlang' : 'wa-row-cindy'}${isLatest ? ' wa-row-latest' : ''}`;
@@ -1037,6 +1103,7 @@
 
       // Optimistic UI update
       chatMessages.push(newMsg);
+      chatVisibleCount = Math.max(chatVisibleCount, chatMessages.length);
       try {
         localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatMessages));
       } catch (e) {}
@@ -1080,22 +1147,34 @@
     });
   }
 
-  // Floating Jump to Bottom Button (WhatsApp Style)
-  if (waMessagesBox && waJumpBottomBtn) {
+  // Scroll event on waMessagesBox (Reverse Lazy Loading on scroll up & Jump-to-bottom button)
+  if (waMessagesBox) {
     waMessagesBox.addEventListener('scroll', () => {
-      const distFromBottom = waMessagesBox.scrollHeight - waMessagesBox.scrollTop - waMessagesBox.clientHeight;
-      if (distFromBottom > 75) {
-        waJumpBottomBtn.classList.add('visible');
-      } else {
-        waJumpBottomBtn.classList.remove('visible');
+      // 1. Lazy loading check: Ketika scroll mendekati atas (<= 50px), muat batch pesan sebelumnya
+      if (waMessagesBox.scrollTop <= 50) {
+        if (!isLazyLoadingChat && chatMessages.length > chatVisibleCount) {
+          loadOlderChatMessages();
+        }
+      }
+
+      // 2. Tombol shortcut kembali ke pesan terbaru
+      if (waJumpBottomBtn) {
+        const distFromBottom = waMessagesBox.scrollHeight - waMessagesBox.scrollTop - waMessagesBox.clientHeight;
+        if (distFromBottom > 75) {
+          waJumpBottomBtn.classList.add('visible');
+        } else {
+          waJumpBottomBtn.classList.remove('visible');
+        }
       }
     });
 
-    waJumpBottomBtn.addEventListener('click', () => {
-      scrollChatToBottom(true);
-      waJumpBottomBtn.classList.remove('visible');
-      playClickSfx();
-    });
+    if (waJumpBottomBtn) {
+      waJumpBottomBtn.addEventListener('click', () => {
+        scrollChatToBottom(true);
+        waJumpBottomBtn.classList.remove('visible');
+        playClickSfx();
+      });
+    }
   }
 
   // Auto scroll to bottom when user scrolls down to chat section

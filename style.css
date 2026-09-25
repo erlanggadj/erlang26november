@@ -1524,6 +1524,72 @@ html, body {
   pointer-events: none;
 }
 
+/* Lazy Loading Chat Header & Spinner (Reverse Infinite Scroll WhatsApp) */
+.wa-lazy-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  margin: 4px auto 14px auto;
+  background: rgba(36, 20, 50, 0.88);
+  border: 1px dashed rgba(224, 170, 255, 0.38);
+  border-radius: 18px;
+  color: #c4b5fd;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  width: fit-content;
+  max-width: 90%;
+  transition: all 0.25s ease;
+  user-select: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.wa-lazy-loader:hover {
+  background: rgba(52, 28, 76, 0.95);
+  border-color: #70d6ff;
+  color: #70d6ff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(112, 214, 255, 0.25);
+}
+
+.wa-lazy-loader.loading {
+  background: rgba(22, 14, 32, 0.96);
+  border-color: rgba(112, 214, 255, 0.65);
+  color: #70d6ff;
+}
+
+.wa-lazy-spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(196, 181, 253, 0.3);
+  border-top-color: #70d6ff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spinVinyl 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+.wa-start-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 6px auto 14px auto;
+  width: 100%;
+}
+
+.wa-start-indicator span {
+  background: rgba(45, 25, 60, 0.85);
+  border: 1px solid rgba(224, 170, 255, 0.25);
+  padding: 5px 16px;
+  border-radius: 14px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #d8b4fe;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
 /* WhatsApp Chat Footer (Button Tambah Pesan) */
 .wa-chat-footer {
   background: rgba(38, 24, 52, 0.98);
