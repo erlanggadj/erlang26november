@@ -724,7 +724,10 @@
   let isLazyLoadingChat = false;
 
   let chatMessages = [];
-  let cloudDbUrl = localStorage.getItem('erlangCindyFirebaseUrl') || '';
+  // Default Cloud Database URL (Firebase Realtime Database)
+  // Masukkan URL Firebase di sini agar SEMUA perangkat (Laptop, HP, HP Cindy) langsung otomatis tersinkronisasi tanpa perlu setting manual di HP
+  const DEFAULT_CLOUD_DB_URL = '';
+  let cloudDbUrl = localStorage.getItem('erlangCindyFirebaseUrl') || DEFAULT_CLOUD_DB_URL;
 
   // Load cached messages (Start clean without dummy data)
   try {
