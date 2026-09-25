@@ -144,6 +144,7 @@
   const waAvatarBoy = document.getElementById('waAvatarBoy');
   const waAvatarGirl = document.getElementById('waAvatarGirl');
   const waOpenAddModalBtn = document.getElementById('waOpenAddModalBtn');
+  const waJumpBottomBtn = document.getElementById('waJumpBottomBtn');
 
   // WhatsApp Add Message Modal Elements
   const waAddMessageModal = document.getElementById('waAddMessageModal');
@@ -478,6 +479,7 @@
     const rect = openCurtainBtn.getBoundingClientRect();
     spawnBurstHearts(rect.left + rect.width / 2, rect.top, 25);
     playClickSfx(true);
+    scrollChatToBottom(false);
   });
 
   // Music toggle
@@ -764,6 +766,31 @@
       .replace(/"/g, '&quot;');
   }
 
+  // Scroll to bottom of WhatsApp chat like official WhatsApp
+  function scrollChatToBottom(smooth = false) {
+    if (!waMessagesBox) return;
+
+    const doScroll = () => {
+      waMessagesBox.scrollTo({
+        top: waMessagesBox.scrollHeight + 1000,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+      const bottomAnchor = document.getElementById('waChatBottomAnchor');
+      if (bottomAnchor) {
+        bottomAnchor.scrollIntoView({
+          behavior: smooth ? 'smooth' : 'auto',
+          block: 'end'
+        });
+      }
+    };
+
+    doScroll();
+    requestAnimationFrame(doScroll);
+    setTimeout(doScroll, 40);
+    setTimeout(doScroll, 120);
+    setTimeout(doScroll, 300);
+  }
+
   // Render WhatsApp Bubbles (Sort by timestamp, latest at bottom)
   function renderWhatsAppChat(scrollToBottom = true) {
     if (!waMessagesList) return;
@@ -778,20 +805,28 @@
           <p>Klik tombol <strong>"Tambah Pesan"</strong> di bawah untuk mulai menuliskan obrolan antara ${escapeHtml(config.boyName)} dan ${escapeHtml(config.girlName)}.</p>
         </div>
       `;
+      if (waJumpBottomBtn) waJumpBottomBtn.classList.remove('visible');
       return;
     }
 
-    // Sort ascending by timestamp (chat chronologically)
-    chatMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+    // Sort ascending by timestamp (chat chronologically: oldest at top, newest at bottom)
+    chatMessages.sort((a, b) => (Number(a.timestamp) || 0) - (Number(b.timestamp) || 0));
 
-    chatMessages.forEach(msg => {
+    const totalCount = chatMessages.length;
+
+    chatMessages.forEach((msg, idx) => {
       const isErlang = msg.sender === 'Erlang' || (msg.sender && msg.sender.includes('Erlang'));
-      const row = document.createElement('div');
-      row.className = `wa-row ${isErlang ? 'wa-row-erlang' : 'wa-row-cindy'}`;
+      const isLatest = (idx === totalCount - 1);
 
-      const bubbleClass = isErlang ? 'wa-bubble-erlang' : 'wa-bubble-cindy';
+      const row = document.createElement('div');
+      row.className = `wa-row ${isErlang ? 'wa-row-erlang' : 'wa-row-cindy'}${isLatest ? ' wa-row-latest' : ''}`;
+
+      const bubbleClass = `${isErlang ? 'wa-bubble-erlang' : 'wa-bubble-cindy'}${isLatest ? ' wa-bubble-latest' : ''}`;
       const senderLabel = isErlang ? `${config.boyName} 🤵🏻` : `${config.girlName} 👸🏻`;
-      const checkmark = isErlang ? '<span class="wa-checkmarks">✓✓</span>' : '';
+
+      // Sesuai layout: Erlang di kiri, Cindy di kanan. Cindy sebagai bubble di kanan mendapat checkmarks WhatsApp terbaca
+      const checkmark = (!isErlang) ? '<span class="wa-checkmarks" title="Terbaca">✓✓</span>' : '';
+      const latestBadge = isLatest ? '<span class="wa-latest-pill">Terbaru 📌</span>' : '';
 
       // Watermark jam, tanggal, bulan, tahun
       let watermarkText = '';
@@ -808,6 +843,7 @@
           <span class="wa-bubble-author">${escapeHtml(senderLabel)}</span>
           <div class="wa-bubble-text">${escapeHtml(msg.text)}</div>
           <div class="wa-bubble-meta">
+            ${latestBadge}
             <span class="wa-bubble-watermark" title="Waktu: Jam, Tanggal, Bulan, Tahun">${escapeHtml(watermarkText)}</span>
             ${checkmark}
           </div>
@@ -817,10 +853,14 @@
       waMessagesList.appendChild(row);
     });
 
-    if (scrollToBottom && waMessagesBox) {
-      setTimeout(() => {
-        waMessagesBox.scrollTop = waMessagesBox.scrollHeight;
-      }, 50);
+    // Anchor div at bottom for 100% reliable scrollIntoView
+    const anchor = document.createElement('div');
+    anchor.id = 'waChatBottomAnchor';
+    anchor.className = 'wa-bottom-anchor';
+    waMessagesList.appendChild(anchor);
+
+    if (scrollToBottom) {
+      scrollChatToBottom(false);
     }
   }
 
@@ -1039,6 +1079,40 @@
       setTimeout(() => waRefreshBtn.classList.remove('spinning'), 600);
     });
   }
+
+  // Floating Jump to Bottom Button (WhatsApp Style)
+  if (waMessagesBox && waJumpBottomBtn) {
+    waMessagesBox.addEventListener('scroll', () => {
+      const distFromBottom = waMessagesBox.scrollHeight - waMessagesBox.scrollTop - waMessagesBox.clientHeight;
+      if (distFromBottom > 75) {
+        waJumpBottomBtn.classList.add('visible');
+      } else {
+        waJumpBottomBtn.classList.remove('visible');
+      }
+    });
+
+    waJumpBottomBtn.addEventListener('click', () => {
+      scrollChatToBottom(true);
+      waJumpBottomBtn.classList.remove('visible');
+      playClickSfx();
+    });
+  }
+
+  // Auto scroll to bottom when user scrolls down to chat section
+  if ('IntersectionObserver' in window && waChatSection) {
+    const chatObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          scrollChatToBottom(false);
+        }
+      });
+    }, { threshold: 0.15 });
+    chatObserver.observe(waChatSection);
+  }
+
+  window.addEventListener('load', () => {
+    scrollChatToBottom(false);
+  });
 
   // Cloud Modal Open / Close
   if (waCloudSetupBtn && cloudModal) {
