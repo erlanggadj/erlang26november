@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9d4edd" />
+      <stop offset="50%" stop-color="#e0aaff" />
+      <stop offset="100%" stop-color="#c77dff" />
+    </linearGradient>
+    <filter id="glow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#7b2cbf" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Left Half Heart -->
+  <path d="M 30,16 C 24,6 10,8 6,18 C 2,28 12,42 30,54 L 30,38 L 26,34 L 30,30 L 25,24 L 30,16 Z" fill="#e0aaff" filter="url(#glow)"/>
+  
+  <!-- Right Half Heart (slightly displaced / broken) -->
+  <path d="M 34,18 L 38,24 L 33,30 L 37,34 L 34,40 L 34,54 C 52,42 62,28 58,18 C 54,8 40,6 34,16 Z" fill="#9d4edd" filter="url(#glow)"/>
+  
+  <!-- Small Tear / Rain Drop -->
+  <path d="M 38,44 C 36,48 40,52 42,50 C 44,48 40,43 38,44 Z" fill="#70d6ff" opacity="0.8"/>
+</svg>

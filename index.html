@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Erlang & Cindy - Tangis di Bulan September 💔 (26 September 2026)</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Erlang & Cindy - Tangis di Bulan September 💔 (26 September 2026)">
+  <meta name="description" content="Persembahan dari seorang IT guy yang lugu, ngoding sambil menangis di subuh 26 September 2026 setelah ditolak Cindy untuk ke-7 kalinya.">
+
+  <!-- Open Graph / Facebook / WhatsApp Preview Thumbnail -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Erlang & Cindy - Tangis di Bulan September 💔">
+  <meta property="og:description" content="'Gak nolak, aku loh menyelamatkan kamu dari aku...' - Cindy. Ditolak 7 kali (nomornya Ronaldo) pada 26 September 2026.">
+  <meta property="og:image" content="assets/banner.svg">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Erlang & Cindy - Tangis di Bulan September 💔">
+  <meta name="twitter:description" content="Kisah subuh 26 September 2026: Ditolak ke-7 kalinya, ngoding sampai pagi sambil menangis...">
+  <meta name="twitter:image" content="assets/banner.svg">
+
+  <!-- Favicon / Icon di Tab Browser -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+
+  <!-- Google Fonts: Melancholic & Modern Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800;900&family=Sacramento&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Animated Canvas (Melancholic Raindrops & Broken Hearts) -->
+  <canvas id="loveCanvas"></canvas>
+
+  <!-- Sound Toggle & Sad Music Player Floating Widget -->
+  <div class="music-player-widget" id="musicPlayer">
+    <div class="vinyl-disc" id="vinylDisc" title="Klik untuk Putar/Jeda Lagu Galau">
+      <div class="vinyl-groove"></div>
+      <div class="vinyl-center">💜</div>
+    </div>
+    <div class="music-info">
+      <span class="music-title" id="musicTitle">Olivia Rodrigo - Purple 💜</span>
+      <span class="music-status" id="musicStatus">Kenangan subuh 26 Sept 🌧️</span>
+    </div>
+    <button class="music-btn" id="playBtn" aria-label="Play/Pause">▶</button>
+  </div>
+
+  <!-- Hidden Custom Audio Tag for user-provided MP3 -->
+  <audio id="bgmAudio" loop preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg">
+    <source src="assets/song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Welcome / Entrance Curtain (Membuka Cerita & Mengaktifkan Audio Browser) -->
+  <div class="curtain-overlay" id="curtainOverlay">
+    <div class="curtain-card">
+      <div class="heart-pulse-icon">🥀</div>
+      <h2>26 September 2026, 02:00 AM...</h2>
+      <p>"Makasih udah nolak aku 7 kali, 7 adalah nomornya Ronaldo... Sekarang gak ada lagi yang nyanyiin Olivia Rodrigo - Purple di malam hari."</p>
+      <button class="btn-primary" id="openCurtainBtn">
+        <span>Buka Tangis 26 September 💔</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Single-View Responsive Container -->
+  <main class="main-wrapper" id="mainWrapper">
+    <div class="glass-card main-card">
+      
+      <!-- Top Decorative Ribbon / Tag -->
+      <div class="top-tag">
+        <span class="sparkle">🥀</span>
+        <span id="badgeStoryText">Ditolak 7 Kali • Angka Ronaldo 🌧️</span>
+        <span class="sparkle">💜</span>
+      </div>
+
+      <!-- Header Title -->
+      <header class="card-header">
+        <h1 class="couple-title">
+          <span class="name-text" id="nameBoy">Erlangga</span>
+          <span class="heart-icon-beat broken" id="centerBeatHeart" title="Klik untuk merasakan kepedihan cinta!">💔</span>
+          <span class="name-text" id="nameGirl">Cindy</span>
+        </h1>
+        <p class="subtitle-text" id="typewriterText">"Ngoding sambil nangis... persembahan dari seorang IT guy yang lugu"</p>
+      </header>
+
+      <!-- Interactive Photo Showcase Section -->
+      <section class="photo-section">
+        
+        <!-- Left Photo: Erlang -->
+        <div class="photo-frame-wrapper boy-frame" id="boyFrame">
+          <div class="photo-frame" title="Klik foto Erlang untuk mendengar isi hatinya!">
+            <img src="assets/boy-placeholder.svg" alt="Foto Erlang" class="couple-img" id="imgBoy">
+            <div class="photo-overlay">
+              <span class="tap-hint">Isi Hati Erlang 🥀</span>
+            </div>
+            <div class="photo-change-btn" id="changeBoyPhotoBtn" title="Ganti Foto Erlang">📷</div>
+          </div>
+          <div class="name-badge">
+            <span id="labelBoy">Erlang (Ditolak 7x) 🥀</span>
+          </div>
+        </div>
+
+        <!-- Center Broken Heart Connector & Emblem -->
+        <div class="love-connector">
+          <div class="connector-line"></div>
+          <div class="heart-circle broken-emblem" id="interactiveHeartEmblem" title="Klik untuk ledakan rasa sesak!">
+            <span class="big-heart">💔</span>
+            <span class="sparkle-ring"></span>
+          </div>
+          <div class="connector-line"></div>
+          <span class="forever-tag">Ke-7 Kali</span>
+        </div>
+
+        <!-- Right Photo: Cindy -->
+        <div class="photo-frame-wrapper girl-frame" id="girlFrame">
+          <div class="photo-frame" title="Klik foto Cindy untuk mendengar alasannya!">
+            <img src="assets/girl-placeholder.svg" alt="Foto Cindy" class="couple-img" id="imgGirl">
+            <div class="photo-overlay">
+              <span class="tap-hint">Alasan Cindy 🌧️</span>
+            </div>
+            <div class="photo-change-btn" id="changeGirlPhotoBtn" title="Ganti Foto Cindy">📷</div>
+          </div>
+          <div class="name-badge">
+            <span id="labelGirl">Cindy ("Save You") 💔</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Milestone Highlight: DITOLAK KE-7 KALINYA PADA 26 SEPTEMBER 2026 -->
+      <section class="milestone-section">
+        <div class="milestone-badge">
+          <span class="milestone-sub">Momen Bersejarah yang Tak Akan Terlupakan 🥀</span>
+          <div class="milestone-highlight">
+            <span class="shoot-text">Ditolak Cindy Untuk yang Ke-7 Kalinya (Nomornya Ronaldo)</span>
+            <div class="date-glow" id="dateText">26 September 2026</div>
+          </div>
+        </div>
+
+        <!-- Interactive Counter (Days, Hours, Minutes, Seconds) -->
+        <div class="counter-container">
+          <p class="counter-title">Waktu pertama DM di IG pada 2 Juli sampai hari ini:</p>
+          <div class="counter-grid">
+            <div class="counter-box">
+              <span class="counter-number" id="countDays">0</span>
+              <span class="counter-label">Hari</span>
+            </div>
+            <div class="counter-box">
+              <span class="counter-number" id="countHours">00</span>
+              <span class="counter-label">Jam</span>
+            </div>
+            <div class="counter-box">
+              <span class="counter-number" id="countMinutes">00</span>
+              <span class="counter-label">Menit</span>
+            </div>
+            <div class="counter-box">
+              <span class="counter-number" id="countSeconds">00</span>
+              <span class="counter-label">Detik</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Buttons Action Bar -->
+      <footer class="interactive-actions">
+        <button class="action-btn btn-tears" id="sendLoveBtn">
+          <span class="btn-icon">🌧️</span>
+          <span class="btn-text">Tangis di Bulan September</span>
+        </button>
+
+        <button class="action-btn btn-letter" id="openLetterBtn">
+          <span class="btn-icon">📜</span>
+          <span class="btn-text">Surat Tak Tersampaikan</span>
+        </button>
+
+        <button class="action-btn btn-reasons" id="reasonsBtn">
+          <span class="btn-icon">💔</span>
+          <span class="btn-text">Alasan Cindy Nolak</span>
+        </button>
+
+        <button class="action-btn btn-settings" id="settingsBtn" title="Ganti Foto Erlang, Cindy & Lagu MP3">
+          <span class="btn-icon">📷</span>
+          <span class="btn-text">Ganti Foto & Lagu</span>
+        </button>
+      </footer>
+
+      <!-- WHATSAPP CHAT BERDUA SECTION (Langsung Tampil di Bawah, Scrollable & Realtime) -->
+      <section class="wa-chat-section" id="waChatSection">
+        <div class="wa-chat-card">
+          
+          <!-- WhatsApp Contact Bar (Obrolan Berdua Erlang & Cindy) -->
+          <div class="wa-header">
+            <div class="wa-contact-info">
+              <div class="wa-avatar-box wa-avatar-duo" title="Obrolan Berdua: Erlang & Cindy">
+                <img src="assets/boy-placeholder.svg" alt="Erlang" class="wa-avatar-img wa-avatar-boy" id="waAvatarBoy" title="Erlang">
+                <img src="assets/girl-placeholder.svg" alt="Cindy" class="wa-avatar-img wa-avatar-girl" id="waAvatarGirl" title="Cindy">
+                <span class="wa-online-dot"></span>
+              </div>
+              <div class="wa-name-wrapper">
+                <span class="wa-contact-name" id="waContactName">Erlang &amp; Cindy 🥀</span>
+                <span class="wa-status-text" id="waStatusText">online • Obrolan Berdua</span>
+              </div>
+            </div>
+
+            <div class="wa-header-actions">
+              <button class="wa-refresh-btn" id="waRefreshBtn" title="Muat ulang pesan terbaru (F5)">
+                🔄 <span class="wa-refresh-text">Segarkan</span>
+              </button>
+              <button class="wa-cloud-btn" id="waCloudSetupBtn" title="Pengaturan Cloud Sync (Firebase)">
+                ☁️ Cloud
+              </button>
+            </div>
+          </div>
+
+          <!-- WhatsApp Chat Messages Scrollable Box -->
+          <div class="wa-messages-box" id="waMessagesBox">
+            <div class="wa-date-pill">
+              <span>📅 26 SEPTEMBER 2026 • SUBUH PENOLAKAN KE-7</span>
+            </div>
+
+            <!-- Chat messages stream here -->
+            <div class="wa-messages-list" id="waMessagesList"></div>
+          </div>
+
+          <!-- WhatsApp Action Footer (Button Tambah Pesan) -->
+          <div class="wa-chat-footer">
+            <button type="button" class="btn-primary wa-btn-add-message" id="waOpenAddModalBtn">
+              <span class="btn-icon">💬</span>
+              <span>Tambah Pesan</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Sweet Melancholic Footer Note -->
+      <div class="footer-note">
+        <span>"Salah satunya buat sesuatu sampai pagi gini gak mikirin diri sendiri cuma demi kamu, persembahan dari aku seorang IT guy yang lugu." 🥀</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal: Surat Tak Tersampaikan (Yang Disiapkan Erlang Sebelum Ditolak) 📜 -->
+  <div class="modal-backdrop" id="letterModal">
+    <div class="modal-card letter-paper">
+      <button class="modal-close" id="closeLetterBtn">&times;</button>
+      <div class="letter-stamp">🥀 26 Sept 2026 • Penolakan Ke-7</div>
+      <h3 class="letter-title">Untuk Cindy, dari Seorang IT Guy yang Lugu...</h3>
+      <div class="letter-content" id="letterContent">
+        <p>Cindy... makasih banyak ya udah nolak aku di tanggal <strong>26 September 2026</strong> ini. Dan makasih juga udah nolak aku sampai <strong>7 kali</strong>—angka keberuntungan, nomornya Ronaldo.</p>
+        <p>Sejak pertama kali kita DM di Instagram pada <strong>2 Juli 2026</strong> sampai subuh ini, aku gak bakal pernah lupain semua kebaikan kamu, hal-hal baru yang kamu kenalin, matrix, dan obrolan malam kita.</p>
+        <p>Mulai hari ini, yahh... gak ada lagi yang nemenin aku cerita di malam hari. Gak ada lagi yang nyanyiin lagu <em>Olivia Rodrigo - Purple</em> lagi buat aku.</p>
+        <p>Sayang banget 2 juta 5 ratus 90 ribu... tapi ya sudah, mungkin emang ini jalan ceritanya.</p>
+        <p>Kamu bilang: <em>"Aku gak nolak, aku loh menyelamatkan kamu dari aku... love is supposed to be easy."</em> Tapi Cin, kamu bukan penyelamatku, kamu bukan superhero yang bisa baca masa depan. Cinta itu gak butuh banyak alasan kalau emang tulus.</p>
+        <p>Sesuai janji kita subuh tadi: <em>jangan ceritain kejelekanku ke orang lain ya, dan aku pun bersumpah gak bakal pernah ceritain hal jelek tentang kamu ke siapapun</em>.</p>
+        <p>Web ini aku buat sampai subuh, gak mikirin diri sendiri, tangan udah gemetar dan ngoding sambil menangis di depan laptop... persembahan terakhir dari aku, seorang IT guy yang lugu, sebelum mungkin kita tanpa komunikasi lagi atau saling block.</p>
+        <p class="letter-sign">Dari orang yang selalu tulus menyayangimu,<br><span id="letterSignName">Erlangga Dwi Jiwantoro 🥀</span></p>
+      </div>
+      <button class="btn-primary btn-accept-pain" id="letterLoveBurstBtn">Aku Belajar Ikhlas 💔</button>
+    </div>
+  </div>
+
+  <!-- Modal: Alasan Cindy Menolak Erlang 💔 -->
+  <div class="modal-backdrop" id="reasonModal">
+    <div class="modal-card reason-card">
+      <button class="modal-close" id="closeReasonBtn">&times;</button>
+      <div class="reason-icon">💔</div>
+      <h3>Alasan Cindy Nolak (Ditolak 7 Kali):</h3>
+      <div class="reason-box" id="reasonText">
+        "Gak nolak, aku loh menyelamatkan kamu dari aku... Aku complicated banget, aku tau aku bakal membebani kamu nantinya."
+      </div>
+      <button class="btn-primary" id="nextReasonBtn">Alasan Cindy Lainnya 🥀</button>
+    </div>
+  </div>
+
+  <!-- Modal: Tambah Pesan Obrolan (Pilih Role Cindy atau Erlang & Text Area Besar) 💬 -->
+  <div class="modal-backdrop" id="waAddMessageModal">
+    <div class="modal-card wa-add-modal-card">
+      <button class="modal-close" id="closeWaAddModalBtn">&times;</button>
+      <div class="reason-icon">💬</div>
+      <h3>Tulis Pesan Obrolan</h3>
+      <p class="settings-hint">Pilih pengirim pesan dan tuliskan apa yang ingin disampaikan:</p>
+      
+      <form id="waModalChatForm" name="chat-erlang-cindy" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="chat-erlang-cindy">
+
+        <!-- Role Selector: Erlang atau Cindy -->
+        <div class="form-group">
+          <label class="form-label-title">Pilih Role Pengirim:</label>
+          <div class="role-selector-group">
+            <label class="role-card-option">
+              <input type="radio" name="modalSenderRole" value="Erlang" checked>
+              <div class="role-card-content role-erlang">
+                <span class="role-avatar-badge">🤵🏻</span>
+                <div class="role-info">
+                  <span class="role-name">Erlang</span>
+                  <span class="role-sub">Cowok yang Ditolak 🥀</span>
+                </div>
+              </div>
+            </label>
+
+            <label class="role-card-option">
+              <input type="radio" name="modalSenderRole" value="Cindy">
+              <div class="role-card-content role-cindy">
+                <span class="role-avatar-badge">👸🏻</span>
+                <div class="role-info">
+                  <span class="role-name">Cindy</span>
+                  <span class="role-sub">Cewek yang Nolak 💔</span>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Kolom Text Field Besar -->
+        <div class="form-group">
+          <label for="modalMessageTextarea" class="form-label-title">Isi Pesan:</label>
+          <textarea id="modalMessageTextarea" name="message" rows="5" class="input-text input-textarea-large" placeholder="Tuliskan pesanmu di sini secara leluasa..." required></textarea>
+          
+          <!-- Quick Emojis inside modal -->
+          <div class="modal-quick-emojis">
+            <span>Sisipkan emoji:</span>
+            <button type="button" class="btn-emoji-tag" data-emoji="💔">💔</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="🥀">🥀</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="🌧️">🌧️</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="💜">💜</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="😭">😭</button>
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <button type="submit" class="btn-primary btn-submit-large" id="modalSendBtn">
+            <span>Kirim Pesan ➤</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Customizer / Pengaturan (Hanya Ganti Foto Cindy, Foto Erlang & Lagu) -->
+  <div class="modal-backdrop" id="settingsModal">
+    <div class="modal-card settings-card">
+      <button class="modal-close" id="closeSettingsBtn">&times;</button>
+      <div class="reason-icon">📷🎵</div>
+      <h3>Ganti Foto &amp; Lagu</h3>
+      <p class="settings-hint">Pilih foto kamu, foto Cindy, dan lagu galau kesukaanmu dari HP atau laptop:</p>
+      
+      <div class="form-group">
+        <label for="inputBoyFile">Ganti Foto Kamu (Erlang 🥀):</label>
+        <input type="file" id="inputBoyFile" accept="image/*" class="input-file">
+        <input type="url" id="inputBoyUrl" placeholder="Atau paste link URL gambar kamu di sini (https://...)" class="input-text input-sub-url">
+      </div>
+
+      <div class="form-group">
+        <label for="inputGirlFile">Ganti Foto Cindy (Yang Nolak 💔):</label>
+        <input type="file" id="inputGirlFile" accept="image/*" class="input-file">
+        <input type="url" id="inputGirlUrl" placeholder="Atau paste link URL gambar Cindy di sini (https://...)" class="input-text input-sub-url">
+      </div>
+
+      <div class="form-group">
+        <label for="inputSongFile">Ganti Lagu Galau (File MP3 / Audio 🎵):</label>
+        <input type="file" id="inputSongFile" accept="audio/*" class="input-file">
+        <input type="url" id="inputSongUrl" placeholder="Atau paste link URL file MP3 di sini (https://...)" class="input-text input-sub-url">
+      </div>
+
+      <div class="cloud-steps-box" style="margin-top: 12px; margin-bottom: 16px;">
+        <strong style="color: #ff9ebb;">💡 Tips Opsi Permanen Saat Deploy:</strong>
+        <p style="font-size: 11.5px; line-height: 1.5; color: #e2e8f0; margin-top: 4px;">
+          Agar foto dan lagu otomatis permanen dilihat &amp; didengar oleh Cindy saat buka web hasil deploy, kamu juga bisa menyimpan file langsung ke folder:
+        </p>
+        <ul style="font-size: 11.5px; color: #c4b5fd; margin-left: 18px; margin-top: 4px;">
+          <li>Foto kamu: <code>assets/boy-placeholder.svg</code> (atau <code>assets/boy.jpg</code>)</li>
+          <li>Foto Cindy: <code>assets/girl-placeholder.svg</code> (atau <code>assets/girl.jpg</code>)</li>
+          <li>Lagu galau: <code>assets/music.mp3</code></li>
+        </ul>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn-primary" id="saveSettingsBtn">Terapkan Perubahan 💔</button>
+        <button class="btn-secondary" id="resetSettingsBtn">Reset ke Default</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Pengaturan Cloud Sync Multi-Device (Firebase) ☁️ -->
+  <div class="modal-backdrop" id="cloudModal">
+    <div class="modal-card cloud-card">
+      <button class="modal-close" id="closeCloudBtn">&times;</button>
+      <div class="reason-icon">☁️</div>
+      <h3>Sinkronisasi Multi-Device</h3>
+      <p class="settings-hint">Agar saat Cindy mengetik di HP-nya langsung muncul di HP kamu saat di-refresh (F5), masukkan URL Firebase Realtime Database gratis di bawah ini:</p>
+      
+      <div class="form-group">
+        <label for="inputFirebaseUrl">Firebase Database URL:</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="url" id="inputFirebaseUrl" class="input-text" placeholder="https://proyek-kamu-default-rtdb.firebaseio.com" style="flex: 1;">
+          <button type="button" class="btn-secondary" id="testCloudBtn" style="white-space: nowrap; padding: 8px 14px; font-size: 12px;">Uji Koneksi 🧪</button>
+        </div>
+        <div id="cloudStatusFeedback" style="display: none; margin-top: 8px; font-size: 12px; padding: 8px 12px; border-radius: 10px;"></div>
+      </div>
+
+      <div class="cloud-steps-box">
+        <strong>Cara Dapatkan URL Gratis (1 Menit via Google):</strong>
+        <ol>
+          <li>Buka <a href="https://console.firebase.google.com" target="_blank" rel="noopener" style="color: #70d6ff;">console.firebase.google.com</a></li>
+          <li>Klik <em>Add Project</em> (nama bebas, misal: <code>erlang-cindy</code>)</li>
+          <li>Pilih <strong>Build &gt; Realtime Database</strong> &gt; <em>Create Database</em></li>
+          <li>Pilih <strong>Start in Test Mode</strong> (Read &amp; Write: true)</li>
+          <li>Salin URL yang tampil di atas tabel (berakhiran <code>.firebaseio.com</code>) lalu paste di sini!</li>
+        </ol>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn-primary" id="saveCloudBtn">Simpan &amp; Aktifkan Cloud 🚀</button>
+        <button class="btn-secondary" id="resetCloudBtn">Gunakan Mode Offline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Direct File Inputs triggered by camera icon on photo frames -->
+  <input type="file" id="directBoyFileInput" accept="image/*" style="display:none;">
+  <input type="file" id="directGirlFileInput" accept="image/*" style="display:none;">
+
+  <script src="script.js"></script>
+</body>
+</html>

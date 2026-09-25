@@ -1,0 +1,30 @@
+# Netlify Build & Header Configuration
+# Erlang & Cindy - Tangis di Bulan September (26 September 2026)
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Access-Control-Allow-Origin = "*"
+
+# Pastikan file HTML selalu mengambil versi terbaru saat F5 / reload
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Cache aset static (gambar & suara)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"

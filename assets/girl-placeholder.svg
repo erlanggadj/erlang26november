@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgSadGirl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a3b53" />
+      <stop offset="50%" stop-color="#34283c" />
+      <stop offset="100%" stop-color="#1f1826" />
+    </linearGradient>
+    <linearGradient id="cindyDress" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7b2cbf" />
+      <stop offset="100%" stop-color="#5a189a" />
+    </linearGradient>
+    <filter id="shadowGirlSad">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  
+  <rect width="400" height="400" rx="30" fill="url(#bgSadGirl)"/>
+
+  <!-- Background sparkles / faded flowers -->
+  <g fill="#c77dff" opacity="0.3">
+    <circle cx="330" cy="100" r="3" />
+    <circle cx="70" cy="160" r="2.5" />
+    <path d="M 60,70 L 62,76 L 68,78 L 62,80 L 60,86 L 58,80 L 52,78 L 58,76 Z" fill="#ff9ebb" />
+  </g>
+
+  <!-- Apologetic Cindy Illustration -->
+  <g transform="translate(0, 20)">
+    <!-- Back Hair -->
+    <path d="M 125 180 C 120 280, 130 330, 160 360 C 160 280, 170 200, 170 170 Z" fill="#2d1e2f"/>
+    <path d="M 275 180 C 280 280, 270 330, 240 360 C 240 280, 230 200, 230 170 Z" fill="#2d1e2f"/>
+
+    <!-- Dress / Cardigan -->
+    <path d="M 120 380 C 120 290, 150 265, 200 265 C 250 265, 280 290, 280 380 Z" fill="url(#cindyDress)" filter="url(#shadowGirlSad)"/>
+    
+    <!-- Neck -->
+    <rect x="186" y="225" width="28" height="40" rx="6" fill="#fcd7b0" />
+    
+    <!-- Face -->
+    <ellipse cx="200" cy="180" rx="52" ry="58" fill="#fed7aa" filter="url(#shadowGirlSad)"/>
+    
+    <!-- Embarrassed / Apologetic Blush -->
+    <circle cx="166" cy="195" r="9" fill="#ff758f" opacity="0.4" />
+    <circle cx="234" cy="195" r="9" fill="#ff758f" opacity="0.4" />
+    
+    <!-- Apologetic Gentle Eyes -->
+    <ellipse cx="176" cy="176" rx="5" ry="7" fill="#2d1e2f" />
+    <circle cx="178" cy="173" r="2" fill="#ffffff" />
+    
+    <ellipse cx="224" cy="176" rx="5" ry="7" fill="#2d1e2f" />
+    <circle cx="226" cy="173" r="2" fill="#ffffff" />
+    
+    <!-- Eyebrows showing awkward/apologetic look -->
+    <path d="M 166 165 Q 176 160 186 166" stroke="#4a342c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M 214 166 Q 224 160 234 165" stroke="#4a342c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Hesitant / gentle mouth -->
+    <path d="M 190 202 Q 200 200 210 202" stroke="#d90429" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    
+    <!-- Hair -->
+    <path d="M 148 165 C 140 120, 160 95, 200 95 C 240 95, 260 120, 252 165 C 248 140, 230 130, 200 130 C 170 130, 155 140, 148 165 Z" fill="#3a233c" />
+    <path d="M 160 135 C 175 145, 195 145, 210 135 C 190 125, 175 125, 160 135 Z" fill="#4a2e4c" />
+    
+    <!-- Hairpin -->
+    <circle cx="238" cy="138" r="8" fill="#c77dff" />
+    <circle cx="238" cy="138" r="3" fill="#fff" />
+  </g>
+  
+  <!-- Badge / Text -->
+  <rect x="110" y="325" width="180" height="38" rx="19" fill="rgba(30, 20, 40, 0.85)" stroke="#c77dff" stroke-width="1.5"/>
+  <text x="200" y="349" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="800" font-size="15" fill="#ffd1dc">Cindy ("Temenan Aja") 💔</text>
+</svg>
