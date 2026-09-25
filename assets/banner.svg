@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <linearGradient id="bgCilan" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgCilang" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0c0814" />
       <stop offset="50%" stop-color="#180e26" />
       <stop offset="100%" stop-color="#0f0918" />
@@ -8,29 +8,29 @@
 
     <!-- Center Radial Glow -->
     <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#7b2cbf" stop-opacity="0.35" />
-      <stop offset="60%" stop-color="#70d6ff" stop-opacity="0.12" />
+      <stop offset="0%" stop-color="#7b2cbf" stop-opacity="0.38" />
+      <stop offset="60%" stop-color="#70d6ff" stop-opacity="0.14" />
       <stop offset="100%" stop-color="#0c0814" stop-opacity="0" />
     </radialGradient>
 
     <!-- Text Neon Drop Shadow -->
     <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#70d6ff" flood-opacity="0.45" />
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.7" />
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.75" />
     </filter>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bgCilan)"/>
+  <rect width="1200" height="630" fill="url(#bgCilang)"/>
   <rect width="1200" height="630" fill="url(#centerGlow)"/>
 
   <!-- Subtle Outer Border -->
-  <rect x="24" y="24" width="1152" height="582" rx="20" fill="none" stroke="rgba(224, 170, 255, 0.2)" stroke-width="2"/>
+  <rect x="24" y="24" width="1152" height="582" rx="20" fill="none" stroke="rgba(224, 170, 255, 0.22)" stroke-width="2"/>
 
-  <!-- Centered Text: cilan.ai -->
+  <!-- Centered Text: CILANG APPS -->
   <g filter="url(#neonGlow)">
-    <text x="600" y="360" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="800" font-size="124" letter-spacing="-2">
-      <tspan fill="#ffffff">cilan</tspan><tspan fill="#70d6ff">.ai</tspan>
+    <text x="600" y="358" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="900" font-size="108" letter-spacing="1">
+      <tspan fill="#ffffff">CILANG </tspan><tspan fill="#70d6ff">APPS</tspan>
     </text>
   </g>
 </svg>
