@@ -139,8 +139,6 @@
   const waChatSection = document.getElementById('waChatSection');
   const waMessagesBox = document.getElementById('waMessagesBox');
   const waMessagesList = document.getElementById('waMessagesList');
-  const waRefreshBtn = document.getElementById('waRefreshBtn');
-  const waCloudSetupBtn = document.getElementById('waCloudSetupBtn');
   const waAvatarBoy = document.getElementById('waAvatarBoy');
   const waAvatarGirl = document.getElementById('waAvatarGirl');
   const waOpenAddModalBtn = document.getElementById('waOpenAddModalBtn');
@@ -152,15 +150,6 @@
   const waModalChatForm = document.getElementById('waModalChatForm');
   const modalMessageTextarea = document.getElementById('modalMessageTextarea');
   const modalSendBtn = document.getElementById('modalSendBtn');
-
-  // Cloud Sync Modal Elements
-  const cloudModal = document.getElementById('cloudModal');
-  const closeCloudBtn = document.getElementById('closeCloudBtn');
-  const inputFirebaseUrl = document.getElementById('inputFirebaseUrl');
-  const testCloudBtn = document.getElementById('testCloudBtn');
-  const cloudStatusFeedback = document.getElementById('cloudStatusFeedback');
-  const saveCloudBtn = document.getElementById('saveCloudBtn');
-  const resetCloudBtn = document.getElementById('resetCloudBtn');
 
   const settingsModal = document.getElementById('settingsModal');
   const closeSettingsBtn = document.getElementById('closeSettingsBtn');
@@ -811,29 +800,17 @@
       .replace(/"/g, '&quot;');
   }
 
-  // Scroll to bottom of WhatsApp chat like official WhatsApp
+  // Scroll to bottom of WhatsApp chat without causing page window jump
   function scrollChatToBottom(smooth = false) {
     if (!waMessagesBox) return;
-
-    const doScroll = () => {
+    if (smooth) {
       waMessagesBox.scrollTo({
-        top: waMessagesBox.scrollHeight + 1000,
-        behavior: smooth ? 'smooth' : 'auto'
+        top: waMessagesBox.scrollHeight,
+        behavior: 'smooth'
       });
-      const bottomAnchor = document.getElementById('waChatBottomAnchor');
-      if (bottomAnchor) {
-        bottomAnchor.scrollIntoView({
-          behavior: smooth ? 'smooth' : 'auto',
-          block: 'end'
-        });
-      }
-    };
-
-    doScroll();
-    requestAnimationFrame(doScroll);
-    setTimeout(doScroll, 40);
-    setTimeout(doScroll, 120);
-    setTimeout(doScroll, 300);
+    } else {
+      waMessagesBox.scrollTop = waMessagesBox.scrollHeight;
+    }
   }
 
   // Load older messages lazily when scrolling up
@@ -872,6 +849,79 @@
     }, 280);
   }
 
+  // Helper: Build single message row DOM node
+  function createMessageRowElement(msg, isLatest) {
+    const isErlang = msg.sender === 'Erlang' || (msg.sender && msg.sender.includes('Erlang'));
+    const row = document.createElement('div');
+    row.className = `wa-row ${isErlang ? 'wa-row-erlang' : 'wa-row-cindy'}${isLatest ? ' wa-row-latest' : ''}`;
+    if (msg.id) row.dataset.msgId = msg.id;
+
+    const bubbleClass = `${isErlang ? 'wa-bubble-erlang' : 'wa-bubble-cindy'}${isLatest ? ' wa-bubble-latest' : ''}`;
+    const senderLabel = isErlang ? `${config.boyName} 🤵🏻` : `${config.girlName} 👸🏻`;
+
+    const checkmark = (!isErlang) ? '<span class="wa-checkmarks" title="Terbaca">✓✓</span>' : '';
+    const latestBadge = isLatest ? '<span class="wa-latest-pill">Terbaru 📌</span>' : '';
+
+    let watermarkText = '';
+    if (msg.timestamp) {
+      watermarkText = formatWatermarkTime(msg.timestamp);
+    } else if (msg.time && (msg.time.includes('September') || msg.time.includes('•') || msg.time.length > 8)) {
+      watermarkText = msg.time;
+    } else {
+      watermarkText = msg.time ? `${msg.time} • 26 September 2026` : formatWatermarkTime(new Date());
+    }
+
+    row.innerHTML = `
+      <div class="wa-bubble ${bubbleClass}">
+        <span class="wa-bubble-author">${escapeHtml(senderLabel)}</span>
+        <div class="wa-bubble-text">${escapeHtml(msg.text)}</div>
+        <div class="wa-bubble-meta">
+          ${latestBadge}
+          <span class="wa-bubble-watermark" title="Waktu: Jam, Tanggal, Bulan, Tahun">${escapeHtml(watermarkText)}</span>
+          ${checkmark}
+        </div>
+      </div>
+    `;
+    return row;
+  }
+
+  // Helper: Append single new message directly without destroying DOM or flickering
+  function appendSingleChatMessage(newMsg, smoothScroll = true) {
+    if (!waMessagesList) return;
+
+    // Remove empty chat state if present
+    const emptyDiv = waMessagesList.querySelector('.wa-empty-chat');
+    if (emptyDiv) {
+      waMessagesList.innerHTML = '';
+    }
+
+    // Demote previously latest bubble
+    const prevLatestRow = waMessagesList.querySelector('.wa-row-latest');
+    if (prevLatestRow) {
+      prevLatestRow.classList.remove('wa-row-latest');
+      const prevBubble = prevLatestRow.querySelector('.wa-bubble');
+      if (prevBubble) prevBubble.classList.remove('wa-bubble-latest');
+      const prevBadge = prevLatestRow.querySelector('.wa-latest-pill');
+      if (prevBadge) prevBadge.remove();
+    }
+
+    // Create and append the new bubble
+    const newRow = createMessageRowElement(newMsg, true);
+    const bottomAnchor = document.getElementById('waChatBottomAnchor');
+    if (bottomAnchor) {
+      waMessagesList.insertBefore(newRow, bottomAnchor);
+    } else {
+      waMessagesList.appendChild(newRow);
+      const anchor = document.createElement('div');
+      anchor.id = 'waChatBottomAnchor';
+      anchor.className = 'wa-bottom-anchor';
+      waMessagesList.appendChild(anchor);
+    }
+
+    // Scroll internally inside the chat box
+    scrollChatToBottom(smoothScroll);
+  }
+
   // Render WhatsApp Bubbles (Sort by timestamp, latest at bottom, lazy loading older messages)
   function renderWhatsAppChat(scrollToBottom = true) {
     if (!waMessagesList) return;
@@ -890,7 +940,7 @@
       return;
     }
 
-    // Sort ascending by timestamp (chat chronologically: oldest at top, newest at bottom)
+    // Sort ascending by timestamp (chronological)
     chatMessages.sort((a, b) => (Number(a.timestamp) || 0) - (Number(b.timestamp) || 0));
 
     const totalCount = chatMessages.length;
@@ -899,7 +949,7 @@
     const startIndex = Math.max(0, totalCount - chatVisibleCount);
     const visibleMessages = chatMessages.slice(startIndex);
 
-    // If there are older messages remaining, render lazy load trigger
+    // Older messages trigger
     if (startIndex > 0) {
       const loaderDiv = document.createElement('div');
       loaderDiv.className = 'wa-lazy-loader';
@@ -914,7 +964,6 @@
       });
       waMessagesList.appendChild(loaderDiv);
     } else {
-      // Reached the very beginning of conversation
       const startDiv = document.createElement('div');
       startDiv.className = 'wa-start-indicator';
       startDiv.innerHTML = `<span>🥀 Awal mula cerita obrolan • 2 Juli 2026</span>`;
@@ -922,46 +971,13 @@
     }
 
     visibleMessages.forEach((msg, idx) => {
-      const isErlang = msg.sender === 'Erlang' || (msg.sender && msg.sender.includes('Erlang'));
       const globalIdx = startIndex + idx;
       const isLatest = (globalIdx === totalCount - 1);
-
-      const row = document.createElement('div');
-      row.className = `wa-row ${isErlang ? 'wa-row-erlang' : 'wa-row-cindy'}${isLatest ? ' wa-row-latest' : ''}`;
-
-      const bubbleClass = `${isErlang ? 'wa-bubble-erlang' : 'wa-bubble-cindy'}${isLatest ? ' wa-bubble-latest' : ''}`;
-      const senderLabel = isErlang ? `${config.boyName} 🤵🏻` : `${config.girlName} 👸🏻`;
-
-      // Sesuai layout: Erlang di kiri, Cindy di kanan. Cindy sebagai bubble di kanan mendapat checkmarks WhatsApp terbaca
-      const checkmark = (!isErlang) ? '<span class="wa-checkmarks" title="Terbaca">✓✓</span>' : '';
-      const latestBadge = isLatest ? '<span class="wa-latest-pill">Terbaru 📌</span>' : '';
-
-      // Watermark jam, tanggal, bulan, tahun
-      let watermarkText = '';
-      if (msg.timestamp) {
-        watermarkText = formatWatermarkTime(msg.timestamp);
-      } else if (msg.time && (msg.time.includes('September') || msg.time.includes('•') || msg.time.length > 8)) {
-        watermarkText = msg.time;
-      } else {
-        watermarkText = msg.time ? `${msg.time} • 26 September 2026` : formatWatermarkTime(new Date());
-      }
-
-      row.innerHTML = `
-        <div class="wa-bubble ${bubbleClass}">
-          <span class="wa-bubble-author">${escapeHtml(senderLabel)}</span>
-          <div class="wa-bubble-text">${escapeHtml(msg.text)}</div>
-          <div class="wa-bubble-meta">
-            ${latestBadge}
-            <span class="wa-bubble-watermark" title="Waktu: Jam, Tanggal, Bulan, Tahun">${escapeHtml(watermarkText)}</span>
-            ${checkmark}
-          </div>
-        </div>
-      `;
-
+      const row = createMessageRowElement(msg, isLatest);
       waMessagesList.appendChild(row);
     });
 
-    // Anchor div at bottom for 100% reliable scrollIntoView
+    // Anchor div at bottom
     const anchor = document.createElement('div');
     anchor.id = 'waChatBottomAnchor';
     anchor.className = 'wa-bottom-anchor';
@@ -972,12 +988,11 @@
     }
   }
 
-  // Fetch messages from Cloud (Firebase REST API)
+  // Fetch messages from Cloud (Firebase REST API) with smart diffing (no blinking, no unnecessary redraws)
   async function fetchMessagesFromCloud(silent = false) {
     if (!cloudDbUrl) return;
 
     try {
-      // Normalize URL
       let url = cloudDbUrl.trim().replace(/\/+$/, '');
       if (!url.endsWith('.json')) url += '/messages.json';
 
@@ -991,14 +1006,43 @@
           fetchedList.push({ id: key, ...data[key] });
         });
 
+        // Urutkan berdasarkan timestamp ascending
+        fetchedList.sort((a, b) => (Number(a.timestamp) || 0) - (Number(b.timestamp) || 0));
+
         if (fetchedList.length > 0) {
           const oldCount = chatMessages.length;
+
+          // Bandingkan apakah data identik
+          const isIdentical = (oldCount === fetchedList.length) &&
+            (oldCount === 0 || 
+             (chatMessages[oldCount - 1].id === fetchedList[fetchedList.length - 1].id &&
+              chatMessages[oldCount - 1].text === fetchedList[fetchedList.length - 1].text));
+
+          if (isIdentical) {
+            // Data sudah sama, skip render untuk menghemat baterai & CPU!
+            return;
+          }
+
+          // Jika hanya ada pesan baru yang bertambah di akhir
+          if (oldCount > 0 && fetchedList.length > oldCount && fetchedList[oldCount - 1]?.id === chatMessages[oldCount - 1]?.id) {
+            const newItems = fetchedList.slice(oldCount);
+            chatMessages = fetchedList;
+            try {
+              localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatMessages));
+            } catch (e) {}
+
+            newItems.forEach(msg => appendSingleChatMessage(msg, !silent));
+            if (!silent) playClickSfx(true);
+            return;
+          }
+
+          // Initial load atau perubahan struktur
           chatMessages = fetchedList;
           try {
             localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatMessages));
           } catch (e) {}
 
-          renderWhatsAppChat(true);
+          renderWhatsAppChat(!silent);
 
           if (!silent && chatMessages.length > oldCount) {
             playClickSfx(true);
@@ -1143,14 +1187,14 @@
         timestamp: timestamp
       };
 
-      // Optimistic UI update
+      // Optimistic UI update: append directly without tearing down DOM or flickering
       chatMessages.push(newMsg);
       chatVisibleCount = Math.max(chatVisibleCount, chatMessages.length);
       try {
         localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatMessages));
       } catch (e) {}
 
-      renderWhatsAppChat(true);
+      appendSingleChatMessage(newMsg, true);
 
       // Close modal and reset textarea
       if (modalMessageTextarea) modalMessageTextarea.value = '';
@@ -1175,17 +1219,6 @@
         spawnBurstHearts(rect.left + rect.width / 2, rect.top, 16);
       }
       playClickSfx(sender === 'Erlang');
-    });
-  }
-
-  // Manual Refresh Button (F5 trigger / Refresh)
-  if (waRefreshBtn) {
-    waRefreshBtn.addEventListener('click', async () => {
-      waRefreshBtn.classList.add('spinning');
-      await fetchMessagesFromCloud(false);
-      renderWhatsAppChat(true);
-      playClickSfx();
-      setTimeout(() => waRefreshBtn.classList.remove('spinning'), 600);
     });
   }
 
@@ -1219,7 +1252,7 @@
     }
   }
 
-  // Auto scroll to bottom when user scrolls down to chat section
+  // Auto scroll to bottom of chat container when user scrolls down to chat section
   if ('IntersectionObserver' in window && waChatSection) {
     const chatObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1234,101 +1267,6 @@
   window.addEventListener('load', () => {
     scrollChatToBottom(false);
   });
-
-  // Cloud Modal Open / Close
-  if (waCloudSetupBtn && cloudModal) {
-    waCloudSetupBtn.addEventListener('click', () => {
-      if (inputFirebaseUrl) inputFirebaseUrl.value = cloudDbUrl;
-      cloudModal.classList.add('active');
-      playClickSfx();
-    });
-  }
-
-  if (closeCloudBtn && cloudModal) {
-    closeCloudBtn.addEventListener('click', () => {
-      cloudModal.classList.remove('active');
-    });
-  }
-
-  if (testCloudBtn) {
-    testCloudBtn.addEventListener('click', async () => {
-      const url = inputFirebaseUrl ? inputFirebaseUrl.value.trim() : '';
-      if (!url) {
-        if (cloudStatusFeedback) {
-          cloudStatusFeedback.style.display = 'block';
-          cloudStatusFeedback.style.background = 'rgba(239, 68, 68, 0.2)';
-          cloudStatusFeedback.style.color = '#fca5a5';
-          cloudStatusFeedback.style.border = '1px solid #ef4444';
-          cloudStatusFeedback.innerHTML = '⚠️ Masukkan URL Firebase terlebih dahulu.';
-        }
-        return;
-      }
-
-      if (cloudStatusFeedback) {
-        cloudStatusFeedback.style.display = 'block';
-        cloudStatusFeedback.style.background = 'rgba(123, 44, 191, 0.2)';
-        cloudStatusFeedback.style.color = '#e0aaff';
-        cloudStatusFeedback.style.border = '1px solid #7b2cbf';
-        cloudStatusFeedback.innerHTML = '⏳ Sedang menguji koneksi ke database...';
-      }
-
-      try {
-        let testUrl = url.replace(/\/+$/, '');
-        if (!testUrl.endsWith('.json')) testUrl += '/messages.json';
-        const res = await fetch(testUrl);
-        if (res.ok) {
-          if (cloudStatusFeedback) {
-            cloudStatusFeedback.style.background = 'rgba(34, 197, 94, 0.2)';
-            cloudStatusFeedback.style.color = '#86efac';
-            cloudStatusFeedback.style.border = '1px solid #22c55e';
-            cloudStatusFeedback.innerHTML = '✅ Terhubung! Database Firebase aktif dan siap digunakan untuk chat, foto &amp; lagu.';
-          }
-        } else {
-          throw new Error('Status ' + res.status);
-        }
-      } catch (err) {
-        if (cloudStatusFeedback) {
-          cloudStatusFeedback.style.background = 'rgba(239, 68, 68, 0.2)';
-          cloudStatusFeedback.style.color = '#fca5a5';
-          cloudStatusFeedback.style.border = '1px solid #ef4444';
-          cloudStatusFeedback.innerHTML = '❌ Gagal terhubung. Pastikan URL benar dan database di-set ke Test Mode (Read &amp; Write: true).';
-        }
-      }
-    });
-  }
-
-  if (saveCloudBtn) {
-    saveCloudBtn.addEventListener('click', async () => {
-      const enteredUrl = inputFirebaseUrl ? inputFirebaseUrl.value.trim() : '';
-      cloudDbUrl = enteredUrl;
-      try {
-        if (enteredUrl) {
-          localStorage.setItem('erlangCindyFirebaseUrl', enteredUrl);
-        } else {
-          localStorage.removeItem('erlangCindyFirebaseUrl');
-        }
-      } catch (e) {}
-
-      if (cloudModal) cloudModal.classList.remove('active');
-      if (enteredUrl) {
-        await fetchMessagesFromCloud(false);
-      }
-      renderWhatsAppChat(true);
-      playClickSfx(true);
-    });
-  }
-
-  if (resetCloudBtn) {
-    resetCloudBtn.addEventListener('click', () => {
-      cloudDbUrl = '';
-      if (inputFirebaseUrl) inputFirebaseUrl.value = '';
-      try {
-        localStorage.removeItem('erlangCindyFirebaseUrl');
-      } catch (e) {}
-      if (cloudModal) cloudModal.classList.remove('active');
-      playClickSfx();
-    });
-  }
 
   // Auto-sync initial local cache to Firebase if Firebase is currently empty
   async function autoSyncLocalToCloudIfEmpty() {
@@ -1382,7 +1320,7 @@
   }, 4500);
 
   // Close modals when clicking backdrop
-  [letterModal, reasonModal, settingsModal, cloudModal, waAddMessageModal].forEach(modal => {
+  [letterModal, reasonModal, settingsModal, waAddMessageModal].forEach(modal => {
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
@@ -1425,7 +1363,7 @@
 
   applyConfig();
 
-  // --- BACKGROUND CANVAS (FALLING RAINDROPS, TEARS & BROKEN HEARTS) ---
+  // --- BACKGROUND CANVAS (LIGHTWEIGHT FALLING RAINDROPS & BROKEN HEARTS) ---
   const canvas = document.getElementById('loveCanvas');
   const ctx = canvas.getContext('2d');
   let width = (canvas.width = window.innerWidth);
@@ -1444,18 +1382,18 @@
     reset(initial = false) {
       this.x = Math.random() * width;
       this.y = initial ? Math.random() * height : -20;
-      this.size = Math.random() * 8 + 6;
-      this.speedY = Math.random() * 2.2 + 1.2;
-      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.size = Math.random() * 6 + 5;
+      this.speedY = Math.random() * 1.8 + 1.0;
+      this.speedX = (Math.random() - 0.5) * 0.4;
       this.angle = Math.random() * Math.PI * 2;
       this.angularSpeed = (Math.random() - 0.5) * 0.02;
-      this.opacity = Math.random() * 0.45 + 0.25;
+      this.opacity = Math.random() * 0.35 + 0.2;
       
       const rand = Math.random();
-      if (rand < 0.5) {
+      if (rand < 0.6) {
         this.type = 'raindrop';
         this.color = '#70d6ff';
-      } else if (rand < 0.8) {
+      } else if (rand < 0.85) {
         this.type = 'broken_heart';
         this.color = '#ff758f';
       } else {
@@ -1466,7 +1404,7 @@
 
     update() {
       this.y += this.speedY;
-      this.x += Math.sin(this.angle) * 0.6 + this.speedX;
+      this.x += this.speedX;
       this.angle += this.angularSpeed;
 
       if (this.y > height + 20 || this.x < -20 || this.x > width + 20) {
@@ -1475,33 +1413,35 @@
     }
 
     draw() {
+      if (this.type === 'raindrop') {
+        // High performance line draw (no save/restore)
+        ctx.globalAlpha = this.opacity;
+        ctx.strokeStyle = '#70d6ff';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x - 1, this.y + this.size * 1.6);
+        ctx.stroke();
+        return;
+      }
+
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
       ctx.globalAlpha = this.opacity;
       ctx.fillStyle = this.color;
 
-      if (this.type === 'raindrop') {
-        // Slanted raindrop line
-        ctx.strokeStyle = '#70d6ff';
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(-2, this.size * 1.8);
-        ctx.stroke();
-      } else if (this.type === 'broken_heart') {
-        // Mini broken heart
-        const s = this.size * 0.6;
+      if (this.type === 'broken_heart') {
+        const s = this.size * 0.5;
         ctx.beginPath();
         ctx.moveTo(0, s * 0.3);
-        ctx.bezierCurveTo(-s, -s * 0.5, -s * 1.2, s * 0.6, 0, s * 1.2);
-        ctx.bezierCurveTo(s * 1.2, s * 0.6, s, -s * 0.5, 0, s * 0.3);
+        ctx.bezierCurveTo(-s, -s * 0.5, -s * 1.1, s * 0.6, 0, s * 1.1);
+        ctx.bezierCurveTo(s * 1.1, s * 0.6, s, -s * 0.5, 0, s * 0.3);
         ctx.fill();
       } else {
-        // Wilted petal
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.bezierCurveTo(this.size, -this.size / 2, this.size, this.size, 0, this.size * 1.3);
+        ctx.bezierCurveTo(this.size, -this.size / 2, this.size, this.size, 0, this.size * 1.2);
         ctx.bezierCurveTo(-this.size, this.size, -this.size, -this.size / 2, 0, 0);
         ctx.fill();
       }
@@ -1510,16 +1450,36 @@
     }
   }
 
-  const particles = Array.from({ length: 42 }, () => new Particle());
+  // Adaptive particle count for maximum 60fps smoothness
+  const isMobileScreen = (window.innerWidth || 800) < 768;
+  const PARTICLE_COUNT = isMobileScreen ? 8 : 14;
+  const particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
+
+  let isCanvasActive = true;
+  let animFrameId = null;
 
   function animateCanvas() {
+    if (!isCanvasActive) return;
     ctx.clearRect(0, 0, width, height);
     for (let i = 0; i < particles.length; i++) {
       particles[i].update();
       particles[i].draw();
     }
-    requestAnimationFrame(animateCanvas);
+    animFrameId = requestAnimationFrame(animateCanvas);
   }
+
+  // Pause canvas when user switches tab or locks phone screen to conserve battery and CPU
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      isCanvasActive = false;
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+    } else {
+      if (!isCanvasActive) {
+        isCanvasActive = true;
+        animFrameId = requestAnimationFrame(animateCanvas);
+      }
+    }
+  });
 
   animateCanvas();
 

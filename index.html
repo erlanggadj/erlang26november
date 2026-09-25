@@ -246,15 +246,6 @@
                 <span class="wa-status-text" id="waStatusText">online • Obrolan Berdua</span>
               </div>
             </div>
-
-            <div class="wa-header-actions">
-              <button class="wa-refresh-btn" id="waRefreshBtn" title="Muat ulang pesan terbaru (F5)">
-                🔄 <span class="wa-refresh-text">Segarkan</span>
-              </button>
-              <button class="wa-cloud-btn" id="waCloudSetupBtn" title="Pengaturan Cloud Sync (Firebase)">
-                ☁️ Cloud
-              </button>
-            </div>
           </div>
 
           <!-- WhatsApp Chat Messages Scrollable Box -->
@@ -430,41 +421,6 @@
       <div class="settings-actions">
         <button class="btn-primary" id="saveSettingsBtn">Terapkan Perubahan 💔</button>
         <button class="btn-secondary" id="resetSettingsBtn">Reset ke Default</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal: Pengaturan Cloud Sync Multi-Device (Firebase) ☁️ -->
-  <div class="modal-backdrop" id="cloudModal">
-    <div class="modal-card cloud-card">
-      <button class="modal-close" id="closeCloudBtn">&times;</button>
-      <div class="reason-icon">☁️</div>
-      <h3>Sinkronisasi Multi-Device</h3>
-      <p class="settings-hint">Agar saat Cindy mengetik di HP-nya langsung muncul di HP kamu saat di-refresh (F5), masukkan URL Firebase Realtime Database gratis di bawah ini:</p>
-      
-      <div class="form-group">
-        <label for="inputFirebaseUrl">Firebase Database URL:</label>
-        <div style="display: flex; gap: 8px;">
-          <input type="url" id="inputFirebaseUrl" class="input-text" placeholder="https://proyek-kamu-default-rtdb.firebaseio.com" style="flex: 1;">
-          <button type="button" class="btn-secondary" id="testCloudBtn" style="white-space: nowrap; padding: 8px 14px; font-size: 12px;">Uji Koneksi 🧪</button>
-        </div>
-        <div id="cloudStatusFeedback" style="display: none; margin-top: 8px; font-size: 12px; padding: 8px 12px; border-radius: 10px;"></div>
-      </div>
-
-      <div class="cloud-steps-box">
-        <strong>Cara Dapatkan URL Gratis (1 Menit via Google):</strong>
-        <ol>
-          <li>Buka <a href="https://console.firebase.google.com" target="_blank" rel="noopener" style="color: #70d6ff;">console.firebase.google.com</a></li>
-          <li>Klik <em>Add Project</em> (nama bebas, misal: <code>erlang-cindy</code>)</li>
-          <li>Pilih <strong>Build &gt; Realtime Database</strong> &gt; <em>Create Database</em></li>
-          <li>Pilih <strong>Start in Test Mode</strong> (Read &amp; Write: true)</li>
-          <li>Salin URL yang tampil di atas tabel (berakhiran <code>.firebaseio.com</code>) lalu paste di sini!</li>
-        </ol>
-      </div>
-
-      <div class="settings-actions">
-        <button class="btn-primary" id="saveCloudBtn">Simpan &amp; Aktifkan Cloud 🚀</button>
-        <button class="btn-secondary" id="resetCloudBtn">Gunakan Mode Offline</button>
       </div>
     </div>
   </div>
