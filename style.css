@@ -531,15 +531,96 @@ html, body {
   position: relative;
 }
 
-.milestone-sub {
-  font-size: 13px;
-  font-weight: 700;
-  color: #ff9ebb;
-  display: block;
-  margin-bottom: 4px;
+/* Timeline Dua Tanggal Berbeda (Awal DM vs Stop Komunikasi) */
+.timeline-date-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
-.milestone-highlight {
+.timeline-card {
+  flex: 1;
+  min-width: 140px;
+  max-width: 220px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Card 1: Awal Mula DM (Lavender / Violet) */
+.timeline-card-start {
+  background: linear-gradient(135deg, rgba(42, 24, 62, 0.92), rgba(60, 28, 88, 0.95));
+  border: 1.5px solid rgba(196, 181, 253, 0.45);
+}
+
+.pill-start {
+  background: rgba(123, 44, 191, 0.35);
+  color: #c4b5fd;
+  border: 1px solid rgba(196, 181, 253, 0.3);
+}
+
+.date-val-start {
+  font-family: var(--font-cursive);
+  font-size: clamp(24px, 4.5vw, 32px);
+  font-weight: 700;
+  color: #e0aaff;
+  text-shadow: 0 0 16px rgba(196, 181, 253, 0.5);
+  margin: 4px 0 2px 0;
+  line-height: 1.15;
+}
+
+/* Card 2: Stop Komunikasi (Rose Crimson) */
+.timeline-card-end {
+  background: linear-gradient(135deg, rgba(58, 20, 36, 0.92), rgba(78, 24, 46, 0.95));
+  border: 1.5px solid rgba(255, 117, 143, 0.5);
+}
+
+.pill-end {
+  background: rgba(201, 24, 74, 0.35);
+  color: #ff9ebb;
+  border: 1px solid rgba(255, 117, 143, 0.35);
+}
+
+.date-val-end {
+  font-family: var(--font-cursive);
+  font-size: clamp(24px, 4.5vw, 32px);
+  font-weight: 700;
+  color: #ff758f;
+  text-shadow: 0 0 18px rgba(255, 117, 143, 0.6);
+  margin: 4px 0 2px 0;
+  line-height: 1.15;
+  animation: glowDate 3.5s ease-in-out infinite alternate;
+}
+
+.timeline-badge-pill {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.3px;
+  display: inline-block;
+}
+
+.timeline-hint {
+  font-size: 10.5px;
+  color: #e2e8f0;
+  opacity: 0.85;
+}
+
+/* Connector & Duration Badge */
+.timeline-connector {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -547,29 +628,36 @@ html, body {
   gap: 2px;
 }
 
-.shoot-text {
-  font-size: clamp(15px, 2.5vw, 18px);
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 0.5px;
+.timeline-duration-badge {
+  background: linear-gradient(135deg, #ffd166, #ff9e00);
+  color: #210d18;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(255, 158, 0, 0.35);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
-.date-glow {
-  font-family: var(--font-cursive);
-  font-size: clamp(34px, 7vw, 52px);
-  font-weight: 700;
-  color: #ff758f;
-  text-shadow: 0 0 20px rgba(255, 117, 143, 0.5), 0 0 35px rgba(157, 78, 221, 0.3);
-  letter-spacing: 1px;
-  line-height: 1.15;
-  animation: glowDate 3.5s ease-in-out infinite alternate;
+/* Live Pulse Dot */
+.live-pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #70d6ff;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  box-shadow: 0 0 8px #70d6ff;
+  animation: pulseBroken 1.5s infinite ease-in-out;
 }
 
 /* Heartbreak Counter */
 .counter-container {
-  margin-top: 14px;
+  margin-top: 10px;
   border-top: 1px dashed rgba(224, 170, 255, 0.25);
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 .counter-title {
@@ -605,11 +693,23 @@ html, body {
   border-color: #ff758f;
 }
 
+/* Counter Box Highlight (Warna Hari Berbeda) */
+.counter-box-highlight {
+  background: linear-gradient(135deg, rgba(18, 38, 55, 0.95), rgba(28, 52, 75, 0.95)) !important;
+  border: 1.8px solid #70d6ff !important;
+  box-shadow: 0 6px 18px rgba(112, 214, 255, 0.35) !important;
+}
+
 .counter-number {
   font-size: clamp(20px, 4.5vw, 28px);
   font-weight: 900;
   color: #ffffff;
   line-height: 1.1;
+}
+
+.counter-number-days {
+  color: #70d6ff !important;
+  text-shadow: 0 0 14px rgba(112, 214, 255, 0.7) !important;
 }
 
 .counter-label {
@@ -618,6 +718,11 @@ html, body {
   color: #ff9ebb;
   text-transform: uppercase;
   margin-top: 2px;
+}
+
+.counter-label-days {
+  color: #90e0ef !important;
+  font-weight: 900 !important;
 }
 
 /* ==========================================================================
