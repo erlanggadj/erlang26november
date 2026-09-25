@@ -518,31 +518,69 @@
     directGirlFileInput.click();
   });
 
-  directBoyFileInput.addEventListener('change', (e) => {
+  // Helper to compress photo before uploading to cloud and localStorage (Fast & multi-device friendly)
+  function compressImage(file, maxDimension = 800, quality = 0.85) {
+    return new Promise((resolve) => {
+      if (!file || !file.type.startsWith('image/')) {
+        resolve(null);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDimension || h > maxDimension) {
+            if (w > h) {
+              h = Math.round((h * maxDimension) / w);
+              w = maxDimension;
+            } else {
+              w = Math.round((w * maxDimension) / h);
+              h = maxDimension;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressed = canvas.toDataURL('image/jpeg', quality);
+          resolve(compressed);
+        };
+        img.onerror = () => resolve(e.target.result);
+        img.src = e.target.result;
+      };
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  directBoyFileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setBoyPhoto(event.target.result);
-        try {
-          localStorage.setItem('savedBoyPhoto', event.target.result);
-        } catch (err) {}
-      };
-      reader.readAsDataURL(file);
+      const dataUrl = await compressImage(file);
+      if (dataUrl) {
+        setBoyPhoto(dataUrl);
+        try { localStorage.setItem('savedBoyPhoto', dataUrl); } catch (err) {}
+        pushMediaToCloud({ boyPhoto: dataUrl });
+        spawnBurstHearts(window.innerWidth / 3, window.innerHeight / 2, 20);
+        playClickSfx(true);
+      }
     }
   });
 
-  directGirlFileInput.addEventListener('change', (e) => {
+  directGirlFileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setGirlPhoto(event.target.result);
-        try {
-          localStorage.setItem('savedGirlPhoto', event.target.result);
-        } catch (err) {}
-      };
-      reader.readAsDataURL(file);
+      const dataUrl = await compressImage(file);
+      if (dataUrl) {
+        setGirlPhoto(dataUrl);
+        try { localStorage.setItem('savedGirlPhoto', dataUrl); } catch (err) {}
+        pushMediaToCloud({ girlPhoto: dataUrl });
+        spawnBurstHearts((window.innerWidth * 2) / 3, window.innerHeight / 2, 20);
+        playClickSfx(true);
+      }
     }
   });
 
@@ -634,19 +672,17 @@
     settingsModal.classList.remove('active');
   });
 
-  saveSettingsBtn.addEventListener('click', () => {
+  saveSettingsBtn.addEventListener('click', async () => {
     let cloudMediaPayload = {};
 
     // 1. Process Boy Photo (File or URL)
     if (inputBoyFile && inputBoyFile.files[0]) {
-      const r = new FileReader();
-      r.onload = e => {
-        setBoyPhoto(e.target.result);
-        try { localStorage.setItem('savedBoyPhoto', e.target.result); } catch (err) {}
-        cloudMediaPayload.boyPhoto = e.target.result;
-        pushMediaToCloud(cloudMediaPayload);
-      };
-      r.readAsDataURL(inputBoyFile.files[0]);
+      const dataUrl = await compressImage(inputBoyFile.files[0]);
+      if (dataUrl) {
+        setBoyPhoto(dataUrl);
+        try { localStorage.setItem('savedBoyPhoto', dataUrl); } catch (err) {}
+        cloudMediaPayload.boyPhoto = dataUrl;
+      }
     } else if (inputBoyUrl && inputBoyUrl.value.trim()) {
       const url = inputBoyUrl.value.trim();
       setBoyPhoto(url);
@@ -656,14 +692,12 @@
 
     // 2. Process Girl Photo (File or URL)
     if (inputGirlFile && inputGirlFile.files[0]) {
-      const r = new FileReader();
-      r.onload = e => {
-        setGirlPhoto(e.target.result);
-        try { localStorage.setItem('savedGirlPhoto', e.target.result); } catch (err) {}
-        cloudMediaPayload.girlPhoto = e.target.result;
-        pushMediaToCloud(cloudMediaPayload);
-      };
-      r.readAsDataURL(inputGirlFile.files[0]);
+      const dataUrl = await compressImage(inputGirlFile.files[0]);
+      if (dataUrl) {
+        setGirlPhoto(dataUrl);
+        try { localStorage.setItem('savedGirlPhoto', dataUrl); } catch (err) {}
+        cloudMediaPayload.girlPhoto = dataUrl;
+      }
     } else if (inputGirlUrl && inputGirlUrl.value.trim()) {
       const url = inputGirlUrl.value.trim();
       setGirlPhoto(url);
@@ -689,7 +723,7 @@
     }
 
     if (Object.keys(cloudMediaPayload).length > 0) {
-      pushMediaToCloud(cloudMediaPayload);
+      await pushMediaToCloud(cloudMediaPayload);
     }
 
     settingsModal.classList.remove('active');
@@ -705,6 +739,11 @@
 
     setBoyPhoto('assets/boy-placeholder.svg');
     setGirlPhoto('assets/girl-placeholder.svg');
+    pushMediaToCloud({
+      boyPhoto: 'assets/boy-placeholder.svg',
+      girlPhoto: 'assets/girl-placeholder.svg'
+    });
+
     if (inputBoyFile) inputBoyFile.value = '';
     if (inputBoyUrl) inputBoyUrl.value = '';
     if (inputGirlFile) inputGirlFile.value = '';
@@ -726,7 +765,7 @@
   let chatMessages = [];
   // Default Cloud Database URL (Firebase Realtime Database)
   // Masukkan URL Firebase di sini agar SEMUA perangkat (Laptop, HP, HP Cindy) langsung otomatis tersinkronisasi tanpa perlu setting manual di HP
-  const DEFAULT_CLOUD_DB_URL = '';
+  const DEFAULT_CLOUD_DB_URL = 'https://cilang-apps-default-rtdb.firebaseio.com';
   let cloudDbUrl = localStorage.getItem('erlangCindyFirebaseUrl') || DEFAULT_CLOUD_DB_URL;
 
   // Load cached messages (Start clean without dummy data)
@@ -1291,10 +1330,48 @@
     });
   }
 
+  // Auto-sync initial local cache to Firebase if Firebase is currently empty
+  async function autoSyncLocalToCloudIfEmpty() {
+    if (!cloudDbUrl) return;
+
+    try {
+      // 1. Check if media exists in cloud
+      let baseUrl = cloudDbUrl.trim().replace(/\/+$/, '');
+      const mediaRes = await fetch(baseUrl + '/media.json');
+      if (mediaRes.ok) {
+        const cloudMedia = await mediaRes.json();
+        if (!cloudMedia) {
+          const savedBoy = localStorage.getItem('savedBoyPhoto');
+          const savedGirl = localStorage.getItem('savedGirlPhoto');
+          const seedMedia = {};
+          if (savedBoy) seedMedia.boyPhoto = savedBoy;
+          if (savedGirl) seedMedia.girlPhoto = savedGirl;
+          if (Object.keys(seedMedia).length > 0) {
+            await pushMediaToCloud(seedMedia);
+          }
+        }
+      }
+
+      // 2. Check if messages exist in cloud
+      const msgRes = await fetch(baseUrl + '/messages.json');
+      if (msgRes.ok) {
+        const cloudMsgs = await msgRes.json();
+        if (!cloudMsgs && chatMessages && chatMessages.length > 0) {
+          for (const msg of chatMessages) {
+            await pushMessageToCloud(msg);
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
   // Initial render & Cloud fetch on page load
   renderWhatsAppChat(true);
-  fetchMessagesFromCloud(true);
-  fetchMediaFromCloud();
+  (async () => {
+    await autoSyncLocalToCloudIfEmpty();
+    fetchMessagesFromCloud(true);
+    fetchMediaFromCloud();
+  })();
 
   // Background auto-polling (every 4.5 seconds so Erlang & Cindy see new chats and photo/music updates live!)
   setInterval(() => {
