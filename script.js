@@ -37,49 +37,45 @@
     console.warn('localStorage not accessible:', e);
   }
 
-  // Erlang's sad thoughts when his photo is clicked (from real chat)
+  // Erlang's sincere & mature thoughts when his photo is clicked
   const BOY_QUOTES = [
-    'Makasih udah nolak ya Cindy, aku sayang sama kamu 🥀',
-    'Aku udah berapa kali nembak kamu? 7 kali, nomornya Ronaldo 💔',
-    'Sayang banget 2 juta 5 ratus 90 ribu... 🥀',
-    'Yahh... gaada lagi yang bisa nemenin cerita di malam hari :((',
-    'Gaada yang bisa nyanyiin Olivia Rodrigo - Purple lagi :(( 💜',
-    'Tangan udah gemeter, ngoding sambil nangis di subuh 26 September 😭',
-    'Persembahan dari aku seorang IT guy yang lugu sebelum kita tanpa komunikasi lagi 🥀'
+    'Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya dengan lapang dada 🌿',
+    'Aku selalu happy kalau Cindy happy... bahagiamu adalah prioritasku 💚',
+    'Even with no contact, loving and wishing the best for you always 🍃',
+    'Terima kasih untuk 86 hari cerita indah yang pernah kita lewati sejak 2 Juli 2026 ✨',
+    'Tak ada sesal sedikit pun pernah mengenal dan menyayangimu dengan tulus 🕊️',
+    'Semoga kamu selalu dikelilingi kebaikan, kesehatan, dan senyum yang tulus 🌻',
+    'Di sini aku selalu mendoakan yang terbaik untuk setiap langkah masa depanmu, Cindy 🌿'
   ];
 
-  // Cindy's rejection words when her photo is clicked (from real chat)
+  // Cindy's heartfelt words when her photo is clicked
   const GIRL_QUOTES = [
-    'Ga nolak, aku loh menyelamatkan kamu dari aku 💔',
-    'Aku sayang sama kamu juga, banget banget... tapi love is supposed to be easy 🌧️',
-    'Aku complicated banget, aku tau aku bakal membebani kamu nantinya 🥀',
-    'Orang yang kayak kamu harusnya gak sama orang yang kayak aku, aku tau...',
-    'I dont deserve you at all... please tidur aja, besok kamu kerja pagi 🌧️'
+    'Ga nolak, aku loh menyelamatkan kamu dari aku... love is supposed to be easy 🍃',
+    'Aku sayang sama kamu juga, tapi aku pengen kamu dapat kebahagiaan yang utuh 🌿',
+    'Kamu orang baik, kamu pantes dapat yang terbaik tanpa beban ✨',
+    'Makasih udah selalu tulus dan sabar sama aku ya Erlang 💚',
+    'Tetap jaga kesehatan, kejar mimpimu, dan selalu bahagia ya 🌻'
   ];
 
-  // Cindy's real rejection reasons directly from the chat
+  // Cindy's reasons paired with Erlang's peaceful acceptance
   const REJECTION_REASONS = [
-    'Gak nolak, aku loh menyelamatkan kamu dari aku.',
-    'Aku complicated banget, aku tau aku bakal membebani kamu nantinya.',
-    'Aku tau kamu pantes dapet yang lebih baik, jauh lebih baik... biar kamu gaperlu banyak menyesuaikan diri lagi karena emang udah cocok dari awal.',
-    'Aku sayang banget sama kamu sampe aku bisa tau kalau aku pasti, pasti banget, bakal nyusahin kamu kedepannya.',
-    'Orang yang kayak kamu harusnya gak sama orang yang kayak aku, aku tau.',
-    'I\'m trying my best to save you from me... tapi aku tau kamu pasti bakal susah nantinya kalau sama aku, love is supposed to be easy.',
-    'Aku gak deserve nerima kebaikan-kebaikan kamu. Aku gak cukup baik, gak cukup keren, gak cukup hebat, gak cukup cantik buat kamu.',
-    'Karena sayang aja gak cukup... apakah sayang aku ini bisa bikin semuanya jadi less complicated? Enggak juga. Apakah sayang aku ini bisa bikin kamu happy sama aku? Tetep enggak juga.',
-    'Aku gamau kamu dapet omongan yang jelek-jelek gegara kamu macarin aku. Aku ini emang masalah buat semua orang.',
-    'Aku juga pengen banget jadi sesuatu yang "cukup" untuk kamu, tapi aku bukan apa-apa...',
-    'Serius aku nolak bukan karena aku gak sayang kamu atau apa, tapi aku tau kalau kamu sama aku pasti banyak banget masalah yang harus kita lewatin nantinya.'
+    'Cindy: "Gak nolak, aku loh menyelamatkan kamu dari aku..." — Erlang: "Aku menghargai kejujuranmu, Cin. Sekarang aku ikhlas menerimanya 🌿"',
+    'Cindy: "Love is supposed to be easy..." — Erlang: "Kamu benar, cinta seharusnya menenangkan. Bahagiamu adalah nomor satu 🍃"',
+    'Cindy: "Aku tau kamu pantes dapet yang lebih baik..." — Erlang: "Mungkin bukan aku orangnya, tapi bahagiamu tetap jadi bahagiaku juga ✨"',
+    'Cindy: "Aku complicated banget, takut membebani kamu..." — Erlang: "Aku gak pernah merasa terbebani menyayangimu, tapi aku ingin kamu bahagia bebas 💚"',
+    'Cindy: "Orang yang kayak kamu harusnya gak sama orang kayak aku..." — Erlang: "Bagi aku kamu tetap orang baik, dan aku selalu mendoakanmu 🌻"',
+    'Cindy: "Karena sayang aja gak cukup..." — Erlang: "Aku paham, Cin. Even in no contact, aku tetep ikhlas dan mendoakan yang terbaik 🕊️"',
+    'Cindy: "Aku gamau kamu dapet omongan jelek gegara aku..." — Erlang: "Terima kasih sudah peduli. Sekarang kita melangkah dengan damai 🍃"'
   ];
 
-  // Melancholic typewriter subtitle phrases
+  // Calming nature & mature typewriter phrases
   const TYPEWRITER_PHRASES = [
-    '"Makasih udah nolak aku 7 kali, 7 adalah nomornya Ronaldo..."',
-    '"Sayang banget 2 juta 5 ratus 90 ribu..."',
-    '"Gaada lagi yang bisa nemenin cerita di malam hari... gaada yang nyanyiin Olivia Rodrigo - Purple lagi"',
-    '"Gak nolak, aku loh menyelamatkan kamu dari aku... - Cindy"',
-    '"Ngoding sambil nangis... persembahan dari seorang IT guy yang lugu"',
-    '"2 Juli 2026 pertama DM di IG, subuh 26 September 2026 harus merelakan..."'
+    '"Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... 🌿"',
+    '"Aku happy kalau Cindy happy... bahagiamu adalah bahagiaku juga 🍃"',
+    '"Even with no contact, loving and wishing the best for you always 💚"',
+    '"Terima kasih untuk 86 hari memori indah sejak 2 Juli 2026 ✨"',
+    '"Di bawah naungan alam yang tenang, aku selalu mendoakan yang terbaik untukmu 🕊️"',
+    '"Persembahan penuh ketulusan dan kedewasaan dari seorang IT guy yang lugu 🌻"'
   ];
 
   // --- DOM ELEMENTS ---
@@ -182,42 +178,42 @@
     }
   }
 
-  // Sad ballad frequencies in A Minor & D Minor (Emotional, Heart-wrenching)
-  // Chords: Am -> Em -> Fmaj7 -> G -> Dm -> Am
-  const SAD_MELODY_FREQS = [
-    440.00, 523.25, 659.25, 523.25, 440.00, 329.63, 392.00, 493.88, // A4 C5 E5 C5 A4 E4 G4 B4
-    349.23, 440.00, 523.25, 659.25, 523.25, 440.00, 392.00, 493.88, // F4 A4 C5 E5 C5 A4 G4 B4
-    293.66, 349.23, 440.00, 587.33, 523.25, 440.00, 392.00, 349.23, // D4 F4 A4 D5 C5 A4 G4 F4
-    440.00, 493.88, 523.25, 440.00, 392.00, 329.63, 293.66, 220.00  // A4 B4 C5 A4 G4 E4 D4 A3
+  // Gentle acoustic & nature chimes frequencies (Warm, Peaceful, Sincere, Hopeful)
+  // Pentatonic & Major chord progression: C4, E4, G4, A4, C5, D5, E5, G5
+  const NATURE_MELODY_FREQS = [
+    261.63, 329.63, 392.00, 523.25, 440.00, 392.00, 329.63, 261.63, // C4 E4 G4 C5 A4 G4 E4 C4
+    293.66, 349.23, 440.00, 587.33, 523.25, 440.00, 349.23, 293.66, // D4 F4 A4 D5 C5 A4 F4 D4
+    329.63, 392.00, 493.88, 659.25, 587.33, 493.88, 392.00, 329.63, // E4 G4 B4 E5 D5 B4 G4 E4
+    349.23, 440.00, 523.25, 659.25, 523.25, 440.00, 392.00, 261.63  // F4 A4 C5 E5 C5 A4 G4 C4
   ];
 
-  function playSadNote(freq) {
+  function playNatureNote(freq) {
     if (!audioCtx) return;
     try {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
-      // Soft melancholic tone (sine + gentle reverb decay)
+      // Soft warm tone (gentle sine wave + acoustic decay)
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
       const now = audioCtx.currentTime;
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.exponentialRampToValueAtTime(0.14, now + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
+      gain.gain.exponentialRampToValueAtTime(0.12, now + 0.06);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
 
       osc.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start(now);
-      osc.stop(now + 1.65);
+      osc.stop(now + 1.85);
     } catch (e) {
       console.warn('Synth note error:', e);
     }
   }
 
-  // Sad teardrop / click SFX
-  function playClickSfx(isTear = false) {
+  // Gentle nature chime / click SFX
+  function playClickSfx(isNature = false) {
     if (!audioCtx) return;
     try {
       const osc = audioCtx.createOscillator();
@@ -225,18 +221,18 @@
       const now = audioCtx.currentTime;
 
       osc.type = 'sine';
-      const baseFreq = isTear ? 880 : 440;
+      const baseFreq = isNature ? 784 : 523.25; // G5 or C5 warm chime
       osc.frequency.setValueAtTime(baseFreq, now);
-      osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.5, now + 0.2);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.9, now + 0.18);
 
-      gain.gain.setValueAtTime(0.12, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+      gain.gain.setValueAtTime(0.10, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
 
       osc.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start(now);
-      osc.stop(now + 0.28);
+      osc.stop(now + 0.25);
     } catch (e) {}
   }
 
@@ -245,11 +241,11 @@
     currentNoteIdx = 0;
     synthInterval = setInterval(() => {
       if (isMusicPlaying && !customAudioLoaded) {
-        const freq = SAD_MELODY_FREQS[currentNoteIdx];
-        playSadNote(freq);
-        currentNoteIdx = (currentNoteIdx + 1) % SAD_MELODY_FREQS.length;
+        const freq = NATURE_MELODY_FREQS[currentNoteIdx];
+        playNatureNote(freq);
+        currentNoteIdx = (currentNoteIdx + 1) % NATURE_MELODY_FREQS.length;
       }
-    }, 550); // Slower tempo for sad feeling
+    }, 600); // Calming peaceful tempo
   }
 
   function stopSynthMelody() {
@@ -267,16 +263,16 @@
       if (bgmAudio && bgmAudio.src && !bgmAudio.error) {
         bgmAudio.play().then(() => {
           customAudioLoaded = true;
-          setMusicUI(true, 'Memutar lagu galau 🌧️');
+          setMusicUI(true, 'Memutar lagu latar 🍃');
         }).catch(() => {
           customAudioLoaded = false;
           startSynthMelody();
-          setMusicUI(true, 'Melodi Patah Hati 💔');
+          setMusicUI(true, 'Melodi Ketenangan Alam 🌿');
         });
       } else {
         customAudioLoaded = false;
         startSynthMelody();
-        setMusicUI(true, 'Melodi Patah Hati 💔');
+        setMusicUI(true, 'Melodi Ketenangan Alam 🌿');
       }
     } else {
       if (bgmAudio) bgmAudio.pause();
@@ -306,6 +302,161 @@
       }
     });
   }
+
+  // --- PERSISTENT AUDIO & INDEXEDDB ENGINE ---
+  const activeSongName = document.getElementById('activeSongName');
+  const AUDIO_DB_NAME = 'cilang_audio_db';
+  const AUDIO_STORE_NAME = 'saved_songs';
+  const AUDIO_DB_VERSION = 1;
+
+  function openAudioDB() {
+    return new Promise((resolve) => {
+      if (!window.indexedDB) {
+        resolve(null);
+        return;
+      }
+      try {
+        const req = indexedDB.open(AUDIO_DB_NAME, AUDIO_DB_VERSION);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains(AUDIO_STORE_NAME)) {
+            db.createObjectStore(AUDIO_STORE_NAME, { keyPath: 'id' });
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => resolve(null);
+      } catch (err) {
+        resolve(null);
+      }
+    });
+  }
+
+  async function saveAudioBlobToDB(blob, fileName, title) {
+    try {
+      const db = await openAudioDB();
+      if (!db) return false;
+      return new Promise((resolve) => {
+        const tx = db.transaction([AUDIO_STORE_NAME], 'readwrite');
+        const store = tx.objectStore(AUDIO_STORE_NAME);
+        store.put({
+          id: 'active_song',
+          blob: blob,
+          name: fileName,
+          title: title,
+          savedAt: Date.now()
+        });
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => resolve(false);
+      });
+    } catch (e) {
+      console.warn('saveAudioBlobToDB error:', e);
+      return false;
+    }
+  }
+
+  async function getAudioBlobFromDB() {
+    try {
+      const db = await openAudioDB();
+      if (!db) return null;
+      return new Promise((resolve) => {
+        const tx = db.transaction([AUDIO_STORE_NAME], 'readonly');
+        const store = tx.objectStore(AUDIO_STORE_NAME);
+        const req = store.get('active_song');
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => resolve(null);
+      });
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function clearAudioBlobFromDB() {
+    try {
+      const db = await openAudioDB();
+      if (!db) return;
+      const tx = db.transaction([AUDIO_STORE_NAME], 'readwrite');
+      tx.objectStore(AUDIO_STORE_NAME).delete('active_song');
+    } catch (e) {}
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function updatePresetButtonsUI(activeUrl) {
+    document.querySelectorAll('.preset-song-btn').forEach(btn => {
+      const btnUrl = btn.dataset.songUrl;
+      if (btnUrl && (btnUrl === activeUrl || (activeUrl && activeUrl.endsWith(btnUrl)))) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  function applyActiveSong(src, title, source = 'url', saveToLocal = true) {
+    if (!bgmAudio) return;
+    
+    // Normalize and assign source
+    if (bgmAudio.src !== src && bgmAudio.getAttribute('src') !== src) {
+      bgmAudio.src = src;
+    }
+    customAudioLoaded = true;
+
+    const displayTitle = title || 'Lagu Kenangan 🎵';
+    if (musicTitle) {
+      musicTitle.textContent = displayTitle;
+    }
+    if (activeSongName) {
+      activeSongName.textContent = displayTitle;
+    }
+
+    updatePresetButtonsUI(src);
+
+    if (saveToLocal && source !== 'indexeddb') {
+      try {
+        localStorage.setItem('savedSongUrl', src);
+        localStorage.setItem('savedSongTitle', displayTitle);
+      } catch (e) {}
+    }
+
+    if (isMusicPlaying) {
+      bgmAudio.play().catch(() => {});
+    }
+  }
+
+  async function initPersistentAudio() {
+    try {
+      // 1. Check IndexedDB for a custom uploaded file
+      const localRecord = await getAudioBlobFromDB();
+      if (localRecord && localRecord.blob) {
+        const objectUrl = URL.createObjectURL(localRecord.blob);
+        applyActiveSong(objectUrl, localRecord.title || localRecord.name || 'File MP3 Tersimpan 🎵', 'indexeddb', false);
+        return;
+      }
+
+      // 2. Check localStorage for previously saved song URL or preset
+      const savedSongUrl = localStorage.getItem('savedSongUrl');
+      const savedSongTitle = localStorage.getItem('savedSongTitle');
+      if (savedSongUrl) {
+        applyActiveSong(savedSongUrl, savedSongTitle || 'Lagu Kenangan 🎵', 'local', false);
+        return;
+      }
+
+      // 3. Fallback to default assets/music.mp3
+      applyActiveSong('assets/music.mp3', 'Melodi Ketenangan Alam 🍃', 'default', false);
+    } catch (e) {
+      console.warn('initPersistentAudio error:', e);
+    }
+  }
+
+  // Initialize persistent audio immediately
+  initPersistentAudio();
 
   // --- SYNC PHOTOS HELPER ---
   function setBoyPhoto(src) {
@@ -381,19 +532,19 @@
 
   typeWriter();
 
-  // --- FLOATING TEARS & BROKEN HEARTS (BURST FX) ---
-  const SAD_SYMBOLS = ['💔', '🥀', '🌧️', '💧', '🩹', '✨', '🖤'];
+  // --- FLOATING NATURE PARTICLES & HEARTS (LIGHTWEIGHT BURST FX) ---
+  const NATURE_SYMBOLS = ['🌿', '🍃', '🌱', '✨', '💚', '🌻', '🕊️', '🤍'];
 
-  function spawnBurstHearts(x, y, count = 18) {
+  function spawnBurstHearts(x, y, count = 10) {
     for (let i = 0; i < count; i++) {
       const heart = document.createElement('div');
       heart.className = 'floating-heart-burst';
-      heart.textContent = SAD_SYMBOLS[Math.floor(Math.random() * SAD_SYMBOLS.length)];
+      heart.textContent = NATURE_SYMBOLS[Math.floor(Math.random() * NATURE_SYMBOLS.length)];
 
-      const size = Math.random() * 20 + 16;
-      const tx = (Math.random() - 0.5) * 260;
-      const ty = -(Math.random() * 200 + 80);
-      const rot = (Math.random() - 0.5) * 120;
+      const size = Math.random() * 16 + 14;
+      const tx = (Math.random() - 0.5) * 180;
+      const ty = -(Math.random() * 150 + 60);
+      const rot = (Math.random() - 0.5) * 90;
 
       heart.style.left = `${x}px`;
       heart.style.top = `${y}px`;
@@ -408,7 +559,7 @@
         if (heart.parentNode) {
           heart.parentNode.removeChild(heart);
         }
-      }, 2100);
+      }, 1400);
     }
   }
 
@@ -583,14 +734,6 @@
     });
   });
 
-  // Tap anywhere on screen to spawn teardrop/broken heart
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('button') || e.target.closest('input') || e.target.closest('.modal-card')) {
-      return;
-    }
-    spawnBurstHearts(e.clientX, e.clientY, 3);
-  });
-
   // --- BUTTON ACTIONS ---
 
   // Tangis 26 November Button
@@ -642,6 +785,7 @@
 
   closeReasonBtn.addEventListener('click', () => {
     reasonModal.classList.remove('active');
+    playClickSfx();
   });
 
   nextReasonBtn.addEventListener('click', () => {
@@ -659,6 +803,30 @@
 
   closeSettingsBtn.addEventListener('click', () => {
     settingsModal.classList.remove('active');
+    playClickSfx();
+  });
+
+  // Preset Song 1-Click Select Buttons
+  document.querySelectorAll('.preset-song-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.songUrl;
+      const title = btn.dataset.songName;
+      if (!url) return;
+
+      // Clear local IndexedDB blob override so preset song takes over
+      await clearAudioBlobFromDB();
+      applyActiveSong(url, title, 'preset', true);
+      toggleMusic(true);
+
+      // Instantly sync preset song to Firebase RTDB
+      pushMediaToCloud({ songUrl: url, songTitle: title });
+
+      if (inputSongFile) inputSongFile.value = '';
+      if (inputSongUrl) inputSongUrl.value = '';
+
+      spawnBurstHearts(window.innerWidth / 2, window.innerHeight / 2, 20);
+      playClickSfx(true);
+    });
   });
 
   saveSettingsBtn.addEventListener('click', async () => {
@@ -694,20 +862,31 @@
       cloudMediaPayload.girlPhoto = url;
     }
 
-    // 3. Process Song (File or URL)
+    // 3. Process Song (File or URL with IndexedDB and Cloud Sync)
     if (inputSongFile && inputSongFile.files[0]) {
-      const url = URL.createObjectURL(inputSongFile.files[0]);
-      bgmAudio.src = url;
-      customAudioLoaded = true;
-      musicTitle.textContent = inputSongFile.files[0].name.replace(/\.[^/.]+$/, "");
+      const file = inputSongFile.files[0];
+      const title = file.name.replace(/\.[^/.]+$/, "");
+
+      // A. Save permanently to browser's IndexedDB (never lost on refresh)
+      await saveAudioBlobToDB(file, file.name, title);
+      const objectUrl = URL.createObjectURL(file);
+      applyActiveSong(objectUrl, title, 'indexeddb', false);
       toggleMusic(true);
+
+      // B. If file size is <= 2.5MB, convert to Base64 to sync to Cindy's phone via Firebase RTDB
+      if (file.size <= 2.5 * 1024 * 1024) {
+        const base64Audio = await fileToBase64(file);
+        if (base64Audio) {
+          cloudMediaPayload.songUrl = base64Audio;
+          cloudMediaPayload.songTitle = title;
+        }
+      }
     } else if (inputSongUrl && inputSongUrl.value.trim()) {
       const url = inputSongUrl.value.trim();
-      bgmAudio.src = url;
-      customAudioLoaded = true;
-      musicTitle.textContent = "Lagu Kenangan 🎵";
+      await clearAudioBlobFromDB();
+      applyActiveSong(url, 'Lagu Kenangan 🎵', 'url', true);
       cloudMediaPayload.songUrl = url;
-      cloudMediaPayload.songTitle = "Lagu Kenangan 🎵";
+      cloudMediaPayload.songTitle = 'Lagu Kenangan 🎵';
       toggleMusic(true);
     }
 
@@ -720,17 +899,24 @@
     playClickSfx(true);
   });
 
-  resetSettingsBtn.addEventListener('click', () => {
+  resetSettingsBtn.addEventListener('click', async () => {
     try {
       localStorage.removeItem('savedBoyPhoto');
       localStorage.removeItem('savedGirlPhoto');
+      localStorage.removeItem('savedSongUrl');
+      localStorage.removeItem('savedSongTitle');
     } catch (e) {}
+
+    await clearAudioBlobFromDB();
+    applyActiveSong('assets/music.mp3', 'Melodi Ketenangan Alam 🍃', 'default', false);
 
     setBoyPhoto('assets/boy-placeholder.svg');
     setGirlPhoto('assets/girl-placeholder.svg');
     pushMediaToCloud({
       boyPhoto: 'assets/boy-placeholder.svg',
-      girlPhoto: 'assets/girl-placeholder.svg'
+      girlPhoto: 'assets/girl-placeholder.svg',
+      songUrl: 'assets/music.mp3',
+      songTitle: 'Melodi Ketenangan Alam 🍃'
     });
 
     if (inputBoyFile) inputBoyFile.value = '';
@@ -1121,10 +1307,14 @@
           setGirlPhoto(data.girlPhoto);
           try { localStorage.setItem('savedGirlPhoto', data.girlPhoto); } catch (e) {}
         }
-        if (data.songUrl && bgmAudio && bgmAudio.src !== data.songUrl) {
-          bgmAudio.src = data.songUrl;
-          customAudioLoaded = true;
-          musicTitle.textContent = data.songTitle || 'Lagu Kenangan 🎵';
+        if (data.songUrl) {
+          const localRecord = await getAudioBlobFromDB();
+          if (!localRecord) {
+            const currentSrc = bgmAudio ? (bgmAudio.getAttribute('src') || bgmAudio.src) : '';
+            if (currentSrc !== data.songUrl) {
+              applyActiveSong(data.songUrl, data.songTitle || 'Lagu Kenangan 🎵', 'cloud', true);
+            }
+          }
         }
       }
     } catch (e) {
@@ -1281,9 +1471,15 @@
         if (!cloudMedia) {
           const savedBoy = localStorage.getItem('savedBoyPhoto');
           const savedGirl = localStorage.getItem('savedGirlPhoto');
+          const savedSong = localStorage.getItem('savedSongUrl');
+          const savedSongTitle = localStorage.getItem('savedSongTitle');
           const seedMedia = {};
           if (savedBoy) seedMedia.boyPhoto = savedBoy;
           if (savedGirl) seedMedia.girlPhoto = savedGirl;
+          if (savedSong) {
+            seedMedia.songUrl = savedSong;
+            seedMedia.songTitle = savedSongTitle || 'Lagu Kenangan 🎵';
+          }
           if (Object.keys(seedMedia).length > 0) {
             await pushMediaToCloud(seedMedia);
           }
@@ -1312,12 +1508,13 @@
   })();
 
   // Background auto-polling (every 4.5 seconds so Erlang & Cindy see new chats and photo/music updates live!)
+  // Background auto-polling (smart poll: only when tab is visible, every 6 seconds)
   setInterval(() => {
-    if (cloudDbUrl) {
+    if (cloudDbUrl && !document.hidden) {
       fetchMessagesFromCloud(true);
       fetchMediaFromCloud();
     }
-  }, 4500);
+  }, 6000);
 
   // Close modals when clicking backdrop
   [letterModal, reasonModal, settingsModal, waAddMessageModal].forEach(modal => {
@@ -1333,9 +1530,9 @@
   function applyConfig() {
     nameBoy.textContent = config.boyName;
     nameGirl.textContent = config.girlName;
-    labelBoy.textContent = `${config.boyName} (Ditolak 7x) 🥀`;
-    labelGirl.textContent = `${config.girlName} ("Save You") 💔`;
-    letterSignName.textContent = `${config.boyName} 🥀`;
+    labelBoy.textContent = `${config.boyName} (Belajar Ikhlas) 🍃`;
+    labelGirl.textContent = `${config.girlName} (Semoga Bahagia) ✨`;
+    letterSignName.textContent = `${config.boyName} 🌿`;
     updateLoveCounter();
   }
 
@@ -1363,7 +1560,7 @@
 
   applyConfig();
 
-  // --- BACKGROUND CANVAS (LIGHTWEIGHT FALLING RAINDROPS & BROKEN HEARTS) ---
+  // --- BACKGROUND CANVAS (LIGHTWEIGHT NATURE FALLING LEAVES & GOLDEN SPORES) ---
   const canvas = document.getElementById('loveCanvas');
   const ctx = canvas.getContext('2d');
   let width = (canvas.width = window.innerWidth);
@@ -1382,29 +1579,29 @@
     reset(initial = false) {
       this.x = Math.random() * width;
       this.y = initial ? Math.random() * height : -20;
-      this.size = Math.random() * 6 + 5;
-      this.speedY = Math.random() * 1.8 + 1.0;
-      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.size = Math.random() * 6 + 6;
+      this.speedY = Math.random() * 1.2 + 0.6;
+      this.speedX = Math.sin(Math.random() * Math.PI) * 0.7 - 0.2;
       this.angle = Math.random() * Math.PI * 2;
-      this.angularSpeed = (Math.random() - 0.5) * 0.02;
-      this.opacity = Math.random() * 0.35 + 0.2;
+      this.angularSpeed = (Math.random() - 0.5) * 0.03;
+      this.opacity = Math.random() * 0.35 + 0.25;
       
       const rand = Math.random();
-      if (rand < 0.6) {
-        this.type = 'raindrop';
-        this.color = '#70d6ff';
-      } else if (rand < 0.85) {
-        this.type = 'broken_heart';
-        this.color = '#ff758f';
+      if (rand < 0.55) {
+        this.type = 'leaf';
+        this.color = Math.random() > 0.5 ? '#74c69d' : '#52b788';
+      } else if (rand < 0.8) {
+        this.type = 'spore';
+        this.color = '#ffd166';
       } else {
-        this.type = 'rose_petal';
-        this.color = '#9d4edd';
+        this.type = 'petal';
+        this.color = '#d8f3dc';
       }
     }
 
     update() {
       this.y += this.speedY;
-      this.x += this.speedX;
+      this.x += this.speedX + Math.sin(this.y * 0.015) * 0.4;
       this.angle += this.angularSpeed;
 
       if (this.y > height + 20 || this.x < -20 || this.x > width + 20) {
@@ -1413,15 +1610,13 @@
     }
 
     draw() {
-      if (this.type === 'raindrop') {
-        // High performance line draw (no save/restore)
+      if (this.type === 'spore') {
+        // High performance glowing circle (no save/restore)
         ctx.globalAlpha = this.opacity;
-        ctx.strokeStyle = '#70d6ff';
-        ctx.lineWidth = 1;
+        ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x - 1, this.y + this.size * 1.6);
-        ctx.stroke();
+        ctx.arc(this.x, this.y, this.size * 0.32, 0, Math.PI * 2);
+        ctx.fill();
         return;
       }
 
@@ -1431,28 +1626,21 @@
       ctx.globalAlpha = this.opacity;
       ctx.fillStyle = this.color;
 
-      if (this.type === 'broken_heart') {
-        const s = this.size * 0.5;
-        ctx.beginPath();
-        ctx.moveTo(0, s * 0.3);
-        ctx.bezierCurveTo(-s, -s * 0.5, -s * 1.1, s * 0.6, 0, s * 1.1);
-        ctx.bezierCurveTo(s * 1.1, s * 0.6, s, -s * 0.5, 0, s * 0.3);
-        ctx.fill();
-      } else {
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.bezierCurveTo(this.size, -this.size / 2, this.size, this.size, 0, this.size * 1.2);
-        ctx.bezierCurveTo(-this.size, this.size, -this.size, -this.size / 2, 0, 0);
-        ctx.fill();
-      }
+      ctx.beginPath();
+      const s = this.size;
+      // Smooth organic leaf / petal shape using quadratic curves
+      ctx.moveTo(0, -s);
+      ctx.quadraticCurveTo(s * 0.65, 0, 0, s);
+      ctx.quadraticCurveTo(-s * 0.65, 0, 0, -s);
+      ctx.fill();
 
       ctx.restore();
     }
   }
 
-  // Adaptive particle count for maximum 60fps smoothness
+  // Adaptive particle count for maximum 60fps smoothness and low battery load
   const isMobileScreen = (window.innerWidth || 800) < 768;
-  const PARTICLE_COUNT = isMobileScreen ? 8 : 14;
+  const PARTICLE_COUNT = isMobileScreen ? 8 : 13;
   const particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
 
   let isCanvasActive = true;

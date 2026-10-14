@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Erlang & Cindy - Tangis di Bulan September 💔 (26 September 2026)</title>
+  <title>Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿 (26 September 2026)</title>
   
   <!-- Primary Meta Tags -->
-  <meta name="title" content="Erlang & Cindy - Tangis di Bulan September 💔 (26 September 2026)">
-  <meta name="description" content="Persembahan dari seorang IT guy yang lugu, ngoding sambil menangis di subuh 26 September 2026 setelah ditolak Cindy untuk ke-7 kalinya.">
+  <meta name="title" content="Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿 (26 September 2026)">
+  <meta name="description" content="Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Erlang happy kalau Cindy happy. Even with no contact, loving and wishing the best for you always 🍃.">
 
   <!-- Open Graph / Facebook / WhatsApp Preview Thumbnail -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cilang.netlify.app/">
   <meta property="og:site_name" content="CILANG APPS">
-  <meta property="og:title" content="Erlang & Cindy - Tangis di Bulan September 💔">
-  <meta property="og:description" content="'Gak nolak, aku loh menyelamatkan kamu dari aku...' - Cindy. Ditolak 7 kali (nomornya Ronaldo) pada 26 September 2026.">
+  <meta property="og:title" content="Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿">
+  <meta property="og:description" content="Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya dengan ikhlas. Bahagiamu adalah bahagiaku juga. Tetep loving you even with no contact 🍃.">
   
   <!-- WhatsApp Specific OG Image (Absolute URL, PNG & JPG, 1200x630) -->
   <meta property="og:image" content="https://cilang.netlify.app/assets/banner.png">
@@ -33,8 +33,8 @@
 
   <!-- Twitter Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Erlang & Cindy - Tangis di Bulan September 💔">
-  <meta name="twitter:description" content="Kisah subuh 26 September 2026: Ditolak ke-7 kalinya, ngoding sampai pagi sambil menangis...">
+  <meta name="twitter:title" content="Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿">
+  <meta name="twitter:description" content="Sebuah keikhlasan subuh 26 September 2026: Aku bahagia kalau kamu bahagia, tetep loving you even with no contact 🍃.">
   <meta name="twitter:image" content="https://cilang.netlify.app/assets/banner.png">
 
   <!-- Schema.org / Link Preview Fallback -->
@@ -54,24 +54,32 @@
 </head>
 <body>
 
-  <!-- Background Animated Canvas (Melancholic Raindrops & Broken Hearts) -->
+  <!-- Background Video: Lush Nature Garden & Trees -->
+  <div class="video-bg-container" id="videoBgContainer">
+    <video class="bg-video" autoplay loop muted playsinline poster="assets/garden-poster.jpg" id="bgVideo">
+      <source src="assets/garden.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay-gradient"></div>
+  </div>
+
+  <!-- Background Animated Canvas (Gentle Falling Leaves & Golden Sunlight Orbs) -->
   <canvas id="loveCanvas"></canvas>
 
   <!-- Sound Toggle & Sad Music Player Floating Widget -->
   <div class="music-player-widget" id="musicPlayer">
-    <div class="vinyl-disc" id="vinylDisc" title="Klik untuk Putar/Jeda Lagu Galau">
+    <div class="vinyl-disc" id="vinylDisc" title="Klik untuk Putar/Jeda Melodi Ketenangan">
       <div class="vinyl-groove"></div>
-      <div class="vinyl-center">💜</div>
+      <div class="vinyl-center">🌿</div>
     </div>
     <div class="music-info">
-      <span class="music-title" id="musicTitle">Olivia Rodrigo - Purple 💜</span>
-      <span class="music-status" id="musicStatus">Kenangan subuh 26 Sept 🌧️</span>
+      <span class="music-title" id="musicTitle">Melodi Ketenangan Alam 🍃</span>
+      <span class="music-status" id="musicStatus">Doa tulus untuk bahagiamu ✨</span>
     </div>
     <button class="music-btn" id="playBtn" aria-label="Play/Pause">▶</button>
   </div>
 
   <!-- Hidden Custom Audio Tag for user-provided MP3 -->
-  <audio id="bgmAudio" loop preload="auto">
+  <audio id="bgmAudio" loop preload="none">
     <source src="assets/music.mp3" type="audio/mpeg">
     <source src="assets/song.mp3" type="audio/mpeg">
   </audio>
@@ -79,11 +87,11 @@
   <!-- Welcome / Entrance Curtain (Membuka Cerita & Mengaktifkan Audio Browser) -->
   <div class="curtain-overlay" id="curtainOverlay">
     <div class="curtain-card">
-      <div class="heart-pulse-icon">🥀</div>
-      <h2>26 September 2026, 02:00 AM...</h2>
-      <p>"Makasih udah nolak aku 7 kali, 7 adalah nomornya Ronaldo... Sekarang gak ada lagi yang nyanyiin Olivia Rodrigo - Purple di malam hari."</p>
+      <div class="heart-pulse-icon">🌿</div>
+      <h2>26 September 2026, Sebuah Keikhlasan...</h2>
+      <p>"Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia. Even with no contact, loving and wishing the best for you always 🍃."</p>
       <button class="btn-primary" id="openCurtainBtn">
-        <span>Buka Tangis 26 September 💔</span>
+        <span>Buka Hati &amp; Masuki Taman Damai 🕊️</span>
       </button>
     </div>
   </div>
@@ -94,19 +102,19 @@
       
       <!-- Top Decorative Ribbon / Tag -->
       <div class="top-tag">
-        <span class="sparkle">🥀</span>
-        <span id="badgeStoryText">Ditolak 7 Kali • Angka Ronaldo 🌧️</span>
-        <span class="sparkle">💜</span>
+        <span class="sparkle">🌿</span>
+        <span id="badgeStoryText">Doa Tulus untuk Cindy • Bahagiamu Adalah Bahagiaku 🍃</span>
+        <span class="sparkle">✨</span>
       </div>
 
       <!-- Header Title -->
       <header class="card-header">
         <h1 class="couple-title">
           <span class="name-text" id="nameBoy">Erlangga</span>
-          <span class="heart-icon-beat broken" id="centerBeatHeart" title="Klik untuk merasakan kepedihan cinta!">💔</span>
+          <span class="heart-icon-beat nature" id="centerBeatHeart" title="Ketulusan dan doa yang tak pernah pudar 💚">💚</span>
           <span class="name-text" id="nameGirl">Cindy</span>
         </h1>
-        <p class="subtitle-text" id="typewriterText">"Ngoding sambil nangis... persembahan dari seorang IT guy yang lugu"</p>
+        <p class="subtitle-text" id="typewriterText">"Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia 🌿"</p>
       </header>
 
       <!-- Interactive Photo Showcase Section -->
@@ -117,24 +125,24 @@
           <div class="photo-frame" title="Klik foto Erlang untuk mendengar isi hatinya!">
             <img src="assets/boy-placeholder.svg" alt="Foto Erlang" class="couple-img" id="imgBoy" loading="lazy">
             <div class="photo-overlay">
-              <span class="tap-hint">Isi Hati Erlang 🥀</span>
+              <span class="tap-hint">Doa Tulus Erlang 🌿</span>
             </div>
             <div class="photo-change-btn" id="changeBoyPhotoBtn" title="Ganti Foto Erlang">📷</div>
           </div>
           <div class="name-badge">
-            <span id="labelBoy">Erlang (Ditolak 7x) 🥀</span>
+            <span id="labelBoy">Erlang (Belajar Ikhlas) 🍃</span>
           </div>
         </div>
 
         <!-- Center Broken Heart Connector & Emblem -->
         <div class="love-connector">
           <div class="connector-line"></div>
-          <div class="heart-circle broken-emblem" id="interactiveHeartEmblem" title="Klik untuk ledakan rasa sesak!">
-            <span class="big-heart">💔</span>
+          <div class="heart-circle nature-emblem" id="interactiveHeartEmblem" title="Klik untuk semilir ketenangan hati!">
+            <span class="big-heart">💚</span>
             <span class="sparkle-ring"></span>
           </div>
           <div class="connector-line"></div>
-          <span class="forever-tag">Ke-7 Kali</span>
+          <span class="forever-tag">Ikhlas &amp; Tulus</span>
         </div>
 
         <!-- Right Photo: Cindy -->
@@ -142,12 +150,12 @@
           <div class="photo-frame" title="Klik foto Cindy untuk mendengar alasannya!">
             <img src="assets/girl-placeholder.svg" alt="Foto Cindy" class="couple-img" id="imgGirl" loading="lazy">
             <div class="photo-overlay">
-              <span class="tap-hint">Alasan Cindy 🌧️</span>
+              <span class="tap-hint">Senyum Cindy 🌻</span>
             </div>
             <div class="photo-change-btn" id="changeGirlPhotoBtn" title="Ganti Foto Cindy">📷</div>
           </div>
           <div class="name-badge">
-            <span id="labelGirl">Cindy ("Save You") 💔</span>
+            <span id="labelGirl">Cindy (Semoga Bahagia) ✨</span>
           </div>
         </div>
 
@@ -162,28 +170,28 @@
           <div class="timeline-card timeline-card-start">
             <span class="timeline-badge-pill pill-start">💌 Awal Mula DM di IG</span>
             <div class="timeline-date-val date-val-start">2 Juli 2026</div>
-            <span class="timeline-hint">Pertama kali kenal &amp; cerita malam</span>
+            <span class="timeline-hint">Pertama kali kenal &amp; cerita malam 🌿</span>
           </div>
 
           <!-- Divider / Penghubung Rentang Waktu -->
           <div class="timeline-connector">
             <span class="timeline-connector-line"></span>
-            <span class="timeline-duration-badge">86 Hari Cerita Kita 🥀</span>
+            <span class="timeline-duration-badge">86 Hari Cerita Kita 🍃</span>
             <span class="timeline-connector-line"></span>
           </div>
 
-          <!-- Tanggal 2: Stop Komunikasi Hari Ini -->
+          <!-- Tanggal 2: Ikhlas Mendoakan Cindy Hari Ini -->
           <div class="timeline-card timeline-card-end">
-            <span class="timeline-badge-pill pill-end">💔 Stop Komunikasi (Hari Ini)</span>
+            <span class="timeline-badge-pill pill-end">🕊️ Ikhlas &amp; Mendoakanmu (Hari Ini)</span>
             <div class="timeline-date-val date-val-end" id="dateText">26 September 2026</div>
-            <span class="timeline-hint">Subuh penolakan ke-7 (Nomor Ronaldo)</span>
+            <span class="timeline-hint">Fase no contact, tapi doa tulus tetap mengalir 💚</span>
           </div>
         </div>
 
         <!-- Interactive Counter (Waktu Terus Bertambah dengan Warna Hari Berbeda) -->
         <div class="counter-container">
           <p class="counter-title">
-            <span class="live-pulse-dot"></span> Waktu terus bertambah sejak 2 Juli sampai detik ini:
+            <span class="live-pulse-dot"></span> Waktu terus berjalan sejak kita pertama saling kenal pada 2 Juli:
           </p>
           <div class="counter-grid">
             <div class="counter-box counter-box-highlight">
@@ -209,23 +217,23 @@
       <!-- Interactive Buttons Action Bar -->
       <footer class="interactive-actions">
         <button class="action-btn btn-tears" id="sendLoveBtn">
-          <span class="btn-icon">🌧️</span>
-          <span class="btn-text">Tangis di Bulan September</span>
+          <span class="btn-icon">🍃</span>
+          <span class="btn-text">Angin &amp; Daun Ketenangan</span>
         </button>
 
         <button class="action-btn btn-letter" id="openLetterBtn">
           <span class="btn-icon">📜</span>
-          <span class="btn-text">Surat Tak Tersampaikan</span>
+          <span class="btn-text">Surat: Untuk Bahagiamu</span>
         </button>
 
         <button class="action-btn btn-reasons" id="reasonsBtn">
-          <span class="btn-icon">💔</span>
-          <span class="btn-text">Alasan Cindy Nolak</span>
+          <span class="btn-icon">🕊️</span>
+          <span class="btn-text">Alasan &amp; Kedewasaan</span>
         </button>
 
         <button class="action-btn btn-settings" id="settingsBtn" title="Ganti Foto Erlang, Cindy & Lagu MP3">
           <span class="btn-icon">📷</span>
-          <span class="btn-text">Ganti Foto & Lagu</span>
+          <span class="btn-text">Ganti Foto &amp; Lagu</span>
         </button>
       </footer>
 
@@ -242,8 +250,8 @@
                 <span class="wa-online-dot"></span>
               </div>
               <div class="wa-name-wrapper">
-                <span class="wa-contact-name" id="waContactName">Erlang &amp; Cindy 🥀</span>
-                <span class="wa-status-text" id="waStatusText">online • Obrolan Berdua</span>
+                <span class="wa-contact-name" id="waContactName">Erlang &amp; Cindy 🌿</span>
+                <span class="wa-status-text" id="waStatusText">online • Doa &amp; Ketulusan</span>
               </div>
             </div>
           </div>
@@ -251,7 +259,7 @@
           <!-- WhatsApp Chat Messages Scrollable Box -->
           <div class="wa-messages-box" id="waMessagesBox">
             <div class="wa-date-pill">
-              <span>📅 26 SEPTEMBER 2026 • SUBUH PENOLAKAN KE-7</span>
+              <span>📅 26 SEPTEMBER 2026 • SEBUAH KEIKHLASAN &amp; DOA TERBAIK 🌿</span>
             </div>
 
             <!-- Chat messages stream here -->
@@ -277,49 +285,48 @@
 
       <!-- Sweet Melancholic Footer Note -->
       <div class="footer-note">
-        <span>"Salah satunya buat sesuatu sampai pagi gini gak mikirin diri sendiri cuma demi kamu, persembahan dari aku seorang IT guy yang lugu." 🥀</span>
+        <span>"Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia. Even with no contact, my prayers and love are always with you." 🌿</span>
       </div>
 
     </div>
   </main>
 
-  <!-- Modal: Surat Tak Tersampaikan (Yang Disiapkan Erlang Sebelum Ditolak) 📜 -->
+  <!-- Modal: Surat Tak Tersampaikan (Penuh Kedewasaan & Keikhlasan) 📜 -->
   <div class="modal-backdrop" id="letterModal">
     <div class="modal-card letter-paper">
-      <button class="modal-close" id="closeLetterBtn">&times;</button>
-      <div class="letter-stamp">🥀 26 Sept 2026 • Penolakan Ke-7</div>
-      <h3 class="letter-title">Untuk Cindy, dari Seorang IT Guy yang Lugu...</h3>
+      <button class="modal-close" id="closeLetterBtn" aria-label="Tutup Surat" title="Tutup">✕</button>
+      <div class="letter-stamp">🌿 26 Sept 2026 • Ketulusan &amp; Keikhlasan</div>
+      <h3 class="letter-title">Untuk Cindy, dari Seseorang yang Mendoakan Bahagiamu...</h3>
       <div class="letter-content" id="letterContent">
-        <p>Cindy... makasih banyak ya udah nolak aku di tanggal <strong>26 September 2026</strong> ini. Dan makasih juga udah nolak aku sampai <strong>7 kali</strong>—angka keberuntungan, nomornya Ronaldo.</p>
-        <p>Sejak pertama kali kita DM di Instagram pada <strong>2 Juli 2026</strong> sampai subuh ini, aku gak bakal pernah lupain semua kebaikan kamu, hal-hal baru yang kamu kenalin, matrix, dan obrolan malam kita.</p>
-        <p>Mulai hari ini, yahh... gak ada lagi yang nemenin aku cerita di malam hari. Gak ada lagi yang nyanyiin lagu <em>Olivia Rodrigo - Purple</em> lagi buat aku.</p>
-        <p>Sayang banget 2 juta 5 ratus 90 ribu... tapi ya sudah, mungkin emang ini jalan ceritanya.</p>
-        <p>Kamu bilang: <em>"Aku gak nolak, aku loh menyelamatkan kamu dari aku... love is supposed to be easy."</em> Tapi Cin, kamu bukan penyelamatku, kamu bukan superhero yang bisa baca masa depan. Cinta itu gak butuh banyak alasan kalau emang tulus.</p>
-        <p>Sesuai janji kita subuh tadi: <em>jangan ceritain kejelekanku ke orang lain ya, dan aku pun bersumpah gak bakal pernah ceritain hal jelek tentang kamu ke siapapun</em>.</p>
-        <p>Web ini aku buat sampai subuh, gak mikirin diri sendiri, tangan udah gemetar dan ngoding sambil menangis di depan laptop... persembahan terakhir dari aku, seorang IT guy yang lugu, sebelum mungkin kita tanpa komunikasi lagi atau saling block.</p>
-        <p class="letter-sign">Dari orang yang selalu tulus menyayangimu,<br><span id="letterSignName">Erlangga Dwi Jiwantoro 🥀</span></p>
+        <p>Cindy... terima kasih banyak untuk 86 hari sejak pertama kali kita DM di Instagram pada <strong>2 Juli 2026</strong> sampai detik ini. Semua kebaikan kamu, obrolan malam, cerita-cerita baru, dan kebersamaan yang pernah ada akan selalu menjadi memori yang kuhargai.</p>
+        <p>Mungkin memang aku bukan orang yang tepat yang kamu pilih untuk mendampingi langkahmu, dan dari lubuk hatiku yang paling dalam: <strong>aku ikhlas dan menerima keputusanmu</strong>.</p>
+        <p>Kamu pernah bilang: <em>"Aku gak nolak, aku loh menyelamatkan kamu dari aku... love is supposed to be easy."</em> Sekarang aku paham, Cin. Yang paling penting bagiku sekarang adalah melihat kamu bahagia, hidup tenang tanpa beban, dan tersenyum bebas. Karena <strong>bahagiamu adalah bahagiaku juga</strong>.</p>
+        <p>Meskipun sekarang kita no contact dan menjalani jalan masing-masing, rasa sayang, rasa hormat, dan doa tulusku untukmu tidak akan pernah hilang. <em>Even with no contact, loving and wishing the best for you always</em>.</p>
+        <p>Sesuai janji kita subuh tadi: <em>jangan ceritain kejelekanku ke orang lain ya, dan aku pun bersumpah gak bakal pernah ceritain satu pun hal buruk tentang kamu ke siapapun</em>. Kamu orang baik, Cindy.</p>
+        <p>Web ini kini menjadi taman ketenangan kita—tempat di mana dedaunan hijau dan hembusan angin sepoi-sepoi membawa doa baik untuk setiap langkah dan impian yang kamu tuju ke depan.</p>
+        <p class="letter-sign">Dari orang yang selalu tulus mendoakan bahagiamu,<br><span id="letterSignName">Erlangga Dwi Jiwantoro 🌿</span></p>
       </div>
-      <button class="btn-primary btn-accept-pain" id="letterLoveBurstBtn">Aku Belajar Ikhlas 💔</button>
+      <button class="btn-primary btn-accept-pain" id="letterLoveBurstBtn">Aku Bahagia Melihatmu Bahagia 🕊️</button>
     </div>
   </div>
 
-  <!-- Modal: Alasan Cindy Menolak Erlang 💔 -->
+  <!-- Modal: Alasan Cindy & Kedewasaan untuk Menerima 🕊️ -->
   <div class="modal-backdrop" id="reasonModal">
     <div class="modal-card reason-card">
-      <button class="modal-close" id="closeReasonBtn">&times;</button>
-      <div class="reason-icon">💔</div>
-      <h3>Alasan Cindy Nolak (Ditolak 7 Kali):</h3>
+      <button class="modal-close" id="closeReasonBtn" aria-label="Tutup Alasan" title="Tutup">✕</button>
+      <div class="reason-icon">🕊️</div>
+      <h3>Alasan Cindy &amp; Kedewasaan untuk Menerima:</h3>
       <div class="reason-box" id="reasonText">
-        "Gak nolak, aku loh menyelamatkan kamu dari aku... Aku complicated banget, aku tau aku bakal membebani kamu nantinya."
+        "Gak nolak, aku loh menyelamatkan kamu dari aku... love is supposed to be easy." — Cindy
       </div>
-      <button class="btn-primary" id="nextReasonBtn">Alasan Cindy Lainnya 🥀</button>
+      <button class="btn-primary" id="nextReasonBtn">Renungan &amp; Doa Lainnya 🍃</button>
     </div>
   </div>
 
   <!-- Modal: Tambah Pesan Obrolan (Pilih Role Cindy atau Erlang & Text Area Besar) 💬 -->
   <div class="modal-backdrop" id="waAddMessageModal">
     <div class="modal-card wa-add-modal-card">
-      <button class="modal-close" id="closeWaAddModalBtn">&times;</button>
+      <button class="modal-close" id="closeWaAddModalBtn" aria-label="Tutup Pesan" title="Tutup">✕</button>
       <div class="reason-icon">💬</div>
       <h3>Tulis Pesan Obrolan</h3>
       <p class="settings-hint">Pilih pengirim pesan dan tuliskan apa yang ingin disampaikan:</p>
@@ -337,7 +344,7 @@
                 <span class="role-avatar-badge">🤵🏻</span>
                 <div class="role-info">
                   <span class="role-name">Erlang</span>
-                  <span class="role-sub">Cowok yang Ditolak 🥀</span>
+                  <span class="role-sub">Cowok yang Ikhlas 🍃</span>
                 </div>
               </div>
             </label>
@@ -348,7 +355,7 @@
                 <span class="role-avatar-badge">👸🏻</span>
                 <div class="role-info">
                   <span class="role-name">Cindy</span>
-                  <span class="role-sub">Cewek yang Nolak 💔</span>
+                  <span class="role-sub">Cewek yang Didoakan ✨</span>
                 </div>
               </div>
             </label>
@@ -363,11 +370,11 @@
           <!-- Quick Emojis inside modal -->
           <div class="modal-quick-emojis">
             <span>Sisipkan emoji:</span>
-            <button type="button" class="btn-emoji-tag" data-emoji="💔">💔</button>
-            <button type="button" class="btn-emoji-tag" data-emoji="🥀">🥀</button>
-            <button type="button" class="btn-emoji-tag" data-emoji="🌧️">🌧️</button>
-            <button type="button" class="btn-emoji-tag" data-emoji="💜">💜</button>
-            <button type="button" class="btn-emoji-tag" data-emoji="😭">😭</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="🌿">🌿</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="🍃">🍃</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="💚">💚</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="🕊️">🕊️</button>
+            <button type="button" data-emoji="✨" class="btn-emoji-tag">✨</button>
           </div>
         </div>
 
@@ -380,46 +387,94 @@
     </div>
   </div>
 
-  <!-- Modal: Customizer / Pengaturan (Hanya Ganti Foto Cindy, Foto Erlang & Lagu) -->
+  <!-- Modal: Customizer / Pengaturan (Ganti Foto Cindy, Foto Erlang & Lagu Latar) -->
   <div class="modal-backdrop" id="settingsModal">
     <div class="modal-card settings-card">
-      <button class="modal-close" id="closeSettingsBtn">&times;</button>
-      <div class="reason-icon">📷🎵</div>
-      <h3>Ganti Foto &amp; Lagu</h3>
-      <p class="settings-hint">Pilih foto kamu, foto Cindy, dan lagu galau kesukaanmu dari HP atau laptop:</p>
+      <button class="modal-close" id="closeSettingsBtn" aria-label="Tutup Pengaturan" title="Tutup">✕</button>
+      <div class="reason-icon">🌿🎵</div>
+      <h3>Ganti Foto &amp; Lagu Latar</h3>
+      <p class="settings-hint">Sesuaikan foto kenangan dan lagu pengiring ketenangan hati:</p>
       
-      <div class="form-group">
-        <label for="inputBoyFile">Ganti Foto Kamu (Erlang 🥀):</label>
-        <input type="file" id="inputBoyFile" accept="image/*" class="input-file">
-        <input type="url" id="inputBoyUrl" placeholder="Atau paste link URL gambar kamu di sini (https://...)" class="input-text input-sub-url">
+      <!-- Section: Lagu Latar -->
+      <div class="settings-box-section">
+        <div class="section-badge-header">
+          <span class="badge-icon">🎵</span>
+          <span class="badge-title">Pengaturan Lagu Latar</span>
+        </div>
+
+        <!-- Current Active Song Indicator -->
+        <div class="current-song-badge" id="currentSongBadge">
+          <span class="badge-pulse-dot"></span>
+          <span class="badge-label-song">Lagu Aktif: <strong id="activeSongName">Melodi Ketenangan Alam 🍃</strong></span>
+        </div>
+
+        <!-- Quick 1-Click Preset Songs -->
+        <div class="preset-song-wrapper">
+          <label class="form-sub-label">Pilihan Cepat Lagu Penenang (1-Klik Sync ke Semua Perangkat):</label>
+          <div class="preset-song-grid">
+            <button type="button" class="preset-song-btn active" data-song-id="default" data-song-name="Melodi Ketenangan Alam 🍃" data-song-url="assets/music.mp3">
+              <span class="preset-btn-icon">🍃</span>
+              <div class="preset-btn-info">
+                <strong>Melodi Alam</strong>
+                <small>Akustik Damai (Bawaan)</small>
+              </div>
+            </button>
+            <button type="button" class="preset-song-btn" data-song-id="piano" data-song-name="Piano Akustik Kedamaian Hati 🎹" data-song-url="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3">
+              <span class="preset-btn-icon">🎹</span>
+              <div class="preset-btn-info">
+                <strong>Piano Kedamaian</strong>
+                <small>Sentuhan Lembut</small>
+              </div>
+            </button>
+            <button type="button" class="preset-song-btn" data-song-id="guitar" data-song-name="Petikan Gitar Kenangan Manis 🌿" data-song-url="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=acoustic-guitar-loop-f-91bpm-1886.mp3">
+              <span class="preset-btn-icon">🌿</span>
+              <div class="preset-btn-info">
+                <strong>Gitar Kenangan</strong>
+                <small>Hangat &amp; Menenangkan</small>
+              </div>
+            </button>
+            <button type="button" class="preset-song-btn" data-song-id="forest" data-song-name="Gemericik Air & Alam Damai 🕊️" data-song-url="https://cdn.pixabay.com/download/audio/2021/09/06/audio_924bb3e3cb.mp3?filename=forest-lullaby-110624.mp3">
+              <span class="preset-btn-icon">🕊️</span>
+              <div class="preset-btn-info">
+                <strong>Hutan &amp; Gemericik</strong>
+                <small>Suasana Alam Asri</small>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group song-inputs-container">
+          <label for="inputSongFile">Unggah File MP3 / Audio Sendiri:</label>
+          <input type="file" id="inputSongFile" accept="audio/*" class="input-file">
+          <p class="input-note">✨ File tersimpan permanen di HP/laptop ini melalui IndexedDB (tidak akan hilang saat refresh) dan otomatis disinkronkan ke HP Cindy jika &le; 2.5MB.</p>
+
+          <label for="inputSongUrl" style="margin-top: 10px;">Atau Tempel Link URL Audio MP3:</label>
+          <input type="url" id="inputSongUrl" placeholder="https://contoh.com/lagu-kesukaan.mp3" class="input-text input-sub-url">
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="inputGirlFile">Ganti Foto Cindy (Yang Nolak 💔):</label>
-        <input type="file" id="inputGirlFile" accept="image/*" class="input-file">
-        <input type="url" id="inputGirlUrl" placeholder="Atau paste link URL gambar Cindy di sini (https://...)" class="input-text input-sub-url">
-      </div>
+      <!-- Section: Foto Kenangan -->
+      <div class="settings-box-section">
+        <div class="section-badge-header">
+          <span class="badge-icon">📷</span>
+          <span class="badge-title">Foto Kenangan</span>
+        </div>
 
-      <div class="form-group">
-        <label for="inputSongFile">Ganti Lagu Galau (File MP3 / Audio 🎵):</label>
-        <input type="file" id="inputSongFile" accept="audio/*" class="input-file">
-        <input type="url" id="inputSongUrl" placeholder="Atau paste link URL file MP3 di sini (https://...)" class="input-text input-sub-url">
-      </div>
+        <div class="form-group">
+          <label for="inputBoyFile">Ganti Foto Kamu (Erlang 🌿):</label>
+          <input type="file" id="inputBoyFile" accept="image/*" class="input-file">
+          <input type="url" id="inputBoyUrl" placeholder="Atau paste link URL gambar kamu (https://...)" class="input-text input-sub-url">
+        </div>
 
-      <div class="cloud-steps-box" style="margin-top: 12px; margin-bottom: 16px;">
-        <strong style="color: #ff9ebb;">💡 Tips Opsi Permanen Saat Deploy:</strong>
-        <p style="font-size: 11.5px; line-height: 1.5; color: #e2e8f0; margin-top: 4px;">
-          Agar foto dan lagu otomatis permanen dilihat &amp; didengar oleh Cindy saat buka web hasil deploy, kamu juga bisa menyimpan file langsung ke folder:
-        </p>
-        <ul style="font-size: 11.5px; color: #c4b5fd; margin-left: 18px; margin-top: 4px;">
-          <li>Foto kamu: <code>assets/boy-placeholder.svg</code> (atau <code>assets/boy.jpg</code>)</li>
-          <li>Foto Cindy: <code>assets/girl-placeholder.svg</code> (atau <code>assets/girl.jpg</code>)</li>
-          <li>Lagu galau: <code>assets/music.mp3</code></li>
-        </ul>
+        <div class="form-group">
+          <label for="inputGirlFile">Ganti Foto Cindy (Yang Didoakan ✨):</label>
+          <input type="file" id="inputGirlFile" accept="image/*" class="input-file">
+          <input type="url" id="inputGirlUrl" placeholder="Atau paste link URL gambar Cindy (https://...)" class="input-text input-sub-url">
+        </div>
       </div>
 
       <div class="settings-actions">
-        <button class="btn-primary" id="saveSettingsBtn">Terapkan Perubahan 💔</button>
+        <button class="btn-primary" id="saveSettingsBtn">Terapkan Perubahan 🌿</button>
         <button class="btn-secondary" id="resetSettingsBtn">Reset ke Default</button>
       </div>
     </div>
