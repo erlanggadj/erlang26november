@@ -123,12 +123,11 @@
         
         <!-- Left Photo: Erlang -->
         <div class="photo-frame-wrapper boy-frame" id="boyFrame">
-          <div class="photo-frame" title="Klik foto Erlang untuk mendengar isi hatinya!">
+          <div class="photo-frame" title="Klik untuk memperbesar & melihat foto Erlang!">
             <img src="assets/boy-placeholder.svg" alt="Foto Erlang" class="couple-img" id="imgBoy" loading="lazy">
             <div class="photo-overlay">
-              <span class="tap-hint">Doa Tulus Erlang 🌿</span>
+              <span class="tap-hint">🔍 Lihat Foto Erlang 🌿</span>
             </div>
-            <div class="photo-change-btn" id="changeBoyPhotoBtn" title="Ganti Foto Erlang">📷</div>
           </div>
           <div class="name-badge">
             <span id="labelBoy">Erlang (Belajar Ikhlas) 🍃</span>
@@ -148,12 +147,11 @@
 
         <!-- Right Photo: Cindy -->
         <div class="photo-frame-wrapper girl-frame" id="girlFrame">
-          <div class="photo-frame" title="Klik foto Cindy untuk mendengar alasannya!">
+          <div class="photo-frame" title="Klik untuk memperbesar & melihat foto Cindy!">
             <img src="assets/girl-placeholder.svg" alt="Foto Cindy" class="couple-img" id="imgGirl" loading="lazy">
             <div class="photo-overlay">
-              <span class="tap-hint">Senyum Cindy 🌻</span>
+              <span class="tap-hint">🔍 Lihat Foto Cindy 🌻</span>
             </div>
-            <div class="photo-change-btn" id="changeGirlPhotoBtn" title="Ganti Foto Cindy">📷</div>
           </div>
           <div class="name-badge">
             <span id="labelGirl">Cindy (Semoga Bahagia) ✨</span>
@@ -291,6 +289,31 @@
 
     </div>
   </main>
+
+  <!-- Modal: Preview / Perbesar Foto & Ganti Foto Profil 🖼️ -->
+  <div class="modal-backdrop" id="photoPreviewModal">
+    <div class="modal-card photo-preview-card">
+      <button class="modal-close" id="closePhotoPreviewBtn" aria-label="Tutup Preview Foto" title="Tutup">✕</button>
+      <div class="preview-badge-tag" id="previewBadgeTag">🌿 Foto Profil Erlangga</div>
+      
+      <div class="preview-image-container">
+        <img src="" alt="Preview Foto" id="previewModalImg" class="preview-modal-img">
+      </div>
+
+      <div class="preview-info-box">
+        <h3 id="previewPersonName" class="preview-person-name">Erlangga</h3>
+        <p id="previewPersonRole" class="preview-person-role">Belajar Ikhlas 🍃</p>
+        <blockquote id="previewPersonQuote" class="preview-person-quote">"Mungkin bukan aku orang yang tepat untuk kamu pilih..."</blockquote>
+      </div>
+
+      <div class="preview-action-footer">
+        <button type="button" class="btn-primary btn-change-profile-photo" id="previewChangePhotoBtn">
+          <span class="btn-icon">📷</span>
+          <span id="previewChangePhotoBtnText">Ganti Foto Profil Ini</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal: Surat Tak Tersampaikan (Penuh Kedewasaan & Keikhlasan) 📜 -->
   <div class="modal-backdrop" id="letterModal">

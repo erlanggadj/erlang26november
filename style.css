@@ -467,32 +467,127 @@ html, body {
   border: 1px solid rgba(116, 198, 157, 0.4);
 }
 
-/* Direct Photo Change Camera Button */
-.photo-change-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  width: 32px;
-  height: 32px;
-  background: rgba(22, 52, 38, 0.9);
-  color: #95d5b2;
+/* ==========================================================================
+   PHOTO PREVIEW MODAL (LIGHTBOX / PERBESAR FOTO)
+   ========================================================================== */
+.photo-preview-card {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  padding: clamp(20px, 4vw, 32px);
+  background: rgba(14, 34, 25, 0.94);
+  border: 1.8px solid rgba(149, 213, 178, 0.45);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(82, 183, 136, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-badge-tag {
+  display: inline-block;
+  background: rgba(27, 67, 50, 0.85);
   border: 1px solid rgba(149, 213, 178, 0.4);
-  border-radius: 50%;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #95d5b2;
+  margin-bottom: 14px;
+  letter-spacing: 0.3px;
+}
+
+.preview-image-container {
+  width: 100%;
+  max-height: 48vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  opacity: 0.9;
-  transition: transform 0.2s, background 0.2s, color 0.2s;
-  z-index: 5;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #0d2017;
+  border: 2px solid rgba(149, 213, 178, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.4);
+  margin-bottom: 16px;
 }
 
-.photo-change-btn:hover {
-  transform: scale(1.15) rotate(10deg);
-  background: #2d6a4f;
-  border-color: #52b788;
-  color: white;
+.preview-modal-img {
+  max-height: 46vh;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  transition: transform 0.35s ease;
+}
+
+.preview-modal-img:hover {
+  transform: scale(1.03);
+}
+
+.preview-info-box {
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.preview-person-name {
+  font-family: var(--font-cursive);
+  font-size: clamp(28px, 5vw, 36px);
+  color: #ffffff;
+  margin-bottom: 2px;
+  line-height: 1.15;
+}
+
+.preview-person-role {
+  font-size: 13px;
+  font-weight: 700;
+  color: #95d5b2;
+  margin-bottom: 10px;
+}
+
+.preview-person-quote {
+  font-size: 13.5px;
+  font-style: italic;
+  color: #d8f3dc;
+  background: rgba(20, 50, 36, 0.7);
+  border-left: 3px solid #52b788;
+  padding: 8px 14px;
+  border-radius: 0 14px 14px 0;
+  margin: 0 auto;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.preview-action-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-change-profile-photo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #2d6a4f, #52b788);
+  color: #ffffff;
+  padding: 12px 24px;
+  font-size: 14.5px;
+  font-weight: 800;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(82, 183, 136, 0.4);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-change-profile-photo:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 10px 25px rgba(82, 183, 136, 0.55);
+  background: linear-gradient(135deg, #357a5b, #5ec796);
+}
+
+.btn-change-profile-photo:active {
+  transform: scale(0.96);
 }
 
 .name-badge {

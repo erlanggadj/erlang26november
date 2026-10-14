@@ -100,10 +100,19 @@
   const boyFrame = document.getElementById('boyFrame');
   const girlFrame = document.getElementById('girlFrame');
 
-  const changeBoyPhotoBtn = document.getElementById('changeBoyPhotoBtn');
-  const changeGirlPhotoBtn = document.getElementById('changeGirlPhotoBtn');
+  const photoPreviewModal = document.getElementById('photoPreviewModal');
+  const closePhotoPreviewBtn = document.getElementById('closePhotoPreviewBtn');
+  const previewBadgeTag = document.getElementById('previewBadgeTag');
+  const previewModalImg = document.getElementById('previewModalImg');
+  const previewPersonName = document.getElementById('previewPersonName');
+  const previewPersonRole = document.getElementById('previewPersonRole');
+  const previewPersonQuote = document.getElementById('previewPersonQuote');
+  const previewChangePhotoBtn = document.getElementById('previewChangePhotoBtn');
+  const previewChangePhotoBtnText = document.getElementById('previewChangePhotoBtnText');
+
   const directBoyFileInput = document.getElementById('directBoyFileInput');
   const directGirlFileInput = document.getElementById('directGirlFileInput');
+  let currentPreviewPerson = 'boy';
 
   const centerBeatHeart = document.getElementById('centerBeatHeart');
   const interactiveHeartEmblem = document.getElementById('interactiveHeartEmblem');
@@ -629,34 +638,80 @@
     playClickSfx();
   });
 
-  // Photo Click (Erlang)
-  boyFrame.querySelector('.photo-frame').addEventListener('click', (e) => {
-    if (e.target.closest('.photo-change-btn')) return;
+  function openPhotoPreview(person) {
+    currentPreviewPerson = person;
+    initAudioContext();
+
+    if (person === 'boy') {
+      const src = imgBoy ? imgBoy.src : 'assets/boy-placeholder.svg';
+      if (previewModalImg) previewModalImg.src = src;
+      if (previewBadgeTag) previewBadgeTag.textContent = `🌿 Foto Profil ${config.boyName}`;
+      if (previewPersonName) previewPersonName.textContent = config.boyName;
+      if (previewPersonRole) previewPersonRole.textContent = 'Belajar Ikhlas & Mendoakan Cindy 🍃';
+      if (previewPersonQuote) {
+        const quote = BOY_QUOTES[Math.floor(Math.random() * BOY_QUOTES.length)];
+        previewPersonQuote.textContent = `"${quote}"`;
+      }
+      if (previewChangePhotoBtnText) {
+        previewChangePhotoBtnText.textContent = `Ganti Foto ${config.boyName} 📷`;
+      }
+    } else {
+      const src = imgGirl ? imgGirl.src : 'assets/girl-placeholder.svg';
+      if (previewModalImg) previewModalImg.src = src;
+      if (previewBadgeTag) previewBadgeTag.textContent = `✨ Foto Profil ${config.girlName}`;
+      if (previewPersonName) previewPersonName.textContent = config.girlName;
+      if (previewPersonRole) previewPersonRole.textContent = 'Yang Selalu Didoakan Bahagia 🌻';
+      if (previewPersonQuote) {
+        const quote = GIRL_QUOTES[Math.floor(Math.random() * GIRL_QUOTES.length)];
+        previewPersonQuote.textContent = `"${quote}"`;
+      }
+      if (previewChangePhotoBtnText) {
+        previewChangePhotoBtnText.textContent = `Ganti Foto ${config.girlName} 📷`;
+      }
+    }
+
+    if (photoPreviewModal) {
+      photoPreviewModal.classList.add('active');
+    }
+  }
+
+  // Photo Click (Erlang) -> Open preview modal
+  boyFrame.querySelector('.photo-frame').addEventListener('click', () => {
     const rect = boyFrame.getBoundingClientRect();
-    spawnBurstHearts(rect.left + rect.width / 2, rect.top + rect.height / 3, 12);
+    spawnBurstHearts(rect.left + rect.width / 2, rect.top + rect.height / 3, 14);
     showCuteBubble(boyFrame, BOY_QUOTES);
     playClickSfx(true);
+    openPhotoPreview('boy');
   });
 
-  // Photo Click (Cindy)
-  girlFrame.querySelector('.photo-frame').addEventListener('click', (e) => {
-    if (e.target.closest('.photo-change-btn')) return;
+  // Photo Click (Cindy) -> Open preview modal
+  girlFrame.querySelector('.photo-frame').addEventListener('click', () => {
     const rect = girlFrame.getBoundingClientRect();
-    spawnBurstHearts(rect.left + rect.width / 2, rect.top + rect.height / 3, 12);
+    spawnBurstHearts(rect.left + rect.width / 2, rect.top + rect.height / 3, 14);
     showCuteBubble(girlFrame, GIRL_QUOTES);
     playClickSfx();
+    openPhotoPreview('girl');
   });
 
-  // Camera buttons for direct photo replacement
-  changeBoyPhotoBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    directBoyFileInput.click();
-  });
+  // Action button inside preview modal: triggers file picker for currently previewed person
+  if (previewChangePhotoBtn) {
+    previewChangePhotoBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playClickSfx(true);
+      if (currentPreviewPerson === 'boy' && directBoyFileInput) {
+        directBoyFileInput.click();
+      } else if (currentPreviewPerson === 'girl' && directGirlFileInput) {
+        directGirlFileInput.click();
+      }
+    });
+  }
 
-  changeGirlPhotoBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    directGirlFileInput.click();
-  });
+  if (closePhotoPreviewBtn && photoPreviewModal) {
+    closePhotoPreviewBtn.addEventListener('click', () => {
+      photoPreviewModal.classList.remove('active');
+      playClickSfx();
+    });
+  }
 
   // Helper to compress photo before uploading to cloud and localStorage (Fast & multi-device friendly)
   function compressImage(file, maxDimension = 800, quality = 0.85) {
@@ -702,9 +757,12 @@
       const dataUrl = await compressImage(file);
       if (dataUrl) {
         setBoyPhoto(dataUrl);
+        if (previewModalImg && currentPreviewPerson === 'boy') {
+          previewModalImg.src = dataUrl;
+        }
         try { localStorage.setItem('savedBoyPhoto', dataUrl); } catch (err) {}
         pushMediaToCloud({ boyPhoto: dataUrl });
-        spawnBurstHearts(window.innerWidth / 3, window.innerHeight / 2, 20);
+        spawnBurstHearts(window.innerWidth / 2, window.innerHeight / 2, 25);
         playClickSfx(true);
       }
     }
@@ -716,9 +774,12 @@
       const dataUrl = await compressImage(file);
       if (dataUrl) {
         setGirlPhoto(dataUrl);
+        if (previewModalImg && currentPreviewPerson === 'girl') {
+          previewModalImg.src = dataUrl;
+        }
         try { localStorage.setItem('savedGirlPhoto', dataUrl); } catch (err) {}
         pushMediaToCloud({ girlPhoto: dataUrl });
-        spawnBurstHearts((window.innerWidth * 2) / 3, window.innerHeight / 2, 20);
+        spawnBurstHearts(window.innerWidth / 2, window.innerHeight / 2, 25);
         playClickSfx(true);
       }
     }
@@ -1517,7 +1578,7 @@
   }, 6000);
 
   // Close modals when clicking backdrop
-  [letterModal, reasonModal, settingsModal, waAddMessageModal].forEach(modal => {
+  [photoPreviewModal, letterModal, reasonModal, settingsModal, waAddMessageModal].forEach(modal => {
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
