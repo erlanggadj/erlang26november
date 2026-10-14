@@ -1,21 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <linearGradient id="favGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#9d4edd" />
-      <stop offset="50%" stop-color="#e0aaff" />
-      <stop offset="100%" stop-color="#c77dff" />
+    <!-- Rich Natural Emerald & Sage Gradient -->
+    <linearGradient id="greenHeartGrad" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#74c69d" />
+      <stop offset="45%" stop-color="#40916c" />
+      <stop offset="100%" stop-color="#1b4332" />
     </linearGradient>
-    <filter id="glow">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#7b2cbf" flood-opacity="0.5"/>
+
+    <!-- Inner Soft Highlight for Depth -->
+    <linearGradient id="innerGleam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d8f3dc" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#52b788" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Ambient Emerald Glow -->
+    <filter id="natureGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#52b788" flood-opacity="0.45" />
     </filter>
   </defs>
-  
-  <!-- Left Half Heart -->
-  <path d="M 30,16 C 24,6 10,8 6,18 C 2,28 12,42 30,54 L 30,38 L 26,34 L 30,30 L 25,24 L 30,16 Z" fill="#e0aaff" filter="url(#glow)"/>
-  
-  <!-- Right Half Heart (slightly displaced / broken) -->
-  <path d="M 34,18 L 38,24 L 33,30 L 37,34 L 34,40 L 34,54 C 52,42 62,28 58,18 C 54,8 40,6 34,16 Z" fill="#9d4edd" filter="url(#glow)"/>
-  
-  <!-- Small Tear / Rain Drop -->
-  <path d="M 38,44 C 36,48 40,52 42,50 C 44,48 40,43 38,44 Z" fill="#70d6ff" opacity="0.8"/>
+
+  <!-- Main Green Love Heart -->
+  <path d="M 32,56 C 29,52.5 7,35.5 7,21.5 C 7,11.5 15,5 24.5,5 C 28.8,5 31.2,7.2 32,8.8 C 32.8,7.2 35.2,5 39.5,5 C 49,5 57,11.5 57,21.5 C 57,35.5 35,52.5 32,56 Z" 
+        fill="url(#greenHeartGrad)" 
+        filter="url(#natureGlow)" />
+
+  <!-- Inner Gloss / Specular Arc (Top-Left Lobe) -->
+  <path d="M 24.5,8 C 17.5,8 11,13 10,21 C 9.5,25 12,32 18,39 C 14,32 12,25 13,19 C 14,13 19,9.5 24.5,9.5 C 27,9.5 29.5,10.8 31,12.5 C 29.5,10 27,8 24.5,8 Z" 
+        fill="url(#innerGleam)" />
+
+  <!-- Subtle Little Leaf Accent (Top Right) -->
+  <path d="M 43,4 C 47,2 52,4 53,7 C 53,10 49,12 45,11 C 44,9 43,6 43,4 Z" 
+        fill="#95d5b2" 
+        opacity="0.85" />
 </svg>
