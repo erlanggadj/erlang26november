@@ -85,6 +85,9 @@
     <source src="assets/song.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Hidden Container for YouTube Background Audio Player (Seamless Cross-Device Sync) -->
+  <div id="ytPlayerContainer" style="position:fixed;width:1px;height:1px;left:-9999px;top:-9999px;opacity:0.001;pointer-events:none;z-index:-10;"></div>
+
   <!-- Welcome / Entrance Curtain (Membuka Cerita & Mengaktifkan Audio Browser) -->
   <div class="curtain-overlay" id="curtainOverlay">
     <div class="curtain-card">
@@ -468,12 +471,15 @@
         </div>
 
         <div class="form-group song-inputs-container">
-          <label for="inputSongFile">Unggah File MP3 / Audio Sendiri:</label>
+          <label for="inputSongFile">Unggah File MP3 / Audio Sendiri (s/d 12 MB):</label>
           <input type="file" id="inputSongFile" accept="audio/*" class="input-file">
-          <p class="input-note">✨ File tersimpan permanen di HP/laptop ini melalui IndexedDB (tidak akan hilang saat refresh) dan otomatis disinkronkan ke HP Cindy jika &le; 2.5MB.</p>
+          <p class="input-note">✨ File tersimpan permanen di HP/laptop ini melalui IndexedDB dan otomatis disinkronkan ke Database Cloud agar HP Cindy &amp; perangkat lain dapat mendengarnya.</p>
 
-          <label for="inputSongUrl" style="margin-top: 10px;">Atau Tempel Link URL Audio MP3:</label>
-          <input type="url" id="inputSongUrl" placeholder="https://contoh.com/lagu-kesukaan.mp3" class="input-text input-sub-url">
+          <label for="inputSongUrl" style="margin-top: 10px;">Atau Tempel Link YouTube / YouTube Music / Link Audio MP3 (Sync Instan):</label>
+          <input type="url" id="inputSongUrl" placeholder="Contoh: https://music.youtube.com/watch?v=... atau link MP3" class="input-text input-sub-url">
+          <p class="input-note">🎵 Mendukung link YouTube, YouTube Music, dan direct MP3! Langsung tersinkronkan ke HP Cindy tanpa kuota data besar.</p>
+
+          <div class="song-sync-status" id="songSyncStatus" style="display:none;"></div>
         </div>
       </div>
 

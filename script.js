@@ -264,26 +264,150 @@
     }
   }
 
+  // --- AUDIO & YOUTUBE PLAYER ENGINE ---
+  let ytPlayer = null;
+  let isYtAPIReady = false;
+  let currentYtVideoId = null;
+  let currentSongMode = 'audio'; // 'audio' | 'youtube'
+
+  function extractYouTubeId(url) {
+    if (!url) return null;
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/)|music\.youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/);
+    return match ? match[1] : null;
+  }
+
+  function loadYouTubeIframeAPI() {
+    if (window.YT && window.YT.Player) {
+      isYtAPIReady = true;
+      initYtPlayer();
+      return;
+    }
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScript = document.getElementsByTagName('script')[0];
+    if (firstScript && firstScript.parentNode) {
+      firstScript.parentNode.insertBefore(tag, firstScript);
+    } else {
+      document.head.appendChild(tag);
+    }
+  }
+
+  window.onYouTubeIframeAPIReady = function() {
+    isYtAPIReady = true;
+    initYtPlayer();
+  };
+
+  function initYtPlayer() {
+    const container = document.getElementById('ytPlayerContainer');
+    if (!container || ytPlayer || !window.YT || !window.YT.Player) return;
+    try {
+      ytPlayer = new YT.Player('ytPlayerContainer', {
+        height: '1',
+        width: '1',
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          loop: 1,
+          playsinline: 1,
+          origin: window.location.origin
+        },
+        events: {
+          onReady: (event) => {
+            try { event.target.setVolume(85); } catch (e) {}
+            if (currentYtVideoId && currentSongMode === 'youtube') {
+              try {
+                event.target.loadVideoById(currentYtVideoId);
+                if (isMusicPlaying) {
+                  event.target.playVideo();
+                } else {
+                  event.target.pauseVideo();
+                }
+              } catch (e) {}
+            }
+          },
+          onStateChange: (event) => {
+            if (event.data === 1) { // Playing
+              isMusicPlaying = true;
+              setMusicUI(true, 'Memutar lagu YouTube 🍃');
+            } else if (event.data === 2) { // Paused
+              if (!isMusicPlaying) {
+                setMusicUI(false, 'Musik dijeda ⏸️');
+              }
+            } else if (event.data === 0) { // Ended -> Loop
+              try { event.target.playVideo(); } catch (e) {}
+            }
+          },
+          onError: (err) => {
+            console.warn('YouTube playback error, fallback to audio:', err);
+            currentSongMode = 'audio';
+            if (bgmAudio) {
+              bgmAudio.src = 'assets/music.mp3';
+              bgmAudio.play().catch(() => {});
+            }
+          }
+        }
+      });
+    } catch (e) {
+      console.warn('Init YT player failed:', e);
+    }
+  }
+
+  loadYouTubeIframeAPI();
+
   function toggleMusic(forcePlay = null) {
     initAudioContext();
     const shouldPlay = forcePlay !== null ? forcePlay : !isMusicPlaying;
 
     if (shouldPlay) {
-      if (bgmAudio && bgmAudio.src && !bgmAudio.error) {
-        bgmAudio.play().then(() => {
-          customAudioLoaded = true;
-          setMusicUI(true, 'Memutar lagu latar 🍃');
-        }).catch(() => {
+      if (currentSongMode === 'youtube' && currentYtVideoId) {
+        isMusicPlaying = true;
+        if (bgmAudio) bgmAudio.pause();
+        stopSynthMelody();
+        if (ytPlayer) {
+          try {
+            const videoData = (typeof ytPlayer.getVideoData === 'function') ? ytPlayer.getVideoData() : null;
+            if (!videoData || videoData.video_id !== currentYtVideoId) {
+              if (typeof ytPlayer.loadVideoById === 'function') {
+                ytPlayer.loadVideoById(currentYtVideoId);
+              }
+            }
+            if (typeof ytPlayer.playVideo === 'function') {
+              ytPlayer.playVideo();
+            }
+            setMusicUI(true, 'Memutar lagu YouTube 🍃');
+          } catch (e) {
+            setMusicUI(true, 'Menghubungkan YouTube... ⏳');
+          }
+        } else {
+          setMusicUI(true, 'Memuat pemutar YouTube... ⏳');
+        }
+      } else {
+        // Audio mode
+        if (ytPlayer && ytPlayer.pauseVideo) {
+          try { ytPlayer.pauseVideo(); } catch (e) {}
+        }
+        if (bgmAudio && bgmAudio.src && !bgmAudio.error) {
+          bgmAudio.play().then(() => {
+            customAudioLoaded = true;
+            setMusicUI(true, 'Memutar lagu latar 🍃');
+          }).catch(() => {
+            customAudioLoaded = false;
+            startSynthMelody();
+            setMusicUI(true, 'Melodi Ketenangan Alam 🌿');
+          });
+        } else {
           customAudioLoaded = false;
           startSynthMelody();
           setMusicUI(true, 'Melodi Ketenangan Alam 🌿');
-        });
-      } else {
-        customAudioLoaded = false;
-        startSynthMelody();
-        setMusicUI(true, 'Melodi Ketenangan Alam 🌿');
+        }
       }
     } else {
+      isMusicPlaying = false;
+      if (currentSongMode === 'youtube' && ytPlayer && ytPlayer.pauseVideo) {
+        try { ytPlayer.pauseVideo(); } catch (e) {}
+      }
       if (bgmAudio) bgmAudio.pause();
       stopSynthMelody();
       setMusicUI(false, 'Musik dijeda ⏸️');
@@ -305,7 +429,7 @@
 
   if (bgmAudio) {
     bgmAudio.addEventListener('error', () => {
-      if (isMusicPlaying && customAudioLoaded) {
+      if (isMusicPlaying && customAudioLoaded && currentSongMode === 'audio') {
         customAudioLoaded = false;
         startSynthMelody();
       }
@@ -314,9 +438,21 @@
 
   // --- PERSISTENT AUDIO & INDEXEDDB ENGINE ---
   const activeSongName = document.getElementById('activeSongName');
+  const songSyncStatus = document.getElementById('songSyncStatus');
   const AUDIO_DB_NAME = 'cilang_audio_db';
   const AUDIO_STORE_NAME = 'saved_songs';
   const AUDIO_DB_VERSION = 1;
+
+  function showSyncNotice(msg, autoHide = 4500) {
+    if (!songSyncStatus) return;
+    songSyncStatus.textContent = msg;
+    songSyncStatus.style.display = 'block';
+    if (autoHide) {
+      setTimeout(() => {
+        if (songSyncStatus) songSyncStatus.style.display = 'none';
+      }, autoHide);
+    }
+  }
 
   function openAudioDB() {
     return new Promise((resolve) => {
@@ -340,7 +476,7 @@
     });
   }
 
-  async function saveAudioBlobToDB(blob, fileName, title) {
+  async function saveAudioBlobToDB(blob, fileName, title, savedAt = Date.now()) {
     try {
       const db = await openAudioDB();
       if (!db) return false;
@@ -352,7 +488,7 @@
           blob: blob,
           name: fileName,
           title: title,
-          savedAt: Date.now()
+          savedAt: savedAt
         });
         tx.oncomplete = () => resolve(true);
         tx.onerror = () => resolve(false);
@@ -397,6 +533,68 @@
     });
   }
 
+  function base64ToBlob(base64Data) {
+    try {
+      const parts = base64Data.split(';base64,');
+      const contentType = parts.length > 1 ? parts[0].replace('data:', '') : 'audio/mpeg';
+      const raw = window.atob(parts.length > 1 ? parts[1] : parts[0]);
+      const rawLength = raw.length;
+      const uInt8Array = new Uint8Array(rawLength);
+      for (let i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+      return new Blob([uInt8Array], { type: contentType });
+    } catch (e) {
+      console.warn('base64ToBlob error:', e);
+      return null;
+    }
+  }
+
+  async function fetchYouTubeTitle(videoId) {
+    try {
+      const res = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`);
+      if (res.ok) {
+        const json = await res.json();
+        if (json && json.title) return json.title;
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  async function pushCustomSongToCloud(payload) {
+    if (!cloudDbUrl || !payload) return;
+    try {
+      let baseUrl = cloudDbUrl.trim().replace(/\/+$/, '');
+      if (baseUrl.endsWith('.json')) {
+        baseUrl = baseUrl.replace(/\/messages\.json$/, '').replace(/\.json$/, '');
+      }
+      const endpoint = baseUrl + '/custom_song.json';
+      await fetch(endpoint, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      console.warn('Push custom song error:', e);
+    }
+  }
+
+  async function fetchCustomSongFromCloud() {
+    if (!cloudDbUrl) return null;
+    try {
+      let baseUrl = cloudDbUrl.trim().replace(/\/+$/, '');
+      if (baseUrl.endsWith('.json')) {
+        baseUrl = baseUrl.replace(/\/messages\.json$/, '').replace(/\.json$/, '');
+      }
+      const endpoint = baseUrl + '/custom_song.json';
+      const res = await fetch(endpoint);
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
   function updatePresetButtonsUI(activeUrl) {
     document.querySelectorAll('.preset-song-btn').forEach(btn => {
       const btnUrl = btn.dataset.songUrl;
@@ -408,15 +606,7 @@
     });
   }
 
-  function applyActiveSong(src, title, source = 'url', saveToLocal = true) {
-    if (!bgmAudio) return;
-    
-    // Normalize and assign source
-    if (bgmAudio.src !== src && bgmAudio.getAttribute('src') !== src) {
-      bgmAudio.src = src;
-    }
-    customAudioLoaded = true;
-
+  async function applyActiveSong(src, title, source = 'url', saveToLocal = true) {
     const displayTitle = title || 'Lagu Kenangan 🎵';
     if (musicTitle) {
       musicTitle.textContent = displayTitle;
@@ -425,12 +615,56 @@
       activeSongName.textContent = displayTitle;
     }
 
+    // 1. Check if source is a YouTube URL
+    const ytId = extractYouTubeId(src);
+    if (ytId) {
+      currentSongMode = 'youtube';
+      currentYtVideoId = ytId;
+      customAudioLoaded = true;
+
+      if (bgmAudio) bgmAudio.pause();
+      stopSynthMelody();
+      updatePresetButtonsUI(src);
+
+      if (saveToLocal) {
+        try {
+          localStorage.setItem('savedSongUrl', src);
+          localStorage.setItem('savedSongTitle', displayTitle);
+          localStorage.setItem('savedSongType', 'youtube');
+        } catch (e) {}
+      }
+
+      if (isMusicPlaying) {
+        if (ytPlayer && ytPlayer.loadVideoById) {
+          try {
+            ytPlayer.loadVideoById(ytId);
+            ytPlayer.playVideo();
+          } catch (e) {}
+        }
+      }
+      return;
+    }
+
+    // 2. Otherwise standard Audio element
+    currentSongMode = 'audio';
+    currentYtVideoId = null;
+    if (ytPlayer && ytPlayer.pauseVideo) {
+      try { ytPlayer.pauseVideo(); } catch (e) {}
+    }
+
+    if (!bgmAudio) return;
+    if (bgmAudio.src !== src && bgmAudio.getAttribute('src') !== src) {
+      bgmAudio.src = src;
+    }
+    customAudioLoaded = true;
+
     updatePresetButtonsUI(src);
 
     if (saveToLocal && source !== 'indexeddb') {
       try {
         localStorage.setItem('savedSongUrl', src);
         localStorage.setItem('savedSongTitle', displayTitle);
+        localStorage.setItem('savedSongType', 'audio');
       } catch (e) {}
     }
 
@@ -441,24 +675,32 @@
 
   async function initPersistentAudio() {
     try {
-      // 1. Check IndexedDB for a custom uploaded file
+      // 1. Check localStorage for previously saved YouTube URL
+      const savedSongUrl = localStorage.getItem('savedSongUrl');
+      const savedSongTitle = localStorage.getItem('savedSongTitle');
+      const savedSongType = localStorage.getItem('savedSongType');
+
+      if (savedSongType === 'youtube' && savedSongUrl) {
+        await applyActiveSong(savedSongUrl, savedSongTitle || 'Lagu YouTube 🎵', 'youtube', false);
+        return;
+      }
+
+      // 2. Check IndexedDB for a custom uploaded file
       const localRecord = await getAudioBlobFromDB();
       if (localRecord && localRecord.blob) {
         const objectUrl = URL.createObjectURL(localRecord.blob);
-        applyActiveSong(objectUrl, localRecord.title || localRecord.name || 'File MP3 Tersimpan 🎵', 'indexeddb', false);
+        await applyActiveSong(objectUrl, localRecord.title || localRecord.name || 'File MP3 Tersimpan 🎵', 'indexeddb', false);
         return;
       }
 
-      // 2. Check localStorage for previously saved song URL or preset
-      const savedSongUrl = localStorage.getItem('savedSongUrl');
-      const savedSongTitle = localStorage.getItem('savedSongTitle');
+      // 3. Check regular audio URL
       if (savedSongUrl) {
-        applyActiveSong(savedSongUrl, savedSongTitle || 'Lagu Kenangan 🎵', 'local', false);
+        await applyActiveSong(savedSongUrl, savedSongTitle || 'Lagu Kenangan 🎵', 'local', false);
         return;
       }
 
-      // 3. Fallback to default assets/music.mp3
-      applyActiveSong('assets/music.mp3', 'Melodi Ketenangan Alam 🍃', 'default', false);
+      // 4. Fallback to default assets/music.mp3
+      await applyActiveSong('assets/music.mp3', 'Melodi Ketenangan Alam 🍃', 'default', false);
     } catch (e) {
       console.warn('initPersistentAudio error:', e);
     }
@@ -874,17 +1116,25 @@
       const title = btn.dataset.songName;
       if (!url) return;
 
+      const now = Date.now();
       // Clear local IndexedDB blob override so preset song takes over
       await clearAudioBlobFromDB();
+      try { localStorage.setItem('savedAudioVersion', String(now)); } catch (e) {}
       applyActiveSong(url, title, 'preset', true);
       toggleMusic(true);
 
       // Instantly sync preset song to Firebase RTDB
-      pushMediaToCloud({ songUrl: url, songTitle: title });
+      pushMediaToCloud({
+        songType: 'preset',
+        songUrl: url,
+        songTitle: title,
+        audioVersion: now
+      });
 
       if (inputSongFile) inputSongFile.value = '';
       if (inputSongUrl) inputSongUrl.value = '';
 
+      showSyncNotice(`Lagu aktif: ${title} (tersinkron ke semua perangkat 🍃)`, 3500);
       spawnBurstHearts(window.innerWidth / 2, window.innerHeight / 2, 20);
       playClickSfx(true);
     });
@@ -924,31 +1174,72 @@
     }
 
     // 3. Process Song (File or URL with IndexedDB and Cloud Sync)
+    const nowVersion = Date.now();
+
     if (inputSongFile && inputSongFile.files[0]) {
       const file = inputSongFile.files[0];
       const title = file.name.replace(/\.[^/.]+$/, "");
 
-      // A. Save permanently to browser's IndexedDB (never lost on refresh)
-      await saveAudioBlobToDB(file, file.name, title);
-      const objectUrl = URL.createObjectURL(file);
-      applyActiveSong(objectUrl, title, 'indexeddb', false);
-      toggleMusic(true);
+      showSyncNotice('Menyimpan & mengunggah lagu ke Cloud... ⏳', 0);
 
-      // B. If file size is <= 2.5MB, convert to Base64 to sync to Cindy's phone via Firebase RTDB
-      if (file.size <= 2.5 * 1024 * 1024) {
+      // A. Save permanently to browser's IndexedDB (never lost on refresh on this device)
+      await saveAudioBlobToDB(file, file.name, title, nowVersion);
+      const objectUrl = URL.createObjectURL(file);
+      await applyActiveSong(objectUrl, title, 'indexeddb', false);
+      toggleMusic(true);
+      try { localStorage.setItem('savedAudioVersion', String(nowVersion)); } catch (e) {}
+
+      // B. If file size is <= 12MB, upload to /custom_song.json in Firebase RTDB so other devices get it
+      if (file.size <= 12 * 1024 * 1024) {
         const base64Audio = await fileToBase64(file);
         if (base64Audio) {
-          cloudMediaPayload.songUrl = base64Audio;
+          await pushCustomSongToCloud({
+            audioData: base64Audio,
+            fileName: file.name,
+            songTitle: title,
+            audioVersion: nowVersion
+          });
+
+          cloudMediaPayload.songType = 'cloud_upload';
           cloudMediaPayload.songTitle = title;
+          cloudMediaPayload.songUrl = 'custom_song';
+          cloudMediaPayload.audioVersion = nowVersion;
+          showSyncNotice('Lagu berhasil diunggah & tersinkron ke semua perangkat! 🍃', 4000);
         }
+      } else {
+        showSyncNotice('Ukuran file > 12MB (tersimpan di laptop ini). Gunakan link YouTube untuk sync ke HP!', 5500);
       }
     } else if (inputSongUrl && inputSongUrl.value.trim()) {
       const url = inputSongUrl.value.trim();
-      await clearAudioBlobFromDB();
-      applyActiveSong(url, 'Lagu Kenangan 🎵', 'url', true);
-      cloudMediaPayload.songUrl = url;
-      cloudMediaPayload.songTitle = 'Lagu Kenangan 🎵';
-      toggleMusic(true);
+      const ytId = extractYouTubeId(url);
+
+      if (ytId) {
+        showSyncNotice('Menyambungkan lagu YouTube... ⏳', 0);
+        await clearAudioBlobFromDB();
+        const ytTitle = (await fetchYouTubeTitle(ytId)) || 'Lagu YouTube 🎵';
+        await applyActiveSong(url, ytTitle, 'youtube', true);
+        toggleMusic(true);
+        try { localStorage.setItem('savedAudioVersion', String(nowVersion)); } catch (e) {}
+
+        cloudMediaPayload.songType = 'youtube';
+        cloudMediaPayload.songId = ytId;
+        cloudMediaPayload.songUrl = url;
+        cloudMediaPayload.songTitle = ytTitle;
+        cloudMediaPayload.audioVersion = nowVersion;
+        showSyncNotice(`Lagu YouTube "${ytTitle}" tersinkron ke semua perangkat! 🍃`, 4500);
+      } else {
+        showSyncNotice('Menyimpan link audio... ⏳', 0);
+        await clearAudioBlobFromDB();
+        await applyActiveSong(url, 'Lagu Pilihan 🎵', 'url', true);
+        toggleMusic(true);
+        try { localStorage.setItem('savedAudioVersion', String(nowVersion)); } catch (e) {}
+
+        cloudMediaPayload.songType = 'audio';
+        cloudMediaPayload.songUrl = url;
+        cloudMediaPayload.songTitle = 'Lagu Pilihan 🎵';
+        cloudMediaPayload.audioVersion = nowVersion;
+        showSyncNotice('Lagu tersinkron ke semua perangkat! 🍃', 4000);
+      }
     }
 
     if (Object.keys(cloudMediaPayload).length > 0) {
@@ -961,11 +1252,14 @@
   });
 
   resetSettingsBtn.addEventListener('click', async () => {
+    const now = Date.now();
     try {
       localStorage.removeItem('savedBoyPhoto');
       localStorage.removeItem('savedGirlPhoto');
       localStorage.removeItem('savedSongUrl');
       localStorage.removeItem('savedSongTitle');
+      localStorage.removeItem('savedSongType');
+      localStorage.setItem('savedAudioVersion', String(now));
     } catch (e) {}
 
     await clearAudioBlobFromDB();
@@ -976,8 +1270,10 @@
     pushMediaToCloud({
       boyPhoto: 'assets/boy-placeholder.svg',
       girlPhoto: 'assets/girl-placeholder.svg',
+      songType: 'preset',
       songUrl: 'assets/music.mp3',
-      songTitle: 'Melodi Ketenangan Alam 🍃'
+      songTitle: 'Melodi Ketenangan Alam 🍃',
+      audioVersion: now
     });
 
     if (inputBoyFile) inputBoyFile.value = '';
@@ -987,6 +1283,7 @@
     if (inputSongFile) inputSongFile.value = '';
     if (inputSongUrl) inputSongUrl.value = '';
 
+    showSyncNotice('Pengaturan musik & foto dikembalikan ke default.', 3500);
     settingsModal.classList.remove('active');
     playClickSfx();
   });
@@ -1342,6 +1639,8 @@
     }
   }
 
+  let isFetchingCustomSong = false;
+
   // Fetch media (photos/song) from Cloud
   async function fetchMediaFromCloud() {
     if (!cloudDbUrl) return;
@@ -1358,24 +1657,70 @@
       const res = await fetch(mediaEndpoint);
       if (!res.ok) return;
       const data = await res.json();
+      if (!data) return;
 
-      if (data) {
-        if (data.boyPhoto && imgBoy && imgBoy.src !== data.boyPhoto) {
-          setBoyPhoto(data.boyPhoto);
-          try { localStorage.setItem('savedBoyPhoto', data.boyPhoto); } catch (e) {}
-        }
-        if (data.girlPhoto && imgGirl && imgGirl.src !== data.girlPhoto) {
-          setGirlPhoto(data.girlPhoto);
-          try { localStorage.setItem('savedGirlPhoto', data.girlPhoto); } catch (e) {}
-        }
-        if (data.songUrl) {
-          const localRecord = await getAudioBlobFromDB();
-          if (!localRecord) {
-            const currentSrc = bgmAudio ? (bgmAudio.getAttribute('src') || bgmAudio.src) : '';
-            if (currentSrc !== data.songUrl) {
-              applyActiveSong(data.songUrl, data.songTitle || 'Lagu Kenangan 🎵', 'cloud', true);
-            }
+      // 1. Synchronize photos
+      if (data.boyPhoto && imgBoy && imgBoy.src !== data.boyPhoto) {
+        setBoyPhoto(data.boyPhoto);
+        try { localStorage.setItem('savedBoyPhoto', data.boyPhoto); } catch (e) {}
+      }
+      if (data.girlPhoto && imgGirl && imgGirl.src !== data.girlPhoto) {
+        setGirlPhoto(data.girlPhoto);
+        try { localStorage.setItem('savedGirlPhoto', data.girlPhoto); } catch (e) {}
+      }
+
+      // 2. Synchronize background music across devices
+      const cloudAudioVersion = data.audioVersion ? String(data.audioVersion) : null;
+      const localAudioVersion = localStorage.getItem('savedAudioVersion') || '';
+      const isSameVersion = Boolean(cloudAudioVersion && (cloudAudioVersion === localAudioVersion));
+
+      // Case A: YouTube song (either data.songType === 'youtube' or data.songUrl is a YouTube link)
+      const ytId = data.songId || extractYouTubeId(data.songUrl);
+      if (data.songType === 'youtube' || ytId) {
+        if (!isSameVersion || currentSongMode !== 'youtube' || currentYtVideoId !== ytId) {
+          if (cloudAudioVersion) {
+            try { localStorage.setItem('savedAudioVersion', cloudAudioVersion); } catch (e) {}
           }
+          await clearAudioBlobFromDB();
+          const targetUrl = data.songUrl || `https://www.youtube.com/watch?v=${ytId}`;
+          const targetTitle = data.songTitle || 'Lagu YouTube 🎵';
+          await applyActiveSong(targetUrl, targetTitle, 'youtube', true);
+        }
+        return;
+      }
+
+      // Case B: Custom MP3 uploaded from another device
+      if (data.songType === 'cloud_upload') {
+        if (!isSameVersion && !isFetchingCustomSong) {
+          isFetchingCustomSong = true;
+          try {
+            const customSong = await fetchCustomSongFromCloud();
+            if (customSong && customSong.audioData) {
+              const blob = base64ToBlob(customSong.audioData);
+              if (blob) {
+                const version = customSong.audioVersion || cloudAudioVersion || Date.now();
+                await saveAudioBlobToDB(blob, customSong.fileName || 'custom.mp3', customSong.songTitle || data.songTitle, version);
+                try { localStorage.setItem('savedAudioVersion', String(version)); } catch (e) {}
+                const objUrl = URL.createObjectURL(blob);
+                await applyActiveSong(objUrl, customSong.songTitle || data.songTitle || 'Lagu Pilihan 🎵', 'indexeddb', false);
+              }
+            }
+          } finally {
+            isFetchingCustomSong = false;
+          }
+        }
+        return;
+      }
+
+      // Case C: Preset song or direct audio MP3 URL
+      if (data.songUrl && data.songUrl !== 'custom_song') {
+        const localRecord = await getAudioBlobFromDB();
+        if (!isSameVersion || (!localRecord && bgmAudio && bgmAudio.src !== data.songUrl)) {
+          if (cloudAudioVersion) {
+            try { localStorage.setItem('savedAudioVersion', cloudAudioVersion); } catch (e) {}
+          }
+          await clearAudioBlobFromDB();
+          await applyActiveSong(data.songUrl, data.songTitle || 'Lagu Kenangan 🎵', 'cloud', true);
         }
       }
     } catch (e) {
