@@ -722,11 +722,15 @@
   function setBoyPhoto(src) {
     if (imgBoy) imgBoy.src = src;
     if (waAvatarBoy) waAvatarBoy.src = src;
+    const pickerAvatarBoy = document.getElementById('pickerAvatarBoy');
+    if (pickerAvatarBoy) pickerAvatarBoy.src = src;
   }
 
   function setGirlPhoto(src) {
     if (imgGirl) imgGirl.src = src;
     if (waAvatarGirl) waAvatarGirl.src = src;
+    const pickerAvatarGirl = document.getElementById('pickerAvatarGirl');
+    if (pickerAvatarGirl) pickerAvatarGirl.src = src;
   }
 
   // --- HEARTBREAK COUNTER (Dihitung dari 2 Juli sampai Hari Ini) ---
@@ -2207,11 +2211,60 @@
 
   let currentChatSender = 'Erlang';
 
+  const chatRoleSelectorPanel = document.getElementById('chatRoleSelectorPanel');
+  const chatInputPanel = document.getElementById('chatInputPanel');
+  const btnChooseErlang = document.getElementById('btnChooseErlang');
+  const btnChooseCindy = document.getElementById('btnChooseCindy');
+  const btnChangeRole = document.getElementById('btnChangeRole');
+  const currentRoleBadge = document.getElementById('currentRoleBadge');
+
+  function selectSenderRole(role) {
+    currentChatSender = role;
+    if (roleIcon) {
+      roleIcon.textContent = (role === 'Erlang') ? 'person' : 'face_3';
+    }
+    if (currentRoleBadge) {
+      currentRoleBadge.textContent = (role === 'Erlang') ? 'Erlang 🍃' : 'Cindy ✨';
+    }
+    if (bottomChatInput) {
+      bottomChatInput.placeholder = `Tulis pesan sebagai ${role}...`;
+    }
+    if (chatRoleToggleBtn) {
+      chatRoleToggleBtn.setAttribute('title', `Pengirim: ${role} (Klik untuk ganti)`);
+    }
+    if (chatRoleSelectorPanel) chatRoleSelectorPanel.classList.add('hidden');
+    if (chatInputPanel) chatInputPanel.classList.remove('hidden');
+    if (bottomChatInput) bottomChatInput.focus();
+    playClickSfx(role === 'Erlang');
+  }
+
+  function resetSenderRolePicker() {
+    if (chatInputPanel) chatInputPanel.classList.add('hidden');
+    if (chatRoleSelectorPanel) chatRoleSelectorPanel.classList.remove('hidden');
+    playClickSfx();
+  }
+
+  if (btnChooseErlang) {
+    btnChooseErlang.addEventListener('click', () => selectSenderRole('Erlang'));
+  }
+  if (btnChooseCindy) {
+    btnChooseCindy.addEventListener('click', () => selectSenderRole('Cindy'));
+  }
+  if (btnChangeRole) {
+    btnChangeRole.addEventListener('click', () => resetSenderRolePicker());
+  }
+
   if (chatRoleToggleBtn) {
     chatRoleToggleBtn.addEventListener('click', () => {
       currentChatSender = (currentChatSender === 'Erlang') ? 'Cindy' : 'Erlang';
       if (roleIcon) {
         roleIcon.textContent = (currentChatSender === 'Erlang') ? 'person' : 'face_3';
+      }
+      if (currentRoleBadge) {
+        currentRoleBadge.textContent = (currentChatSender === 'Erlang') ? 'Erlang 🍃' : 'Cindy ✨';
+      }
+      if (bottomChatInput) {
+        bottomChatInput.placeholder = `Tulis pesan sebagai ${currentChatSender}...`;
       }
       chatRoleToggleBtn.setAttribute('title', `Pengirim: ${currentChatSender} (Klik untuk ganti)`);
       showActionToast(`Pengirim aktif: ${currentChatSender} 💬`);
@@ -2235,6 +2288,7 @@
 
   if (quickSendPrayerBtn && bottomChatInput) {
     quickSendPrayerBtn.addEventListener('click', () => {
+      selectSenderRole('Erlang');
       bottomChatInput.value = '💌 Mengirim doa hening untuk ketenangan hatimu...';
       bottomChatInput.focus();
     });
