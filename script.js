@@ -2240,6 +2240,20 @@
     });
   }
 
+  const waBoyAvatarWrap = document.getElementById('waBoyAvatarWrap');
+  const waGirlAvatarWrap = document.getElementById('waGirlAvatarWrap');
+  if (waBoyAvatarWrap) {
+    waBoyAvatarWrap.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openPhotoPreview('boy');
+    });
+  }
+  if (waGirlAvatarWrap) {
+    waGirlAvatarWrap.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openPhotoPreview('girl');
+    });
+  }
   if (waPartnerAvatarFrame) {
     waPartnerAvatarFrame.addEventListener('click', () => {
       openPhotoPreview('girl');

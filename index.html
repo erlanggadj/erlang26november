@@ -241,7 +241,7 @@
   </header>
 
   <!-- MAIN CONTAINER (TABS SEBELAH BERDAMPINGAN) -->
-  <main class="flex flex-col relative w-full px-margin pt-44 pb-28 min-h-screen max-w-2xl mx-auto">
+  <main class="serenade-main-content flex flex-col relative w-full px-margin min-h-screen max-w-2xl mx-auto">
     
     <!-- =========================================================================
          TAB 1: BERANDA KENANGAN (Slide 1)
@@ -472,23 +472,29 @@
       <!-- Interactive Ambient Particles Layer -->
       <div class="fixed inset-0 pointer-events-none z-30 overflow-hidden" id="chat-heart-canvas"></div>
 
-      <!-- 1. Chat Partner Header Bar (Warm Romantic Glass Card) -->
-      <div class="flex items-center justify-between gap-space-sm bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-2.5 rounded-lg border border-outline-variant/30 shadow-sm">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="relative shrink-0 cursor-pointer" id="waPartnerAvatarFrame" title="Lihat foto Cindy">
-            <div class="w-11 h-11 rounded-full overflow-hidden bg-primary-fixed ring-2 ring-primary/20 shadow-sm">
-              <img class="w-full h-full object-cover" id="waAvatarGirl" src="assets/girl-placeholder.svg" alt="Cindy">
+      <!-- 1. Chat Partner Header Bar (Warm Romantic Glass Card: Duo Avatars Erlang & Cindy) -->
+      <div class="flex items-center justify-between gap-space-sm bg-surface-container-lowest/90 backdrop-blur-md px-3 sm:px-space-md py-2.5 rounded-lg border border-outline-variant/30 shadow-sm">
+        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div class="relative shrink-0 flex items-center cursor-pointer select-none" id="waPartnerAvatarFrame" title="Lihat Foto Profil Pasangan">
+            <!-- Duo Avatars: Erlang & Cindy (Overlapping Circles) -->
+            <div class="flex items-center -space-x-3.5 relative">
+              <div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container ring-2 ring-surface-container-lowest shadow-sm transition-transform hover:scale-105 z-10" id="waBoyAvatarWrap" title="Lihat foto Erlang">
+                <img class="w-full h-full object-cover" id="waAvatarBoy" src="assets/boy-placeholder.svg" alt="Erlang">
+              </div>
+              <div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed ring-2 ring-surface-container-lowest shadow-sm transition-transform hover:scale-105 z-20" id="waGirlAvatarWrap" title="Lihat foto Cindy">
+                <img class="w-full h-full object-cover" id="waAvatarGirl" src="assets/girl-placeholder.svg" alt="Cindy">
+              </div>
             </div>
-            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest shadow-sm"></span>
+            <span class="absolute -bottom-0.5 -right-0.5 z-30 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest shadow-sm" title="Online"></span>
           </div>
           <div class="min-w-0 flex flex-col">
             <div class="flex items-center gap-1.5">
-              <span class="font-title-md text-[17px] text-on-surface font-semibold truncate" id="waContactName">Cindy 🐱</span>
+              <span class="font-title-md text-[15px] sm:text-[17px] text-on-surface font-semibold truncate" id="waContactName">Erlang &amp; Cindy 🌿</span>
               <span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
             </div>
             <div class="flex items-center gap-1.5">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <p class="font-label-sm text-[11px] text-primary font-medium truncate" id="waStatusText">Online • Doa &amp; Ketulusan</p>
+              <p class="font-label-sm text-[11px] text-primary font-medium truncate" id="waStatusText">Online • Ruang Kenangan Berdua 💬</p>
             </div>
           </div>
         </div>
@@ -550,32 +556,7 @@
         </button>
       </div>
 
-      <!-- 5. Media Memory Snippet Card Preview (Kilatan Kenangan) -->
-      <div class="p-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col gap-2.5">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5">
-            <span class="material-symbols-outlined text-primary text-[18px]">photo_spark</span>
-            <span class="font-title-md text-[15px] text-on-surface font-semibold font-['Playfair_Display']">Kilatan Kenangan Hari Ini</span>
-          </div>
-          <span class="font-label-sm text-[10px] text-primary font-bold uppercase tracking-wider bg-primary-fixed/60 px-2 py-0.5 rounded-full">Arsip 2026</span>
-        </div>
-        <div class="grid grid-cols-2 gap-2.5">
-          <div class="relative rounded-DEFAULT overflow-hidden aspect-[4/3] group cursor-pointer border border-outline-variant/20 shadow-xs" onclick="spawnBurstHearts(window.innerWidth*0.3, window.innerHeight*0.7, 15)">
-            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Kopi Temu Sore">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
-              <span class="font-label-sm text-[11px] text-white font-medium truncate">Kopi Temu Sore ☕</span>
-            </div>
-          </div>
-          <div class="relative rounded-DEFAULT overflow-hidden aspect-[4/3] group cursor-pointer border border-outline-variant/20 shadow-xs" onclick="spawnBurstHearts(window.innerWidth*0.7, window.innerHeight*0.7, 15)">
-            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Bunga Sederhana">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
-              <span class="font-label-sm text-[11px] text-white font-medium truncate">Bunga Sederhana 🌿</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Quick Action Pills -->
+      <!-- 5. Quick Action Pills -->
       <div class="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar shrink-0">
         <button type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap shrink-0 shadow-xs" id="quickAddMessageBtn">
           <span class="material-symbols-outlined text-[16px]">bookmark_add</span>
@@ -587,8 +568,8 @@
         </button>
       </div>
 
-      <!-- 7. Bottom Sticky Chat Input Dock -->
-      <div class="sticky bottom-20 z-40 bg-surface/95 backdrop-blur-xl p-1.5 rounded-full border border-outline-variant/40 shadow-lg mt-1">
+      <!-- 6. Bottom Sticky Chat Input Dock -->
+      <div class="chat-sticky-dock bg-surface/95 backdrop-blur-xl p-1.5 rounded-full border border-outline-variant/40 shadow-lg mt-1">
         <form class="flex items-center gap-1.5 w-full" id="chat-form">
           <button type="button" aria-label="Ganti Pengirim" class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed active:scale-90 transition-all bg-surface-container-low shrink-0" id="chatRoleToggleBtn" title="Pengirim: Erlang (Klik untuk ganti Cindy)">
             <span class="material-symbols-outlined text-[20px]" id="roleIcon">person</span>
