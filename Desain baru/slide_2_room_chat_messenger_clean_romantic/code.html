@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#fdf8f6;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-background": "#1c1b1b",
+          "surface-variant": "#e5e2e0",
+          "background": "#fdf8f6",
+          "surface": "#fdf8f6",
+          "on-secondary": "#ffffff",
+          "on-primary-fixed": "#400013",
+          "surface-container-high": "#ebe7e5",
+          "surface-container-low": "#f7f3f1",
+          "on-tertiary-fixed-variant": "#55433b",
+          "inverse-on-surface": "#f4f0ee",
+          "tertiary": "#634f47",
+          "primary-container": "#be3a5a",
+          "secondary": "#855239",
+          "on-error": "#ffffff",
+          "secondary-fixed": "#ffdbcc",
+          "surface-dim": "#ddd9d7",
+          "on-primary-container": "#ffe8e9",
+          "inverse-surface": "#31302f",
+          "tertiary-container": "#7c675e",
+          "surface-container-highest": "#e5e2e0",
+          "on-secondary-fixed": "#341101",
+          "secondary-container": "#fdba9c",
+          "on-surface-variant": "#574144",
+          "primary": "#9d2043",
+          "primary-fixed-dim": "#ffb2bd",
+          "on-primary-fixed-variant": "#8c1037",
+          "inverse-primary": "#ffb2bd",
+          "on-tertiary-container": "#ffe9e1",
+          "surface-container-lowest": "#ffffff",
+          "surface-container": "#f1edeb",
+          "on-primary": "#ffffff",
+          "on-error-container": "#93000a",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed": "#271812",
+          "on-secondary-container": "#794830",
+          "error": "#ba1a1a",
+          "on-tertiary": "#ffffff",
+          "tertiary-fixed": "#f9ddd2",
+          "outline": "#8b7073",
+          "outline-variant": "#debfc2",
+          "surface-tint": "#ad2d4e",
+          "primary-fixed": "#ffd9dd",
+          "tertiary-fixed-dim": "#dcc1b6",
+          "surface-bright": "#fdf8f6",
+          "on-surface": "#1c1b1b",
+          "secondary-fixed-dim": "#fab799",
+          "on-secondary-fixed-variant": "#693b24"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.75rem",
+          "lg": "1.25rem",
+          "xl": "1.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "margin": "1rem",
+          "margin-md": "2rem",
+          "space-lg": "1.5rem",
+          "gutter": "1rem",
+          "space-xl": "2.5rem",
+          "space-md": "1rem",
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem"
+        },
+        "fontFamily": {
+          "label-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "display-lg-mobile": ["Playfair Display"],
+          "headline-lg-mobile": ["Playfair Display"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-sm": ["Playfair Display"],
+          "title-md": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"],
+          "headline-lg": ["Playfair Display"],
+          "display-lg": ["Playfair Display"],
+          "headline-md": ["Playfair Display"]
+        },
+        "fontSize": {
+          "label-sm": ["11px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "600" }],
+          "label-md": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "600" }],
+          "display-lg-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "headline-lg-mobile": ["26px", { lineHeight: "34px", fontWeight: "600" }],
+          "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+          "body-lg": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+          "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "500" }],
+          "title-md": ["18px", { lineHeight: "26px", fontWeight: "600" }],
+          "body-md": ["14px", { lineHeight: "22px", fontWeight: "400" }],
+          "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600" }],
+          "headline-md": ["24px", { lineHeight: "32px", fontWeight: "500" }]
+        }
+      }
+    }
+  };
+</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style></head><body class="bg-background font-body-md text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/30 shadow-[0_4px_20px_rgba(157,32,67,0.06)]"><div class="px-gutter flex flex-col justify-between py-2.5 gap-2.5"><div class="flex items-center justify-between gap-space-sm bg-surface-container-low/90 px-3 py-1.5 rounded-full border border-outline-variant/30"><div class="flex items-center gap-2 min-w-0 flex-1"><span class="material-symbols-outlined text-primary text-[17px] animate-pulse">music_note</span><div class="flex items-center gap-1.5 min-w-0"><span class="font-label-sm text-[10px] text-primary font-bold uppercase tracking-wider bg-primary-fixed px-1.5 py-0.5 rounded-full">Latar</span><span class="font-body-sm text-[12px] text-on-surface-variant truncate">Lagu Kenangan - Memutar Latar 🎵</span></div></div><div class="flex items-center gap-0.5 shrink-0"><button aria-label="Loop status" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[17px]">repeat</span></button><button aria-label="Putar atau jeda musik" class="w-8 h-8 flex items-center justify-center text-primary hover:text-primary-container transition-colors"><span class="material-symbols-outlined text-[19px]">pause_circle</span></button></div></div><div class="flex items-center justify-between gap-space-md px-1"><div class="min-w-0 flex-1"><div class="flex items-center gap-1.5"><h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate font-['Playfair_Display']">Erlang &amp; Cindy ♡</h1></div><p class="font-body-sm text-body-sm text-on-surface-variant truncate italic">Doa Tulus untuk Cindy • Bahagiamu Bahagiaku ✨</p></div><div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center shrink-0 border border-outline-variant/40 shadow-sm text-primary"><span class="material-symbols-outlined text-[19px]">favorite</span></div></div><nav class="bg-surface-container-high/60 p-1 rounded-full flex items-center gap-1 border border-outline-variant/20"><a class="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full text-on-surface-variant hover:text-on-surface transition-all duration-200 min-h-[40px]" data-path="beranda-kenangan" href="#"><span class="material-symbols-outlined text-[18px]">favorite</span><span class="font-label-md text-label-md">Beranda Kenangan</span></a><a aria-current="page" class="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-full transition-all duration-200 min-h-[40px] relative bg-surface-container-lowest text-primary shadow-sm font-semibold" data-path="room-chat" href="#"><span class="material-symbols-outlined text-[18px]">chat_bubble</span><span class="font-label-md text-label-md">Room Chat</span><span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-[10px] font-bold">4</span></a></nav></div></header><main class="flex flex-col relative w-full px-margin pt-[182px] pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Interactive Ambient Particles Layer -->
+<div class="fixed inset-0 pointer-events-none z-30 overflow-hidden" id="chat-heart-canvas"></div>
+<!-- Chat Partner Header Bar (Warm Romantic Glass Card) -->
+<div class="flex items-center justify-between gap-space-sm bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-2.5 rounded-lg border border-outline-variant/30 shadow-sm mb-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative shrink-0">
+<div class="w-11 h-11 rounded-full overflow-hidden bg-primary-fixed ring-2 ring-primary/20 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Intimate soft-lit photographic portrait of an Asian girl named Cindy smiling gently outdoors at golden hour, framed by lush botanical greenery and gentle bokeh highlights, romantic cinematic tone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1pnYWaPmtMcjejQAlbO0EH8uwEUTkRUzMj1t-2ntgaxYmdFkMymr3afx9ShgbzFeTDpQOvwWTwH4zQRjR8Zl7poer3a9UjZAxCRnQrMn6zC_ir7MQUWKnRk4dYFhIlWgA2P2ydkJ7YAc5tifnMyqWW3HKnDg-EHVPb2GdnSD8hxxzgqxliSqe1kUgjJWrlp-JsDVAfq9tDjC-nGUEwaus2AiaEtx-HxxoVQ4Y3Zi5oY_9zoZbcmu_mg"/>
+</div>
+<!-- Active Online Indicator -->
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest shadow-sm"></span>
+</div>
+<div class="min-w-0 flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-title-md text-[17px] text-on-surface font-semibold truncate">Cindy</span>
+<span class="text-sm">🐱</span>
+<span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<p class="font-label-sm text-[11px] text-primary font-medium truncate">Online • Doa &amp; Ketulusan</p>
+</div>
+</div>
+</div>
+<!-- Quick Action Bar -->
+<div class="flex items-center gap-1 shrink-0">
+<button aria-label="Panggil Suara Cindy" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-95 transition-all bg-surface-container-low" id="btn-call" type="button">
+<span class="material-symbols-outlined text-[19px]">call</span>
+</button>
+<button aria-label="Cari Pesan Kenangan" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-95 transition-all bg-surface-container-low" id="btn-search-chat" type="button">
+<span class="material-symbols-outlined text-[19px]">search</span>
+</button>
+<button aria-label="Simpan ke Kenangan Abadi" class="w-9 h-9 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed/60 active:scale-95 transition-all bg-primary-fixed/30" id="btn-heart-bookmark" type="button">
+<span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">bookmark_heart</span>
+</button>
+</div>
+</div>
+<!-- Pinned Message Banner -->
+<div class="relative overflow-hidden bg-gradient-to-r from-primary-fixed/60 via-surface-container-lowest to-primary-fixed/30 border border-outline-variant/40 px-3.5 py-2 rounded-lg shadow-sm flex items-center justify-between gap-2.5 mb-3">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings: 'FILL' 1;">keep</span>
+<div class="min-w-0 flex flex-col">
+<span class="font-label-sm text-[10px] text-primary font-bold tracking-wider uppercase">PESAN TERSEMAT ♡</span>
+<p class="font-body-sm text-[13px] text-on-surface truncate italic font-serif">"i love you (today is national boyfriend day)" — 10 Okt 2026</p>
+</div>
+</div>
+<button aria-label="Lihat pesan tersimpan" class="shrink-0 text-on-surface-variant hover:text-primary p-1" type="button">
+<span class="material-symbols-outlined text-[18px]">keyboard_arrow_right</span>
+</button>
+</div>
+<!-- Date Divider Badge -->
+<div class="flex items-center justify-center my-2 mb-3">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/30 shadow-xs">
+<span class="material-symbols-outlined text-primary text-[14px]">calendar_month</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">10 Oktober 2026</span>
+</div>
+</div>
+<!-- Intimate Chat Bubble Stream -->
+<div class="flex flex-col gap-3 pb-2" id="chat-messages-container">
+<!-- 1. Cindy (Incoming) -->
+<div class="flex items-end gap-2 max-w-[85%] self-start group">
+<div class="w-7 h-7 rounded-full overflow-hidden bg-surface-container shrink-0 mb-1 ring-1 ring-outline-variant/40">
+<img class="w-full h-full object-cover" data-alt="Micro avatar of sweet girl Cindy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUOYHpetiYAprg-WrwLwW5fmqt2wuBeqFwTRTZnfWfUinmhKILSD0l09TbBG0lnvH0hoBFPOW9jgQ3LrU-i9PbSyHmTyfvULHEcjC8BZSgNI3oXaSlYF8k9c3tljFvUVu2sWbsJokkgnKSlBI6xIXOubijR-G6CXSJyNfOpEkQQ-W7HmiF9b49m4cC8xnZIJawMq7RTFAERvmJYdiwNy_3AjOr3oaxWPHq_AEskYHrOyrvtoyqje7Z7g"/>
+</div>
+<div class="relative bg-surface-container-lowest text-on-surface px-3.5 py-2.5 rounded-[18px_18px_18px_4px] shadow-sm border border-outline-variant/30">
+<p class="font-body-md text-body-md leading-relaxed text-on-surface">galaknyaaa 🥺</p>
+<div class="flex items-center justify-end gap-1 mt-0.5">
+<span class="font-label-sm text-[11px] text-on-surface-variant/80">17:18</span>
+</div>
+<!-- Reaction badge -->
+<button class="absolute -bottom-2.5 -right-1.5 bg-surface-container-lowest border border-outline-variant/40 px-1.5 py-0.5 rounded-full flex items-center gap-0.5 text-label-sm shadow-xs active:scale-125 transition-transform" onclick="pulseReaction(this)" type="button">
+<span>🥺</span>
+<span class="text-primary font-label-sm text-[10px] font-bold">1</span>
+</button>
+</div>
+</div>
+<!-- 2. Erlang (Outgoing - Romantic Crimson/Rose Accent) -->
+<div class="flex flex-col items-end max-w-[85%] self-end group">
+<div class="relative bg-gradient-to-br from-primary via-primary to-primary-container text-on-primary px-3.5 py-2.5 rounded-[18px_18px_4px_18px] shadow-sm shadow-primary/20">
+<p class="font-body-md text-body-md leading-relaxed font-normal text-on-primary">unblock aja prabowo haha</p>
+<div class="flex items-center justify-end gap-1 mt-0.5 text-on-primary/80">
+<span class="font-label-sm text-[11px] text-on-primary/85">17:20</span>
+<span class="material-symbols-outlined text-[15px] text-on-primary" title="Dibaca">done_all</span>
+</div>
+<!-- Reaction Tag -->
+<button class="absolute -bottom-2.5 -left-2 bg-surface-container-lowest border border-outline-variant/40 px-1.5 py-0.5 rounded-full flex items-center gap-0.5 shadow-xs active:scale-125 transition-transform" onclick="pulseReaction(this)" type="button">
+<span>😂</span>
+<span class="text-primary font-label-sm text-[10px] font-bold">1</span>
+</button>
+</div>
+</div>
+<!-- 3. Cindy (Incoming) -->
+<div class="flex items-end gap-2 max-w-[85%] self-start group">
+<div class="w-7 h-7 rounded-full overflow-hidden bg-surface-container shrink-0 mb-1 ring-1 ring-outline-variant/40">
+<img class="w-full h-full object-cover" data-alt="Micro portrait of Cindy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl3Lp375tbzMPBUU3Cdi1j898eA5o8LAfuJPR6lDyPIvm3QWjKCveY0DjV6PVP5jMS7WCFd6NL70JQIRyhL04rQYORe_M0Ml9SGby4INROnXFlxi58Gs3MNTp0oVGr1FpUtdxyumv8iYr77Co3lLx2bNTmHiWMrVxXXSCKWrCjj0YBorKVxwOFDol5uk2J4vYgAEz5r4icLTVD5QXZgQRRmA2F2AnjGM9BfTtsSUeA5fRH6li8EzFGVg"/>
+</div>
+<div class="relative bg-surface-container-lowest text-on-surface px-3.5 py-2.5 rounded-[18px_18px_18px_4px] shadow-sm border border-outline-variant/30">
+<p class="font-body-md text-body-md leading-relaxed text-on-surface">rawrrrr 🦖</p>
+<div class="flex items-center justify-end gap-1 mt-0.5">
+<span class="font-label-sm text-[11px] text-on-surface-variant/80">17:22</span>
+</div>
+</div>
+</div>
+<!-- 4. Cindy (Special Romance Card) -->
+<div class="flex items-end gap-2 max-w-[90%] self-start group">
+<div class="w-7 h-7 rounded-full overflow-hidden bg-surface-container shrink-0 mb-1 ring-1 ring-outline-variant/40">
+<img class="w-full h-full object-cover" data-alt="Close-up micro avatar of Cindy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb09U8j2iI-iDUd_S6xD5IBEt6W_pakUtgQFe_nE8_sQBzd7VxSUN6_1UwlXO-VrGqCA7XtqkEOLm4w4P5fMlnW-YhP1nUawaITSYD48xhCgS05b7Zps6W1L4Bqn_Jp_AZobhGAs8p7SxiAg0Scw_yA0LDTOvhy_Hfjxc7JSSHoKuvXwVwJvBgrfV_YHTC8q3hOkMjtGa-Cg4pgdLqeEoMzxFJVUc44qflXy6GMsEkNwZiprkMYtuBOA"/>
+</div>
+<div class="relative bg-gradient-to-br from-surface-container-lowest via-surface-container-lowest to-primary-fixed/20 text-on-surface p-3.5 rounded-[18px_18px_18px_4px] shadow-sm border border-outline-variant/40">
+<!-- Milestone Header Accent -->
+<div class="flex items-center gap-1.5 text-primary mb-1.5">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-[10px] font-bold tracking-wider uppercase">⭐ SPESIAL HARI PACAR NASIONAL</span>
+</div>
+<p class="font-headline-sm text-[17px] text-on-surface font-normal font-['Playfair_Display'] italic leading-snug">
+          i love you (today is national boyfriend day) 🤍
+        </p>
+<div class="flex items-center justify-between gap-space-md mt-2 pt-1 border-t border-outline-variant/30">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-sm text-[11px] font-medium">Dikenang selamanya</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant/80">17:23</span>
+</div>
+<!-- Mini badge Cindy -->
+<div class="absolute -bottom-2.5 right-3 bg-surface-container-lowest border border-outline-variant/40 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+<span class="material-symbols-outlined text-primary text-[13px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-sm text-[11px] text-on-surface font-semibold">Cindy</span>
+</div>
+</div>
+</div>
+<!-- 5. Erlang (Outgoing Romantic reply) -->
+<div class="flex flex-col items-end max-w-[88%] self-end group">
+<div class="relative bg-gradient-to-br from-primary via-primary to-primary-container text-on-primary p-3.5 rounded-[18px_18px_4px_18px] shadow-md shadow-primary/25">
+<p class="font-body-lg text-[15px] text-on-primary font-normal leading-relaxed">
+          Terima kasih Cindy... doa terbaikku selalu mengalir buat bahagiamu 🍃
+        </p>
+<div class="flex items-center justify-between gap-space-md mt-2 pt-1 border-t border-on-primary/20 text-on-primary/85">
+<span class="font-label-sm text-[11px] italic tracking-tight opacity-90">Bahagiamu Bahagiaku</span>
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-[11px] font-medium">17:25</span>
+<span class="material-symbols-outlined text-[16px] text-on-primary font-bold" title="Terkirim &amp; Terbaca">done_all</span>
+</div>
+</div>
+<!-- Floating heart reaction badge -->
+<button class="absolute -bottom-2.5 -left-2 bg-surface-container-lowest border border-outline-variant/40 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs active:scale-95 transition-all text-on-surface" onclick="pulseReaction(this)" type="button">
+<span class="text-xs">🤍</span>
+<span class="text-xs">🕊️</span>
+<span class="text-primary font-label-sm text-[10px] font-bold">2</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Media Memory Snippet Card Preview -->
+<div class="mt-4 mb-2 p-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">photo_spark</span>
+<span class="font-title-md text-[15px] text-on-surface font-semibold">Kilatan Kenangan Hari Ini</span>
+</div>
+<span class="font-label-sm text-[10px] text-primary font-bold uppercase tracking-wider bg-primary-fixed/60 px-2 py-0.5 rounded-full">Arsip 2026</span>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<div class="relative rounded-DEFAULT overflow-hidden aspect-[4/3] group cursor-pointer border border-outline-variant/20 shadow-xs" onclick="triggerFloatingHearts(event)">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Two hands gently holding coffee cups together at a rustic wooden cafe table surrounded by green plants, warm golden ambient sunlight, intimate candid romantic style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOlwa4z0gIIAp6e6dYnWOAvg711vmR9Ja2BFAt07PwmJ98Q5gNRxz54TORSa5hWOMYU3pVmFnjke8DdYhlLya_qyFS4lLFf_6fJe3HHc6h7LncxcYYK1jS8c9MnqCbtXx9vDEGdMOrpbfO1c_VjlKO-nr8yloutznfL66JRKNe8ooFYnbUT_RQ-ieJdLZ0mpUDYd0bh4HOBTRb8kixNJE4BD-tNB07mSntVLQh8Rr9aAeqRn8OICqqiw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
+<span class="font-label-sm text-[11px] text-white font-medium truncate">Kopi Temu Sore ☕</span>
+</div>
+</div>
+<div class="relative rounded-DEFAULT overflow-hidden aspect-[4/3] group cursor-pointer border border-outline-variant/20 shadow-xs" onclick="triggerFloatingHearts(event)">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Delicate bouquet of baby's breath and fresh green foliage wrapped in brown craft paper resting on a car passenger seat, soft twilight light, romantic mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA598a8IFeDpFUCMzoO0cB2ST-MI1DSGriuZm4Y0ydbmZJA2Zj28LCayPaTr4-9yQ5Xh9l7b0LBoej2Hv_Ge9AYbBc7rPtAiTiyssM-oNA5tg15zC_iZsvDhLXAAJ4EKlZy0RRtO4QvpzhYfFpRPW6v16LDrcLkguiD0HwK9KBNpGkDotYpVHZSOMmQTcCpWGcv0d6mIjdgpQK0NC8z7GcOzsazDhh3pe7-RxuGrXLbbbfkK7v5cdK06Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
+<span class="font-label-sm text-[11px] text-white font-medium truncate">Bunga Sederhana 🌿</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Action Pills -->
+<div class="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar shrink-0 mt-1 mb-1">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap shrink-0 shadow-xs" onclick="appendQuickMessage('+ Tambah Pesan Kenangan ✨')" type="button">
+<span class="material-symbols-outlined text-[16px]">bookmark_add</span>
+<span class="font-label-md text-label-md">+ Tambah Pesan Kenangan</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap shrink-0 shadow-xs" onclick="appendQuickMessage('💌 Mengirim doa hening untuk ketenangan hatimu...')" type="button">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+<span class="font-label-md text-label-md">💌 Kirim Doa Hening</span>
+</button>
+</div>
+<!-- Bottom Sticky Chat Input Dock -->
+<div class="sticky bottom-2 z-40 bg-surface/95 backdrop-blur-xl p-1.5 rounded-full border border-outline-variant/40 shadow-lg mt-2">
+<form class="flex items-center gap-1.5 w-full" id="chat-form" onsubmit="handleSendMessage(event)">
+<!-- Attach Button (+) -->
+<button aria-label="Tambah Lampiran Media" class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed active:scale-90 transition-all bg-surface-container-low shrink-0" id="btn-attachment" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<!-- Input Text Field Container -->
+<div class="relative flex-1 min-w-0 flex items-center bg-surface-container-lowest rounded-full px-3.5 py-0.5 border border-outline-variant/30 shadow-inner">
+<input autocomplete="off" class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-body-md py-1.5 min-w-0" id="chat-input" placeholder="Tulis pesan kenangan ♡" type="text"/>
+<button aria-label="Pilih stiker cinta" class="text-primary hover:scale-125 transition-transform p-1 shrink-0" onclick="injectHeartEmoji()" type="button">
+<span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Voice Note Button -->
+<button aria-label="Rekam Catatan Suara" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-90 transition-all bg-surface-container-low shrink-0" id="btn-voice-note" type="button">
+<span class="material-symbols-outlined text-[19px]">mic</span>
+</button>
+<!-- Send Button -->
+<button aria-label="Kirim Pesan" class="h-10 px-4 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all shrink-0 font-label-md text-label-md font-bold" id="btn-send-message" type="submit">
+<span>Kirim</span>
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</form>
+</div>
+</div>
+<script>
+  function pulseReaction(button) {
+    button.classList.add('scale-125');
+    setTimeout(() => {
+      button.classList.remove('scale-125');
+    }, 200);
+  }
+
+  function appendQuickMessage(text) {
+    const input = document.getElementById('chat-input');
+    if (input) {
+      input.value = text;
+      input.focus();
+    }
+  }
+
+  function injectHeartEmoji() {
+    const input = document.getElementById('chat-input');
+    if (input) {
+      input.value += ' 🤍 ';
+      input.focus();
+    }
+  }
+
+  function triggerFloatingHearts(e) {
+    const canvas = document.getElementById('chat-heart-canvas');
+    if (!canvas) return;
+
+    for (let i = 0; i < 6; i++) {
+      const heart = document.createElement('div');
+      heart.innerText = ['🤍', '✨', '🌸', '🕊️'][Math.floor(Math.random() * 4)];
+      heart.className = 'fixed pointer-events-none text-xl transition-all duration-1000 ease-out z-50';
+      const startX = e.clientX || window.innerWidth / 2;
+      const startY = e.clientY || window.innerHeight / 2;
+      heart.style.left = (startX + (Math.random() * 60 - 30)) + 'px';
+      heart.style.top = startY + 'px';
+      heart.style.opacity = '1';
+      heart.style.transform = 'translateY(0) scale(1)';
+      canvas.appendChild(heart);
+
+      setTimeout(() => {
+        heart.style.transform = `translate(${Math.random() * 80 - 40}px, -${100 + Math.random() * 80}px) scale(1.4)`;
+        heart.style.opacity = '0';
+      }, 50);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1100);
+    }
+  }
+
+  function handleSendMessage(event) {
+    event.preventDefault();
+    const input = document.getElementById('chat-input');
+    const container = document.getElementById('chat-messages-container');
+    if (!input || !input.value.trim() || !container) return;
+
+    const userText = input.value.trim();
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const timeStr = `${hours}:${minutes}`;
+
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'flex flex-col items-end max-w-[85%] self-end animate-fadeIn';
+    msgDiv.innerHTML = `
+      <div class="relative bg-gradient-to-br from-primary via-primary to-primary-container text-on-primary px-3.5 py-2.5 rounded-[18px_18px_4px_18px] shadow-sm">
+        <p class="font-body-md text-body-md leading-relaxed font-normal text-on-primary">${escapeHtml(userText)}</p>
+        <div class="flex items-center justify-end gap-1 mt-0.5 text-on-primary/80">
+          <span class="font-label-sm text-[11px] text-on-primary/85">${timeStr}</span>
+          <span class="material-symbols-outlined text-[15px] text-on-primary">done</span>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(msgDiv);
+    input.value = '';
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  }
+
+  function escapeHtml(string) {
+    const div = document.createElement('div');
+    div.innerText = string;
+    return div.innerHTML;
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-4px_16px_rgba(157,32,67,0.04)]" data-active-classes="text-primary font-semibold"><div class="flex justify-around items-center h-16 px-space-md"><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" data-path="beranda-kenangan" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-[10px]">Beranda</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 transition-colors relative text-primary font-semibold" data-path="room-chat" href="#"><span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">forum</span><span class="font-label-sm text-[10px]">Obrolan</span><span class="absolute top-2 right-4 w-2 h-2 rounded-full bg-primary ring-2 ring-surface"></span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" data-path="linimasa-cinta" href="#"><span class="material-symbols-outlined text-[22px]">auto_stories</span><span class="font-label-sm text-[10px]">Linimasa</span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" data-path="galeri-foto" href="#"><span class="material-symbols-outlined text-[22px]">photo_library</span><span class="font-label-sm text-[10px]">Galeri</span></a></div></nav></body></html>

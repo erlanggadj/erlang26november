@@ -416,14 +416,23 @@
 
   function setMusicUI(playing, statusText) {
     isMusicPlaying = playing;
+    const playBtnIcon = document.getElementById('playBtnIcon');
     if (playing) {
-      vinylDisc.classList.add('spinning');
-      playBtn.textContent = '❚❚';
-      musicStatus.textContent = statusText || 'Memutar 🌧️';
+      if (vinylDisc) vinylDisc.classList.add('spinning');
+      if (playBtnIcon) {
+        playBtnIcon.textContent = 'pause_circle';
+      } else if (playBtn) {
+        playBtn.textContent = '❚❚';
+      }
+      if (musicStatus) musicStatus.textContent = statusText || 'Memutar 🍃';
     } else {
-      vinylDisc.classList.remove('spinning');
-      playBtn.textContent = '▶';
-      musicStatus.textContent = statusText || 'Klik untuk memutar 💔';
+      if (vinylDisc) vinylDisc.classList.remove('spinning');
+      if (playBtnIcon) {
+        playBtnIcon.textContent = 'play_circle';
+      } else if (playBtn) {
+        playBtn.textContent = '▶';
+      }
+      if (musicStatus) musicStatus.textContent = statusText || 'Klik untuk memutar 🍃';
     }
   }
 
@@ -1464,6 +1473,15 @@
 
     // Scroll internally inside the chat box
     scrollChatToBottom(smoothScroll);
+    updateMessageBadgeCount();
+  }
+
+  function updateMessageBadgeCount() {
+    const count = (chatMessages && Array.isArray(chatMessages)) ? chatMessages.length : 0;
+    const chatBadgeCount = document.getElementById('chatBadgeCount');
+    const bannerChatCount = document.getElementById('bannerChatCount');
+    if (chatBadgeCount) chatBadgeCount.textContent = count;
+    if (bannerChatCount) bannerChatCount.textContent = `${count} Pesan`;
   }
 
   // Render WhatsApp Bubbles (Sort by timestamp, latest at bottom, lazy loading older messages)
@@ -1481,6 +1499,7 @@
         </div>
       `;
       if (waJumpBottomBtn) waJumpBottomBtn.classList.remove('visible');
+      updateMessageBadgeCount();
       return;
     }
 
@@ -1530,6 +1549,7 @@
     if (scrollToBottom) {
       scrollChatToBottom(false);
     }
+    updateMessageBadgeCount();
   }
 
   // Fetch messages from Cloud (Firebase REST API) with smart diffing (no blinking, no unnecessary redraws)
@@ -2074,6 +2094,239 @@
       }
     }
   });
+
+  // --- TABS SWITCHING ENGINE (BERANDA KENANGAN vs ROOM CHAT) ---
+  const tabBeranda = document.getElementById('tabBeranda');
+  const tabRoomChat = document.getElementById('tabRoomChat');
+  const tabBerandaBtn = document.getElementById('tabBerandaBtn');
+  const tabRoomChatBtn = document.getElementById('tabRoomChatBtn');
+  const bottomNavBerandaBtn = document.getElementById('bottomNavBerandaBtn');
+  const bottomNavChatBtn = document.getElementById('bottomNavChatBtn');
+  const bannerToChatBtn = document.getElementById('bannerToChatBtn');
+
+  function switchTab(tabName) {
+    playClickSfx();
+    if (tabName === 'chat') {
+      if (tabBeranda) tabBeranda.classList.add('hidden');
+      if (tabRoomChat) tabRoomChat.classList.remove('hidden');
+
+      if (tabBerandaBtn) {
+        tabBerandaBtn.className = 'flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full text-on-surface-variant hover:text-on-surface transition-all duration-200 min-h-[40px]';
+      }
+      if (tabRoomChatBtn) {
+        tabRoomChatBtn.className = 'flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full transition-all duration-200 min-h-[40px] relative bg-surface-container-lowest text-primary shadow-sm font-semibold';
+      }
+
+      if (bottomNavBerandaBtn) {
+        bottomNavBerandaBtn.className = 'bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors';
+      }
+      if (bottomNavChatBtn) {
+        bottomNavChatBtn.className = 'bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 transition-colors relative text-primary font-semibold';
+      }
+
+      setTimeout(() => {
+        scrollChatToBottom(false);
+      }, 60);
+    } else {
+      if (tabRoomChat) tabRoomChat.classList.add('hidden');
+      if (tabBeranda) tabBeranda.classList.remove('hidden');
+
+      if (tabBerandaBtn) {
+        tabBerandaBtn.className = 'flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full transition-all duration-200 min-h-[40px] bg-surface-container-lowest text-primary shadow-sm font-semibold';
+      }
+      if (tabRoomChatBtn) {
+        tabRoomChatBtn.className = 'flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full text-on-surface-variant hover:text-on-surface transition-all duration-200 min-h-[40px] relative';
+      }
+
+      if (bottomNavBerandaBtn) {
+        bottomNavBerandaBtn.className = 'bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 transition-colors relative text-primary font-semibold';
+      }
+      if (bottomNavChatBtn) {
+        bottomNavChatBtn.className = 'bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors';
+      }
+    }
+  }
+
+  if (tabBerandaBtn) tabBerandaBtn.addEventListener('click', () => switchTab('beranda'));
+  if (tabRoomChatBtn) tabRoomChatBtn.addEventListener('click', () => switchTab('chat'));
+  if (bottomNavBerandaBtn) bottomNavBerandaBtn.addEventListener('click', () => switchTab('beranda'));
+  if (bottomNavChatBtn) bottomNavChatBtn.addEventListener('click', () => switchTab('chat'));
+  if (bannerToChatBtn) bannerToChatBtn.addEventListener('click', () => switchTab('chat'));
+
+  // Toast Notice Helper
+  function showActionToast(msg) {
+    const toast = document.getElementById('actionToast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.remove('hidden');
+    clearTimeout(window._toastTimeout);
+    window._toastTimeout = setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 2800);
+  }
+
+  // Ruang Refleksi Card 4 (Settings)
+  const openSettingsCardBtn = document.getElementById('openSettingsCardBtn');
+  if (openSettingsCardBtn && settingsModal) {
+    openSettingsCardBtn.addEventListener('click', () => {
+      settingsModal.classList.add('active');
+      playClickSfx();
+    });
+  }
+
+  // Bottom Navigation: Surat & Pengaturan
+  const bottomNavLetterBtn = document.getElementById('bottomNavLetterBtn');
+  if (bottomNavLetterBtn && letterModal) {
+    bottomNavLetterBtn.addEventListener('click', () => {
+      letterModal.classList.add('active');
+      playClickSfx();
+    });
+  }
+
+  const bottomNavSettingsBtn = document.getElementById('bottomNavSettingsBtn');
+  if (bottomNavSettingsBtn && settingsModal) {
+    bottomNavSettingsBtn.addEventListener('click', () => {
+      settingsModal.classList.add('active');
+      playClickSfx();
+    });
+  }
+
+  // Direct Sticky Room Chat Input Engine (Slide 2)
+  const bottomChatForm = document.getElementById('chat-form');
+  const bottomChatInput = document.getElementById('chat-input');
+  const chatRoleToggleBtn = document.getElementById('chatRoleToggleBtn');
+  const roleIcon = document.getElementById('roleIcon');
+  const chatHeartBtn = document.getElementById('chatHeartBtn');
+  const quickAddMessageBtn = document.getElementById('quickAddMessageBtn');
+  const quickSendPrayerBtn = document.getElementById('quickSendPrayerBtn');
+  const waPartnerAvatarFrame = document.getElementById('waPartnerAvatarFrame');
+  const btnCall = document.getElementById('btn-call');
+  const btnSearchChat = document.getElementById('btn-search-chat');
+  const btnHeartBookmark = document.getElementById('btn-heart-bookmark');
+  const pinnedBanner = document.getElementById('pinnedBanner');
+
+  let currentChatSender = 'Erlang';
+
+  if (chatRoleToggleBtn) {
+    chatRoleToggleBtn.addEventListener('click', () => {
+      currentChatSender = (currentChatSender === 'Erlang') ? 'Cindy' : 'Erlang';
+      if (roleIcon) {
+        roleIcon.textContent = (currentChatSender === 'Erlang') ? 'person' : 'face_3';
+      }
+      chatRoleToggleBtn.setAttribute('title', `Pengirim: ${currentChatSender} (Klik untuk ganti)`);
+      showActionToast(`Pengirim aktif: ${currentChatSender} 💬`);
+      playClickSfx(currentChatSender === 'Erlang');
+    });
+  }
+
+  if (chatHeartBtn && bottomChatInput) {
+    chatHeartBtn.addEventListener('click', () => {
+      bottomChatInput.value += ' 🤍 ';
+      bottomChatInput.focus();
+    });
+  }
+
+  if (quickAddMessageBtn && waAddMessageModal) {
+    quickAddMessageBtn.addEventListener('click', () => {
+      waAddMessageModal.classList.add('active');
+      playClickSfx();
+    });
+  }
+
+  if (quickSendPrayerBtn && bottomChatInput) {
+    quickSendPrayerBtn.addEventListener('click', () => {
+      bottomChatInput.value = '💌 Mengirim doa hening untuk ketenangan hatimu...';
+      bottomChatInput.focus();
+    });
+  }
+
+  if (waPartnerAvatarFrame) {
+    waPartnerAvatarFrame.addEventListener('click', () => {
+      openPhotoPreview('girl');
+    });
+  }
+
+  if (btnCall) {
+    btnCall.addEventListener('click', () => {
+      showActionToast('Doa hening menghubungkan rasa kita... 🕊️');
+      playClickSfx(true);
+    });
+  }
+
+  if (btnSearchChat) {
+    btnSearchChat.addEventListener('click', () => {
+      showActionToast('Mencari arsip kenangan 86 hari kita... 📜');
+      playClickSfx();
+    });
+  }
+
+  if (btnHeartBookmark) {
+    btnHeartBookmark.addEventListener('click', () => {
+      showActionToast('Kenangan ini tersimpan abadi di relung hati ♡');
+      spawnBurstHearts(window.innerWidth / 2, window.innerHeight / 2, 20);
+      playClickSfx(true);
+    });
+  }
+
+  if (pinnedBanner) {
+    pinnedBanner.addEventListener('click', () => {
+      showActionToast('Pesan tersemat: i love you (national boyfriend day) 🤍');
+      playClickSfx(true);
+    });
+  }
+
+  // Handle send message from direct sticky bottom dock
+  if (bottomChatForm) {
+    bottomChatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!bottomChatInput) return;
+      const text = bottomChatInput.value.trim();
+      if (!text) return;
+
+      const now = new Date();
+      const timestamp = now.getTime();
+      const watermarkFormatted = formatWatermarkTime(now);
+
+      const newMsg = {
+        id: 'msg-' + timestamp,
+        sender: currentChatSender,
+        text: text,
+        time: watermarkFormatted,
+        timestamp: timestamp
+      };
+
+      chatMessages.push(newMsg);
+      chatVisibleCount = Math.max(chatVisibleCount, chatMessages.length);
+      try {
+        localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatMessages));
+      } catch (err) {}
+
+      appendSingleChatMessage(newMsg, true);
+      updateMessageBadgeCount();
+
+      bottomChatInput.value = '';
+
+      // Push to Firebase Cloud
+      pushMessageToCloud(newMsg);
+
+      // Background submission to Netlify form if configured
+      try {
+        const params = new URLSearchParams();
+        params.append('form-name', 'chat-erlang-cindy');
+        params.append('modalSenderRole', currentChatSender);
+        params.append('message', text);
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString()
+        }).catch(() => {});
+      } catch (err) {}
+
+      spawnBurstHearts(window.innerWidth / 2, window.innerHeight * 0.85, 12);
+      playClickSfx(currentChatSender === 'Erlang');
+      scrollChatToBottom(true);
+    });
+  }
 
   animateCanvas();
 

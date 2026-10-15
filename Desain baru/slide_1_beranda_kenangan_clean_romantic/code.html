@@ -1,0 +1,337 @@
+<!DOCTYPE html><html class="light" lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#fdf8f6;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-background": "#1c1b1b",
+          "surface-variant": "#e5e2e0",
+          "background": "#fdf8f6",
+          "surface": "#fdf8f6",
+          "on-secondary": "#ffffff",
+          "on-primary-fixed": "#400013",
+          "surface-container-high": "#ebe7e5",
+          "surface-container-low": "#f7f3f1",
+          "on-tertiary-fixed-variant": "#55433b",
+          "inverse-on-surface": "#f4f0ee",
+          "tertiary": "#634f47",
+          "primary-container": "#be3a5a",
+          "secondary": "#855239",
+          "on-error": "#ffffff",
+          "secondary-fixed": "#ffdbcc",
+          "surface-dim": "#ddd9d7",
+          "on-primary-container": "#ffe8e9",
+          "inverse-surface": "#31302f",
+          "tertiary-container": "#7c675e",
+          "surface-container-highest": "#e5e2e0",
+          "on-secondary-fixed": "#341101",
+          "secondary-container": "#fdba9c",
+          "on-surface-variant": "#574144",
+          "primary": "#9d2043",
+          "primary-fixed-dim": "#ffb2bd",
+          "on-primary-fixed-variant": "#8c1037",
+          "inverse-primary": "#ffb2bd",
+          "on-tertiary-container": "#ffe9e1",
+          "surface-container-lowest": "#ffffff",
+          "surface-container": "#f1edeb",
+          "on-primary": "#ffffff",
+          "on-error-container": "#93000a",
+          "error-container": "#ffdad6",
+          "on-tertiary-fixed": "#271812",
+          "on-secondary-container": "#794830",
+          "error": "#ba1a1a",
+          "on-tertiary": "#ffffff",
+          "tertiary-fixed": "#f9ddd2",
+          "outline": "#8b7073",
+          "outline-variant": "#debfc2",
+          "surface-tint": "#ad2d4e",
+          "primary-fixed": "#ffd9dd",
+          "tertiary-fixed-dim": "#dcc1b6",
+          "surface-bright": "#fdf8f6",
+          "on-surface": "#1c1b1b",
+          "secondary-fixed-dim": "#fab799",
+          "on-secondary-fixed-variant": "#693b24"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.5rem",
+          "lg": "1rem",
+          "xl": "1.5rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "margin": "1.25rem",
+          "margin-md": "2rem",
+          "space-lg": "1.25rem",
+          "gutter": "1rem",
+          "space-xl": "2rem",
+          "space-md": "0.875rem",
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem"
+        },
+        "fontFamily": {
+          "label-sm": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "display-lg-mobile": ["Playfair Display"],
+          "headline-lg-mobile": ["Playfair Display"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-sm": ["Playfair Display"],
+          "title-md": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"],
+          "headline-lg": ["Playfair Display"],
+          "display-lg": ["Playfair Display"],
+          "headline-md": ["Playfair Display"]
+        },
+        "fontSize": {
+          "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+          "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+          "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+          "headline-lg-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "600" }],
+          "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+          "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+          "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+          "title-md": ["17px", { "lineHeight": "24px", "fontWeight": "600" }],
+          "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+          "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+          "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+          "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }]
+        }
+      }
+    }
+  }
+</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style></head><body class="bg-background font-body-md text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_4px_24px_rgba(157,32,67,0.06)] border-b border-outline-variant/30"><div class="px-gutter flex flex-col justify-between py-space-sm gap-2.5"><div class="flex items-center justify-between gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-full border border-outline-variant/40 shadow-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><span class="material-symbols-outlined text-primary text-[18px] animate-pulse">music_note</span><div class="flex items-center gap-space-xs min-w-0"><span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Latar</span><span class="font-body-sm text-body-sm text-on-surface truncate">Lagu Kenangan - Memutar Latar ♪</span></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Loop status" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[17px]">repeat</span></button><button aria-label="Putar atau jeda musik" class="w-8 h-8 flex items-center justify-center text-primary hover:text-primary-container transition-colors"><span class="material-symbols-outlined text-[20px]">pause_circle</span></button></div></div><div class="flex items-center justify-between gap-space-md px-space-xs"><div class="min-w-0 flex-1"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate tracking-tight">Erlang &amp; Cindy ♡</span><span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span></div><p class="font-body-sm text-body-sm text-on-surface-variant truncate italic font-serif">Doa Tulus untuk Cindy • Bahagiamu Bahagiaku ✨</p></div><div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center shrink-0 border border-primary/20 shadow-sm"><span class="material-symbols-outlined text-primary text-[18px]">person</span></div></div><nav class="bg-surface-container-high/70 p-1 rounded-full flex items-center gap-1 border border-outline-variant/30 shadow-inner" data-active-classes="bg-surface-container-lowest text-primary shadow-sm font-semibold"><a aria-current="page" class="flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full transition-all duration-200 min-h-[40px] bg-surface-container-lowest text-primary shadow-sm font-semibold" data-path="beranda-kenangan" href="#"><span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span><span class="font-label-md text-label-md tracking-normal">Beranda Kenangan</span></a><a class="flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full text-on-surface-variant hover:text-on-surface transition-all duration-200 min-h-[40px] relative" data-path="room-chat" href="#"><span class="material-symbols-outlined text-[18px]">chat_bubble</span><span class="font-label-md text-label-md tracking-normal">Room Chat</span><span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-sm">4</span></a></nav></div></header><main class="flex flex-col relative w-full px-margin pt-52 pb-28 bg-surface min-h-screen"><div class="flex flex-col w-full gap-space-lg">
+<!-- Ambient Romantic Glow Card Backdrop -->
+<div class="relative w-full overflow-hidden rounded-xl bg-gradient-to-b from-surface-container-lowest to-surface-container-low p-space-lg shadow-sm border border-outline-variant/40">
+<div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-secondary-fixed/50 blur-3xl pointer-events-none"></div>
+<!-- 1. Couple Avatars Header -->
+<div class="relative z-10 flex flex-col items-center gap-space-md">
+<div class="flex items-center justify-between w-full max-w-xs px-space-xs">
+<!-- Erlang Card -->
+<div class="flex flex-col items-center text-center gap-space-xs">
+<div class="relative">
+<div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 ring-primary-fixed-dim/70 shadow-md">
+<img class="w-full h-full object-cover rounded-full" data-alt="Warm aesthetic close-up portrait of a thoughtful Indonesian young man named Erlang, soft ambient warm forest lighting, gentle smile, dark emerald and nocturnal pine color scheme, 35mm film aesthetic, cinematic soft focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8gUL0DOVEUD7ip0bJXd-CRpOV72JiHEuM3WC5cuN8XMwNKhZjCyVv20KKfYyibc0Ayr9Lvf4Sfcl0UWSrbj3ggZV9yQz6Y4c-BmlxI5Mv9akVamFGNEAEoxOMcZBVIieDTbJZAEplVEUPMv9Fm71NH21MLW5kpPGlywTtJLU7eRY6qvzhvYcfC6OFTPUa3o0_LDR-mab1IKgUAo-c4oXyy0YW_QsWEqPoKo4f99s-yU53Jb5XAFSNVA">
+</div>
+<div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
+<span class="material-symbols-outlined text-secondary text-[14px]">eco</span>
+</div>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Erlang</span>
+<span class="font-label-sm text-label-sm text-secondary px-space-xs py-0.5 rounded-full bg-secondary-fixed/50 font-medium">Belajar Ikhlas 🍃</span>
+</div>
+<!-- Center Glowing Heart Badge -->
+<div class="flex flex-col items-center gap-1">
+<div class="relative group cursor-pointer flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest border border-outline-variant/40 shadow-sm active:scale-95 transition-all" id="heartGlowBtn">
+<span class="material-symbols-outlined text-primary text-[22px] animate-pulse" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<div class="absolute -inset-1 rounded-full bg-primary-fixed/40 blur-sm pointer-events-none"></div>
+</div>
+<span class="font-label-sm text-label-sm text-primary tracking-wider font-semibold uppercase text-center mt-1">IKHLAS &amp; TULUS</span>
+</div>
+<!-- Cindy Card -->
+<div class="flex flex-col items-center text-center gap-space-xs">
+<div class="relative">
+<div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 ring-primary-fixed-dim/70 shadow-md">
+<img class="w-full h-full object-cover rounded-full" data-alt="Enchanting cinematic portrait of an Indonesian young woman named Cindy, delicate serene smile, softly backlit with gentle warm golden hour rays, dark botanical pine background, natural elegance, soft textured portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtGL2NPubPxefImgD9Q6eTBkjqsGYC4GiuWsqslPbKR-M6qrE2kNILBHxoTUU2pgo1H_qX1aQGmJKXcCrLL-eYx7P3jY15vZENjKSlIYII5qf2AX9I5MEhz7ctQxpqe4ZJr_i-hgihbTNjcfEll_YgxGWGm8TPbdqr_sq8k_0wt-CrvzS1AJ7ozls2ltr80AggP2Hxg6SmBmm9UwuZhQwHk3N-DfmnSQicxNCc60Gtqoz1sok8nzUL6g">
+</div>
+<div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
+<span class="material-symbols-outlined text-primary text-[14px]">auto_awesome</span>
+</div>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Cindy</span>
+<span class="font-label-sm text-label-sm text-primary px-space-xs py-0.5 rounded-full bg-primary-fixed/50 font-medium">Semoga Bahagia ✨</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Perjalanan Cerita & Timeline -->
+<div class="flex flex-col gap-space-md bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/30 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">timeline</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Linimasa Hati</h2>
+</div>
+<div class="flex items-center gap-1 px-space-md py-1 rounded-full bg-primary-fixed/60 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span class="font-label-sm text-label-sm font-semibold">86 Hari Cerita Kita</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-md relative mt-space-xs">
+<!-- Milestone 1 -->
+<div class="flex items-start gap-space-md relative">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shrink-0 border border-outline-variant/40 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[18px]">chat_bubble_outline</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Awal Mula DM di IG</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">2 Juli 2026</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Pertama kali kenal &amp; cerita malam berdua yang tak terlupakan 🍃
+          </p>
+</div>
+</div>
+<!-- Connector Dot Line Visual -->
+<div class="ml-4 w-0.5 h-6 bg-outline-variant/40"></div>
+<!-- Milestone 2 -->
+<div class="flex items-start gap-space-md relative">
+<div class="w-9 h-9 rounded-full bg-primary-fixed/50 flex items-center justify-center shrink-0 border border-primary/20 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Fase Ikhlas &amp; Mendoakanmu</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">26 Sept 2026</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Fase no contact, namun untaian doa tulus tetap mengalir tenang untukmu 🤍
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Counter Hari & Jam Cinta -->
+<div class="flex flex-col gap-space-sm bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">hourglass_bottom</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Waktu terus berjalan sejak kita pertama saling kenal pada <span class="text-on-surface font-semibold">2 Juli</span>:
+      </p>
+</div>
+<!-- 4 Glass Romantic Counter Cards -->
+<div class="grid grid-cols-4 gap-space-xs mt-space-xs" id="memoryCounter">
+<div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+<span class="font-headline-sm text-headline-sm text-primary font-semibold" id="cntDays">105</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Hari</span>
+</div>
+<div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+<span class="font-headline-sm text-headline-sm text-primary font-semibold" id="cntHours">11</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Jam</span>
+</div>
+<div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+<span class="font-headline-sm text-headline-sm text-primary font-semibold" id="cntMins">10</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Menit</span>
+</div>
+<div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+<span class="font-headline-sm text-headline-sm text-secondary font-semibold" id="cntSecs">20</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Detik</span>
+</div>
+</div>
+</div>
+<!-- 4. Interactive Quick Action Cards (2x2 Grid) -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-space-xs">
+<h3 class="font-title-md text-title-md text-on-surface">Ruang Refleksi &amp; Rasa</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pilih untuk Mendengar</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Card 1 -->
+<button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" onclick="showFeedback('Menyalakan hembusan angin &amp; ketenangan alam...')" type="button">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary mb-space-sm">
+<span class="material-symbols-outlined text-[20px]">air</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">🍃 Daun &amp; Ketenangan</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Suara relaksasi</span>
+</button>
+<!-- Card 2 -->
+<button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" onclick="showFeedback('Membuka surat ketulusan hati untuk Cindy...')" type="button">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-space-sm">
+<span class="material-symbols-outlined text-[20px]">mark_email_read</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">📜 Surat Tulus</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Untuk bahagiamu</span>
+</button>
+<!-- Card 3 -->
+<button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" onclick="showFeedback('Meresapi kedewasaan dalam melepaskan...')" type="button">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary mb-space-sm">
+<span class="material-symbols-outlined text-[20px]">spa</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">🕊️ Alasan &amp; Dewasa</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Paham &amp; melepaskan</span>
+</button>
+<!-- Card 4 -->
+<button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" onclick="showFeedback('Memutar melodi kenangan terindah...')" type="button">
+<div class="w-10 h-10 rounded-full bg-secondary-container/40 flex items-center justify-center text-on-secondary-container mb-space-sm">
+<span class="material-symbols-outlined text-[20px]">perm_media</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">📷 Foto &amp; Lagu</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Ganti memori</span>
+</button>
+</div>
+</div>
+<!-- Interactive Action Toast Notice -->
+<div class="hidden transition-all duration-300 py-space-xs px-space-md rounded-full bg-surface-container-highest text-primary font-body-sm text-body-sm text-center shadow-sm border border-outline-variant/30" id="actionToast"></div>
+<!-- 5. Highlight Banner to Room Chat -->
+<a class="relative overflow-hidden rounded-xl bg-gradient-to-r from-surface-container-low to-surface-container p-space-md shadow-sm border border-outline-variant/40 hover:bg-surface-container-high active:scale-[0.98] transition-all flex items-center justify-between gap-space-md group" data-path="room-chat" href="#">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 shadow-sm border border-primary/10">
+<span class="material-symbols-outlined text-[22px]">forum</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Arsip Chat Kenangan</span>
+<span class="px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold">4 Pesan</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">
+          Percakapan tersimpan rapi di tab sebelah 💬
+        </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center text-primary shrink-0 group-hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</a>
+<!-- 6. Closing Quote Card -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm border border-outline-variant/30 mb-space-sm">
+<div class="flex flex-col gap-space-sm text-center items-center">
+<span class="material-symbols-outlined text-primary text-[24px] opacity-75" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<p class="font-headline-sm text-headline-sm text-on-surface italic max-w-sm leading-relaxed font-serif">
+        “Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia. Even with no contact, my prayers and love are always with you. 🕊️🤍”
+      </p>
+<div class="flex items-center justify-center gap-space-xs mt-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-label-sm text-label-sm tracking-wider uppercase font-medium">Ruang Kenangan Hati • Kota Kita</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple toast feedback for quick action cards
+  function showFeedback(msg) {
+    const toast = document.getElementById('actionToast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.remove('hidden');
+    clearTimeout(window._toastTimeout);
+    window._toastTimeout = setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 2500);
+  }
+
+  // Soft increment on second counter for living feel
+  (function() {
+    let s = 43;
+    const secEl = document.getElementById('cntSecs');
+    if (secEl) {
+      setInterval(() => {
+        s = (s + 1) % 60;
+        secEl.textContent = s < 10 ? '0' + s : s;
+      }, 1000);
+    }
+
+    // Heart Badge Micro-delight
+    const heartBtn = document.getElementById('heartGlowBtn');
+    if (heartBtn) {
+      heartBtn.addEventListener('click', () => {
+        showFeedback('Doa tulus berhembus lembut untuk Cindy... ♡');
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(157,32,67,0.05)]" data-active-classes="text-primary font-semibold"></nav>
+
+</body></html>

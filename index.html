@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿 (26 September 2026)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Erlang &amp; Cindy - Bahagiamu adalah Bahagiaku 🌿 (26 September 2026)</title>
   
   <!-- Primary Meta Tags -->
-  <meta name="title" content="Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿 (26 September 2026)">
+  <meta name="title" content="Erlang &amp; Cindy - Bahagiamu adalah Bahagiaku 🌿 (26 September 2026)">
   <meta name="description" content="Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Erlang happy kalau Cindy happy. Even with no contact, loving and wishing the best for you always 🍃.">
 
   <!-- Open Graph / Facebook / WhatsApp Preview Thumbnail -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cilang.netlify.app/">
   <meta property="og:site_name" content="CILANG APPS">
-  <meta property="og:title" content="Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿">
+  <meta property="og:title" content="Erlang &amp; Cindy - Bahagiamu adalah Bahagiaku 🌿">
   <meta property="og:description" content="Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya dengan ikhlas. Bahagiamu adalah bahagiaku juga. Tetep loving you even with no contact 🍃.">
   
-  <!-- WhatsApp Specific OG Image (Absolute URL, PNG & JPG, 1200x630) -->
+  <!-- WhatsApp Specific OG Image -->
   <meta property="og:image" content="https://cilang.netlify.app/assets/banner.png">
   <meta property="og:image:secure_url" content="https://cilang.netlify.app/assets/banner.png">
   <meta property="og:image:type" content="image/png">
@@ -24,16 +24,13 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="CILANG APPS">
 
-  <!-- Secondary JPG fallback for maximum WhatsApp compatibility -->
   <meta property="og:image" content="https://cilang.netlify.app/assets/banner.jpg">
   <meta property="og:image:secure_url" content="https://cilang.netlify.app/assets/banner.jpg">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
 
   <!-- Twitter Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Erlang & Cindy - Bahagiamu adalah Bahagiaku 🌿">
+  <meta name="twitter:title" content="Erlang &amp; Cindy - Bahagiamu adalah Bahagiaku 🌿">
   <meta name="twitter:description" content="Sebuah keikhlasan subuh 26 September 2026: Aku bahagia kalau kamu bahagia, tetep loving you even with no contact 🍃.">
   <meta name="twitter:image" content="https://cilang.netlify.app/assets/banner.png">
 
@@ -46,16 +43,108 @@
   <link rel="alternate icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
 
-  <!-- Google Fonts: Melancholic & Modern Aesthetic -->
+  <!-- Google Fonts: Serenade Romantic Aesthetic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800;900&family=Sacramento&display=swap" rel="stylesheet">
-  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Dancing+Script:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN with Serenade Custom Palette -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#1c1b1b",
+            "surface-variant": "#e5e2e0",
+            "background": "#fdf8f6",
+            "surface": "#fdf8f6",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed": "#400013",
+            "surface-container-high": "#ebe7e5",
+            "surface-container-low": "#f7f3f1",
+            "on-tertiary-fixed-variant": "#55433b",
+            "inverse-on-surface": "#f4f0ee",
+            "tertiary": "#634f47",
+            "primary-container": "#be3a5a",
+            "secondary": "#855239",
+            "on-error": "#ffffff",
+            "secondary-fixed": "#ffdbcc",
+            "surface-dim": "#ddd9d7",
+            "on-primary-container": "#ffe8e9",
+            "inverse-surface": "#31302f",
+            "tertiary-container": "#7c675e",
+            "surface-container-highest": "#e5e2e0",
+            "on-secondary-fixed": "#341101",
+            "secondary-container": "#fdba9c",
+            "on-surface-variant": "#574144",
+            "primary": "#9d2043",
+            "primary-fixed-dim": "#ffb2bd",
+            "on-primary-fixed-variant": "#8c1037",
+            "inverse-primary": "#ffb2bd",
+            "on-tertiary-container": "#ffe9e1",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f1edeb",
+            "on-primary": "#ffffff",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed": "#271812",
+            "on-secondary-container": "#794830",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#f9ddd2",
+            "outline": "#8b7073",
+            "outline-variant": "#debfc2",
+            "surface-tint": "#ad2d4e",
+            "primary-fixed": "#ffd9dd",
+            "tertiary-fixed-dim": "#dcc1b6",
+            "surface-bright": "#fdf8f6",
+            "on-surface": "#1c1b1b",
+            "secondary-fixed-dim": "#fab799",
+            "on-secondary-fixed-variant": "#693b24"
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "margin": "1.25rem",
+            "margin-md": "2rem",
+            "space-lg": "1.25rem",
+            "gutter": "1rem",
+            "space-xl": "2rem",
+            "space-md": "0.875rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "label-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "label-md": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg-mobile": ["Playfair Display", "serif"],
+            "headline-lg-mobile": ["Playfair Display", "serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-sm": ["Playfair Display", "serif"],
+            "title-md": ["Plus Jakarta Sans", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Playfair Display", "serif"],
+            "display-lg": ["Playfair Display", "serif"],
+            "headline-md": ["Playfair Display", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-background font-body-md text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed">
 
-  <!-- Background Video: Lush Nature Garden & Trees -->
+  <!-- Background Video: Subtle Lush Nature Garden -->
   <div class="video-bg-container" id="videoBgContainer">
     <video class="bg-video" autoplay loop muted playsinline poster="assets/garden-poster.jpg" id="bgVideo">
       <source src="assets/garden.mp4" type="video/mp4">
@@ -66,19 +155,6 @@
   <!-- Background Animated Canvas (Gentle Falling Leaves & Golden Sunlight Orbs) -->
   <canvas id="loveCanvas"></canvas>
 
-  <!-- Sound Toggle & Sad Music Player Floating Widget -->
-  <div class="music-player-widget" id="musicPlayer">
-    <div class="vinyl-disc" id="vinylDisc" title="Klik untuk Putar/Jeda Melodi Ketenangan">
-      <div class="vinyl-groove"></div>
-      <div class="vinyl-center">🌿</div>
-    </div>
-    <div class="music-info">
-      <span class="music-title" id="musicTitle">Melodi Ketenangan Alam 🍃</span>
-      <span class="music-status" id="musicStatus">Doa tulus untuk bahagiamu ✨</span>
-    </div>
-    <button class="music-btn" id="playBtn" aria-label="Play/Pause">▶</button>
-  </div>
-
   <!-- Hidden Custom Audio Tag for user-provided MP3 -->
   <audio id="bgmAudio" loop preload="none">
     <source src="assets/music.mp3" type="audio/mpeg">
@@ -88,6 +164,13 @@
   <!-- Hidden Container for YouTube Background Audio Player (Seamless Cross-Device Sync) -->
   <div id="ytPlayerContainer" style="position:fixed;width:1px;height:1px;left:-9999px;top:-9999px;opacity:0.001;pointer-events:none;z-index:-10;"></div>
 
+  <!-- Hidden compatibility elements to support all script.js listeners -->
+  <div id="vinylDisc" style="display:none;"></div>
+  <span id="musicStatus" style="display:none;"></span>
+  <strong id="activeSongName" style="display:none;">Melodi Ketenangan Alam 🍃</strong>
+  <div id="badgeStoryText" style="display:none;"></div>
+  <img src="assets/boy-placeholder.svg" id="waAvatarBoy" alt="Erlang" style="display:none;">
+
   <!-- Welcome / Entrance Curtain (Membuka Cerita & Mengaktifkan Audio Browser) -->
   <div class="curtain-overlay" id="curtainOverlay">
     <div class="curtain-card">
@@ -95,203 +178,473 @@
       <h2>26 September 2026, Sebuah Keikhlasan...</h2>
       <p>"Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia. Even with no contact, loving and wishing the best for you always 🍃."</p>
       <button class="btn-primary" id="openCurtainBtn">
-        <span>Buka Hati &amp; Masuki Taman Damai 🕊️</span>
+        <span>Buka Hati &amp; Masuki Ruang Kenangan 🕊️</span>
       </button>
     </div>
   </div>
 
-  <!-- Main Single-View Responsive Container -->
-  <main class="main-wrapper" id="mainWrapper">
-    <div class="glass-card main-card">
+  <!-- TOP FIXED HEADER: Pemutar Musik, Judul Pasangan, & Tab Navigation -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_4px_24px_rgba(157,32,67,0.06)] border-b border-outline-variant/30">
+    <div class="px-gutter flex flex-col justify-between py-space-sm gap-2.5 max-w-2xl mx-auto">
       
-      <!-- Top Decorative Ribbon / Tag -->
-      <div class="top-tag">
-        <span class="sparkle">🌿</span>
-        <span id="badgeStoryText">Doa Tulus untuk Cindy • Bahagiamu Adalah Bahagiaku 🍃</span>
-        <span class="sparkle">✨</span>
+      <!-- 1. Background Music Bar -->
+      <div class="flex items-center justify-between gap-space-sm bg-surface-container-low px-space-md py-1.5 rounded-full border border-outline-variant/40 shadow-sm cursor-pointer" id="musicPlayer">
+        <div class="flex items-center gap-space-sm min-w-0 flex-1">
+          <span class="material-symbols-outlined text-primary text-[18px] animate-pulse" id="musicBarIcon">music_note</span>
+          <div class="flex items-center gap-space-xs min-w-0">
+            <span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider bg-primary-fixed px-1.5 py-0.5 rounded-full">Latar</span>
+            <span class="font-body-sm text-body-sm text-on-surface truncate" id="musicTitle">Melodi Ketenangan Alam 🍃</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-space-xs shrink-0">
+          <button type="button" aria-label="Loop status" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-[17px]">repeat</span>
+          </button>
+          <button type="button" aria-label="Putar atau jeda musik" class="w-8 h-8 flex items-center justify-center text-primary hover:text-primary-container transition-colors" id="playBtn">
+            <span class="material-symbols-outlined text-[20px]" id="playBtnIcon">pause_circle</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Header Title -->
-      <header class="card-header">
-        <h1 class="couple-title">
-          <span class="name-text" id="nameBoy">Erlangga</span>
-          <span class="heart-icon-beat nature" id="centerBeatHeart" title="Ketulusan dan doa yang tak pernah pudar 💚">💚</span>
-          <span class="name-text" id="nameGirl">Cindy</span>
-        </h1>
-        <p class="subtitle-text" id="typewriterText">"Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia 🌿"</p>
-      </header>
-
-      <!-- Interactive Photo Showcase Section -->
-      <section class="photo-section">
-        
-        <!-- Left Photo: Erlang -->
-        <div class="photo-frame-wrapper boy-frame" id="boyFrame">
-          <div class="photo-frame" title="Klik untuk memperbesar & melihat foto Erlang!">
-            <img src="assets/boy-placeholder.svg" alt="Foto Erlang" class="couple-img" id="imgBoy" loading="lazy">
-            <div class="photo-overlay">
-              <span class="tap-hint">🔍 Lihat Foto Erlang 🌿</span>
-            </div>
+      <!-- 2. Couple Title & Subtitle with Profile Settings Icon -->
+      <div class="flex items-center justify-between gap-space-md px-space-xs">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-space-xs">
+            <span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate tracking-tight font-['Playfair_Display']">
+              <span id="nameBoy">Erlangga</span> &amp; <span id="nameGirl">Cindy</span> ♡
+            </span>
+            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
           </div>
-          <div class="name-badge">
-            <span id="labelBoy">Erlang (Belajar Ikhlas) 🍃</span>
-          </div>
-        </div>
-
-        <!-- Center Broken Heart Connector & Emblem -->
-        <div class="love-connector">
-          <div class="connector-line"></div>
-          <div class="heart-circle nature-emblem" id="interactiveHeartEmblem" title="Klik untuk semilir ketenangan hati!">
-            <span class="big-heart">💚</span>
-            <span class="sparkle-ring"></span>
-          </div>
-          <div class="connector-line"></div>
-          <span class="forever-tag">Ikhlas &amp; Tulus</span>
-        </div>
-
-        <!-- Right Photo: Cindy -->
-        <div class="photo-frame-wrapper girl-frame" id="girlFrame">
-          <div class="photo-frame" title="Klik untuk memperbesar & melihat foto Cindy!">
-            <img src="assets/girl-placeholder.svg" alt="Foto Cindy" class="couple-img" id="imgGirl" loading="lazy">
-            <div class="photo-overlay">
-              <span class="tap-hint">🔍 Lihat Foto Cindy 🌻</span>
-            </div>
-          </div>
-          <div class="name-badge">
-            <span id="labelGirl">Cindy (Semoga Bahagia) ✨</span>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- Milestone Highlight: 2 JULI (AWAL DM) S/D 26 SEPTEMBER (STOP KOMUNIKASI) -->
-      <section class="milestone-section">
-        
-        <!-- Dua Tanggal Dibuat Beda (Timeline Visual) -->
-        <div class="timeline-date-wrapper">
-          <!-- Tanggal 1: Awal Mula DM di IG -->
-          <div class="timeline-card timeline-card-start">
-            <span class="timeline-badge-pill pill-start">💌 Awal Mula DM di IG</span>
-            <div class="timeline-date-val date-val-start">2 Juli 2026</div>
-            <span class="timeline-hint">Pertama kali kenal &amp; cerita malam 🌿</span>
-          </div>
-
-          <!-- Divider / Penghubung Rentang Waktu -->
-          <div class="timeline-connector">
-            <span class="timeline-connector-line"></span>
-            <span class="timeline-duration-badge">86 Hari Cerita Kita 🍃</span>
-            <span class="timeline-connector-line"></span>
-          </div>
-
-          <!-- Tanggal 2: Ikhlas Mendoakan Cindy Hari Ini -->
-          <div class="timeline-card timeline-card-end">
-            <span class="timeline-badge-pill pill-end">🕊️ Ikhlas &amp; Mendoakanmu (Hari Ini)</span>
-            <div class="timeline-date-val date-val-end" id="dateText">26 September 2026</div>
-            <span class="timeline-hint">Fase no contact, tapi doa tulus tetap mengalir 💚</span>
-          </div>
-        </div>
-
-        <!-- Interactive Counter (Waktu Terus Bertambah dengan Warna Hari Berbeda) -->
-        <div class="counter-container">
-          <p class="counter-title">
-            <span class="live-pulse-dot"></span> Waktu terus berjalan sejak kita pertama saling kenal pada 2 Juli:
+          <p class="font-body-sm text-body-sm text-on-surface-variant truncate italic font-serif" id="typewriterText">
+            "Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia 🌿"
           </p>
-          <div class="counter-grid">
-            <div class="counter-box counter-box-highlight">
-              <span class="counter-number counter-number-days" id="countDays">86</span>
-              <span class="counter-label counter-label-days">Hari</span>
+        </div>
+        <button type="button" class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center shrink-0 border border-primary/20 shadow-sm text-primary hover:scale-105 active:scale-95 transition-all" id="settingsBtn" title="Ganti Foto &amp; Lagu">
+          <span class="material-symbols-outlined text-[18px]">person</span>
+        </button>
+      </div>
+
+      <!-- 3. Top Tab Navigation Bar (Slide 1 vs Slide 2) -->
+      <nav class="bg-surface-container-high/70 p-1 rounded-full flex items-center gap-1 border border-outline-variant/30 shadow-inner">
+        <button type="button" id="tabBerandaBtn" class="flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full transition-all duration-200 min-h-[40px] bg-surface-container-lowest text-primary shadow-sm font-semibold">
+          <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+          <span class="font-label-md text-label-md tracking-normal">Beranda Kenangan</span>
+        </button>
+        <button type="button" id="tabRoomChatBtn" class="flex-1 flex items-center justify-center gap-space-xs py-2 px-space-md rounded-full text-on-surface-variant hover:text-on-surface transition-all duration-200 min-h-[40px] relative">
+          <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+          <span class="font-label-md text-label-md tracking-normal">Room Chat</span>
+          <span id="chatBadgeCount" class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-sm">0</span>
+        </button>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER (TABS SEBELAH BERDAMPINGAN) -->
+  <main class="flex flex-col relative w-full px-margin pt-44 pb-28 min-h-screen max-w-2xl mx-auto">
+    
+    <!-- =========================================================================
+         TAB 1: BERANDA KENANGAN (Slide 1)
+         ========================================================================= -->
+    <section id="tabBeranda" class="tab-pane flex flex-col w-full gap-space-lg">
+      
+      <!-- 1. Couple Avatars Header Card with Ambient Romantic Glow -->
+      <div class="relative w-full overflow-hidden rounded-xl bg-gradient-to-b from-surface-container-lowest to-surface-container-low p-space-lg shadow-sm border border-outline-variant/40">
+        <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-secondary-fixed/50 blur-3xl pointer-events-none"></div>
+        
+        <div class="relative z-10 flex flex-col items-center gap-space-md">
+          <div class="flex items-center justify-between w-full max-w-sm px-space-xs">
+            
+            <!-- Erlang Card -->
+            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-space-xs cursor-pointer group" id="boyFrame">
+              <div class="relative photo-frame" title="Klik untuk melihat foto Erlang!">
+                <div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 ring-primary-fixed-dim/70 shadow-md group-hover:scale-105 transition-transform">
+                  <img class="w-full h-full object-cover rounded-full couple-img" id="imgBoy" src="assets/boy-placeholder.svg" alt="Foto Erlang" loading="lazy">
+                </div>
+                <div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
+                  <span class="material-symbols-outlined text-secondary text-[14px]">eco</span>
+                </div>
+              </div>
+              <span class="font-title-md text-title-md text-on-surface font-semibold">Erlang</span>
+              <span class="font-label-sm text-label-sm text-secondary px-space-xs py-0.5 rounded-full bg-secondary-fixed/50 font-medium" id="labelBoy">Belajar Ikhlas 🍃</span>
             </div>
-            <div class="counter-box">
-              <span class="counter-number" id="countHours">00</span>
-              <span class="counter-label">Jam</span>
+
+            <!-- Center Glowing Heart Badge -->
+            <div class="flex flex-col items-center gap-1 cursor-pointer" id="centerBeatHeart" title="Ikhlas &amp; Tulus">
+              <div class="relative group flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest border border-outline-variant/40 shadow-sm active:scale-95 transition-all" id="interactiveHeartEmblem">
+                <span class="material-symbols-outlined text-primary text-[22px] animate-pulse" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                <div class="absolute -inset-1 rounded-full bg-primary-fixed/40 blur-sm pointer-events-none"></div>
+              </div>
+              <span class="font-label-sm text-label-sm text-primary tracking-wider font-semibold uppercase text-center mt-1">IKHLAS &amp; TULUS</span>
             </div>
-            <div class="counter-box">
-              <span class="counter-number" id="countMinutes">00</span>
-              <span class="counter-label">Menit</span>
+
+            <!-- Cindy Card -->
+            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-space-xs cursor-pointer group" id="girlFrame">
+              <div class="relative photo-frame" title="Klik untuk melihat foto Cindy!">
+                <div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 ring-primary-fixed-dim/70 shadow-md group-hover:scale-105 transition-transform">
+                  <img class="w-full h-full object-cover rounded-full couple-img" id="imgGirl" src="assets/girl-placeholder.svg" alt="Foto Cindy" loading="lazy">
+                </div>
+                <div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
+                  <span class="material-symbols-outlined text-primary text-[14px]">auto_awesome</span>
+                </div>
+              </div>
+              <span class="font-title-md text-title-md text-on-surface font-semibold">Cindy</span>
+              <span class="font-label-sm text-label-sm text-primary px-space-xs py-0.5 rounded-full bg-primary-fixed/50 font-medium" id="labelGirl">Semoga Bahagia ✨</span>
             </div>
-            <div class="counter-box">
-              <span class="counter-number" id="countSeconds">00</span>
-              <span class="counter-label">Detik</span>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Perjalanan Cerita & Linimasa Hati -->
+      <div class="flex flex-col gap-space-md bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/30 relative overflow-hidden">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-primary text-[20px]">timeline</span>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold font-['Playfair_Display']">Linimasa Hati</h2>
+          </div>
+          <div class="flex items-center gap-1 px-space-md py-1 rounded-full bg-primary-fixed/60 text-primary border border-primary/20">
+            <span class="material-symbols-outlined text-[14px]">calendar_today</span>
+            <span class="font-label-sm text-label-sm font-semibold">86 Hari Cerita Kita</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-space-md relative mt-space-xs">
+          <!-- Milestone 1 -->
+          <div class="flex items-start gap-space-md relative">
+            <div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center shrink-0 border border-outline-variant/40 mt-0.5">
+              <span class="material-symbols-outlined text-primary text-[18px]">chat_bubble_outline</span>
+            </div>
+            <div class="flex flex-col min-w-0 flex-1">
+              <div class="flex items-center justify-between">
+                <span class="font-label-md text-label-md text-on-surface font-semibold">Awal Mula DM di IG</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">2 Juli 2026</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Pertama kali kenal &amp; cerita malam berdua yang tak terlupakan 🍃
+              </p>
+            </div>
+          </div>
+
+          <!-- Connector Dot Line Visual -->
+          <div class="ml-4 w-0.5 h-6 bg-outline-variant/40"></div>
+
+          <!-- Milestone 2 -->
+          <div class="flex items-start gap-space-md relative">
+            <div class="w-9 h-9 rounded-full bg-primary-fixed/50 flex items-center justify-center shrink-0 border border-primary/20 mt-0.5">
+              <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            </div>
+            <div class="flex flex-col min-w-0 flex-1">
+              <div class="flex items-center justify-between">
+                <span class="font-label-md text-label-md text-on-surface font-semibold">Fase Ikhlas &amp; Mendoakanmu</span>
+                <span class="font-label-sm text-label-sm text-primary font-medium" id="dateText">26 Sept 2026</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Fase no contact, namun untaian doa tulus tetap mengalir tenang untukmu 🤍
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Interactive Buttons Action Bar -->
-      <footer class="interactive-actions">
-        <button class="action-btn btn-tears" id="sendLoveBtn">
-          <span class="btn-icon">🍃</span>
-          <span class="btn-text">Angin &amp; Daun Ketenangan</span>
-        </button>
+      <!-- 3. Counter Hari & Jam Cinta -->
+      <div class="flex flex-col gap-space-sm bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/30">
+        <div class="flex items-center gap-space-xs">
+          <span class="material-symbols-outlined text-secondary text-[18px]">hourglass_bottom</span>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Waktu terus berjalan sejak kita pertama saling kenal pada <span class="text-on-surface font-semibold">2 Juli</span>:
+          </p>
+        </div>
 
-        <button class="action-btn btn-letter" id="openLetterBtn">
-          <span class="btn-icon">📜</span>
-          <span class="btn-text">Surat: Untuk Bahagiamu</span>
-        </button>
-
-        <button class="action-btn btn-reasons" id="reasonsBtn">
-          <span class="btn-icon">🕊️</span>
-          <span class="btn-text">Alasan &amp; Kedewasaan</span>
-        </button>
-
-        <button class="action-btn btn-settings" id="settingsBtn" title="Ganti Foto Erlang, Cindy & Lagu MP3">
-          <span class="btn-icon">📷</span>
-          <span class="btn-text">Ganti Foto &amp; Lagu</span>
-        </button>
-      </footer>
-
-      <!-- WHATSAPP CHAT BERDUA SECTION (Langsung Tampil di Bawah, Scrollable & Realtime) -->
-      <section class="wa-chat-section" id="waChatSection">
-        <div class="wa-chat-card">
-          
-          <!-- WhatsApp Contact Bar (Obrolan Berdua Erlang & Cindy) -->
-          <div class="wa-header">
-            <div class="wa-contact-info">
-              <div class="wa-avatar-box wa-avatar-duo" title="Obrolan Berdua: Erlang & Cindy">
-                <img src="assets/boy-placeholder.svg" alt="Erlang" class="wa-avatar-img wa-avatar-boy" id="waAvatarBoy" title="Erlang" loading="lazy">
-                <img src="assets/girl-placeholder.svg" alt="Cindy" class="wa-avatar-img wa-avatar-girl" id="waAvatarGirl" title="Cindy" loading="lazy">
-                <span class="wa-online-dot"></span>
-              </div>
-              <div class="wa-name-wrapper">
-                <span class="wa-contact-name" id="waContactName">Erlang &amp; Cindy 🌿</span>
-                <span class="wa-status-text" id="waStatusText">online • Doa &amp; Ketulusan</span>
-              </div>
-            </div>
+        <!-- 4 Glass Romantic Counter Cards -->
+        <div class="grid grid-cols-4 gap-space-xs mt-space-xs" id="memoryCounter">
+          <div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+            <span class="font-headline-sm text-headline-sm text-primary font-semibold" id="countDays">86</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Hari</span>
           </div>
-
-          <!-- WhatsApp Chat Messages Scrollable Box -->
-          <div class="wa-messages-box" id="waMessagesBox">
-            <div class="wa-date-pill">
-              <span>📅 26 SEPTEMBER 2026 • SEBUAH KEIKHLASAN &amp; DOA TERBAIK 🌿</span>
-            </div>
-
-            <!-- Chat messages stream here -->
-            <div class="wa-messages-list" id="waMessagesList"></div>
-            <div id="waChatBottomAnchor" class="wa-bottom-anchor"></div>
+          <div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+            <span class="font-headline-sm text-headline-sm text-primary font-semibold" id="countHours">00</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Jam</span>
           </div>
+          <div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+            <span class="font-headline-sm text-headline-sm text-primary font-semibold" id="countMinutes">00</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Menit</span>
+          </div>
+          <div class="flex flex-col items-center justify-center py-2.5 px-space-xs rounded-lg bg-surface-container-low border border-outline-variant/30 shadow-none">
+            <span class="font-headline-sm text-headline-sm text-secondary font-semibold" id="countSeconds">00</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Detik</span>
+          </div>
+        </div>
+      </div>
 
-          <!-- Floating Jump to Bottom Button (Like WhatsApp) -->
-          <button type="button" class="wa-jump-bottom-btn" id="waJumpBottomBtn" title="Kembali ke pesan terbaru" aria-label="Ke Pesan Terbaru">
-            <span>↓ Pesan Terbaru</span>
+      <!-- 4. Interactive Quick Action Cards (2x2 Grid) -->
+      <div class="flex flex-col gap-space-xs">
+        <div class="flex items-center justify-between px-space-xs">
+          <h3 class="font-title-md text-title-md text-on-surface font-semibold font-['Playfair_Display']">Ruang Refleksi &amp; Rasa</h3>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">Pilih untuk Mendengar</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-space-sm">
+          <!-- Card 1: Daun & Ketenangan -->
+          <button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" id="sendLoveBtn" type="button">
+            <div class="w-10 h-10 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary mb-space-sm">
+              <span class="material-symbols-outlined text-[20px]">air</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">🍃 Daun &amp; Ketenangan</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Hembusan damai</span>
           </button>
 
-          <!-- WhatsApp Action Footer (Button Tambah Pesan) -->
-          <div class="wa-chat-footer">
-            <button type="button" class="btn-primary wa-btn-add-message" id="waOpenAddModalBtn">
-              <span class="btn-icon">💬</span>
-              <span>Tambah Pesan</span>
+          <!-- Card 2: Surat Tulus -->
+          <button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" id="openLetterBtn" type="button">
+            <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-space-sm">
+              <span class="material-symbols-outlined text-[20px]">mark_email_read</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">📜 Surat Tulus</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Untuk bahagiamu</span>
+          </button>
+
+          <!-- Card 3: Alasan & Dewasa -->
+          <button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" id="reasonsBtn" type="button">
+            <div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary mb-space-sm">
+              <span class="material-symbols-outlined text-[20px]">spa</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">🕊️ Alasan &amp; Dewasa</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Paham &amp; ikhlas</span>
+          </button>
+
+          <!-- Card 4: Ganti Foto & Lagu -->
+          <button class="flex flex-col text-left p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/35 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" id="openSettingsCardBtn" type="button">
+            <div class="w-10 h-10 rounded-full bg-secondary-container/40 flex items-center justify-center text-on-secondary-container mb-space-sm">
+              <span class="material-symbols-outlined text-[20px]">perm_media</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">📷 Foto &amp; Lagu</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Ganti kenangan</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Toast Notice Feedback -->
+      <div class="hidden transition-all duration-300 py-space-xs px-space-md rounded-full bg-surface-container-highest text-primary font-body-sm text-body-sm text-center shadow-sm border border-outline-variant/30" id="actionToast"></div>
+
+      <!-- 5. Highlight Banner to Room Chat (Transisi ke Tab Sebelah) -->
+      <button type="button" class="w-full text-left relative overflow-hidden rounded-xl bg-gradient-to-r from-surface-container-low to-surface-container p-space-md shadow-sm border border-outline-variant/40 hover:bg-surface-container-high active:scale-[0.98] transition-all flex items-center justify-between gap-space-md group" id="bannerToChatBtn">
+        <div class="flex items-center gap-space-md min-w-0">
+          <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 shadow-sm border border-primary/10">
+            <span class="material-symbols-outlined text-[22px]">forum</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <div class="flex items-center gap-space-xs">
+              <span class="font-label-md text-label-md text-on-surface font-semibold truncate">Arsip Chat Kenangan</span>
+              <span class="px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold" id="bannerChatCount">0 Pesan</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">
+              Percakapan tersimpan rapi di tab sebelah 💬
+            </p>
+          </div>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-center text-primary shrink-0 group-hover:translate-x-1 transition-transform">
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </div>
+      </button>
+
+      <!-- 6. Closing Romantic Quote Card -->
+      <div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm border border-outline-variant/30 mb-space-sm">
+        <div class="flex flex-col gap-space-sm text-center items-center">
+          <span class="material-symbols-outlined text-primary text-[24px] opacity-75" style="font-variation-settings: 'FILL' 1;">favorite</span>
+          <p class="font-headline-sm text-headline-sm text-on-surface italic max-w-sm leading-relaxed font-serif">
+            “Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia. Even with no contact, my prayers and love are always with you. 🕊️🤍”
+          </p>
+          <div class="flex items-center justify-center gap-space-xs mt-space-xs text-on-surface-variant">
+            <span class="material-symbols-outlined text-[14px]">location_on</span>
+            <span class="font-label-sm text-label-sm tracking-wider uppercase font-medium">Ruang Kenangan Hati • Kota Kita</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         TAB 2: ROOM CHAT (Slide 2 - Tab Sebelah)
+         ========================================================================= -->
+    <section id="tabRoomChat" class="tab-pane hidden flex flex-col w-full gap-3">
+      
+      <!-- Interactive Ambient Particles Layer -->
+      <div class="fixed inset-0 pointer-events-none z-30 overflow-hidden" id="chat-heart-canvas"></div>
+
+      <!-- 1. Chat Partner Header Bar (Warm Romantic Glass Card) -->
+      <div class="flex items-center justify-between gap-space-sm bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-2.5 rounded-lg border border-outline-variant/30 shadow-sm">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="relative shrink-0 cursor-pointer" id="waPartnerAvatarFrame" title="Lihat foto Cindy">
+            <div class="w-11 h-11 rounded-full overflow-hidden bg-primary-fixed ring-2 ring-primary/20 shadow-sm">
+              <img class="w-full h-full object-cover" id="waAvatarGirl" src="assets/girl-placeholder.svg" alt="Cindy">
+            </div>
+            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest shadow-sm"></span>
+          </div>
+          <div class="min-w-0 flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-title-md text-[17px] text-on-surface font-semibold truncate" id="waContactName">Cindy 🐱</span>
+              <span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <p class="font-label-sm text-[11px] text-primary font-medium truncate" id="waStatusText">Online • Doa &amp; Ketulusan</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Action Bar -->
+        <div class="flex items-center gap-1 shrink-0">
+          <button type="button" aria-label="Panggil Suara Cindy" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-95 transition-all bg-surface-container-low" id="btn-call" title="Panggil Kenangan">
+            <span class="material-symbols-outlined text-[19px]">call</span>
+          </button>
+          <button type="button" aria-label="Cari Pesan Kenangan" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-95 transition-all bg-surface-container-low" id="btn-search-chat" title="Cari Pesan">
+            <span class="material-symbols-outlined text-[19px]">search</span>
+          </button>
+          <button type="button" aria-label="Simpan ke Kenangan Abadi" class="w-9 h-9 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed/60 active:scale-95 transition-all bg-primary-fixed/30" id="btn-heart-bookmark" title="Simpan Kenangan">
+            <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">bookmark_heart</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Pinned Message Banner (Pesan Tersemat ♡) -->
+      <div class="relative overflow-hidden bg-gradient-to-r from-primary-fixed/60 via-surface-container-lowest to-primary-fixed/30 border border-outline-variant/40 px-3.5 py-2 rounded-lg shadow-sm flex items-center justify-between gap-2.5 cursor-pointer" id="pinnedBanner">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings: 'FILL' 1;">keep</span>
+          <div class="min-w-0 flex flex-col">
+            <span class="font-label-sm text-[10px] text-primary font-bold tracking-wider uppercase">PESAN TERSEMAT ♡</span>
+            <p class="font-body-sm text-[13px] text-on-surface truncate italic font-serif">"i love you (today is national boyfriend day)" — 10 Okt 2026</p>
+          </div>
+        </div>
+        <button type="button" aria-label="Lihat pesan tersimpan" class="shrink-0 text-on-surface-variant hover:text-primary p-1">
+          <span class="material-symbols-outlined text-[18px]">keyboard_arrow_right</span>
+        </button>
+      </div>
+
+      <!-- 3. Date Divider Badge -->
+      <div class="flex items-center justify-center my-1">
+        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/30 shadow-xs">
+          <span class="material-symbols-outlined text-primary text-[14px]">calendar_month</span>
+          <span class="font-label-md text-label-md text-on-surface-variant font-medium">10 Oktober 2026</span>
+        </div>
+      </div>
+
+      <!-- 4. Intimate Chat Bubble Stream (Scrollable container connected to Firebase!) -->
+      <div class="wa-chat-section flex flex-col relative w-full" id="waChatSection">
+        <div class="wa-messages-box max-h-[55vh] overflow-y-auto px-2 py-3 flex flex-col gap-3 rounded-xl border border-outline-variant/30 bg-surface-container-lowest/70 backdrop-blur-sm shadow-inner" id="waMessagesBox">
+          
+          <!-- Lazy loader indicator -->
+          <div class="wa-lazy-loader text-center text-xs text-on-surface-variant py-1" id="waLazyLoader"></div>
+          
+          <!-- Chat messages stream from Firebase -->
+          <div class="wa-messages-list flex flex-col gap-3" id="waMessagesList"></div>
+          
+          <!-- Bottom scroll anchor -->
+          <div id="waChatBottomAnchor"></div>
+        </div>
+
+        <!-- Floating jump to bottom button -->
+        <button type="button" class="wa-jump-bottom-btn" id="waJumpBottomBtn" title="Kembali ke pesan terbaru" aria-label="Ke Pesan Terbaru">
+          <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+          <span class="text-xs">Pesan Terbaru</span>
+        </button>
+      </div>
+
+      <!-- 5. Media Memory Snippet Card Preview (Kilatan Kenangan) -->
+      <div class="p-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col gap-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-primary text-[18px]">photo_spark</span>
+            <span class="font-title-md text-[15px] text-on-surface font-semibold font-['Playfair_Display']">Kilatan Kenangan Hari Ini</span>
+          </div>
+          <span class="font-label-sm text-[10px] text-primary font-bold uppercase tracking-wider bg-primary-fixed/60 px-2 py-0.5 rounded-full">Arsip 2026</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="relative rounded-DEFAULT overflow-hidden aspect-[4/3] group cursor-pointer border border-outline-variant/20 shadow-xs" onclick="spawnBurstHearts(window.innerWidth*0.3, window.innerHeight*0.7, 15)">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Kopi Temu Sore">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
+              <span class="font-label-sm text-[11px] text-white font-medium truncate">Kopi Temu Sore ☕</span>
+            </div>
+          </div>
+          <div class="relative rounded-DEFAULT overflow-hidden aspect-[4/3] group cursor-pointer border border-outline-variant/20 shadow-xs" onclick="spawnBurstHearts(window.innerWidth*0.7, window.innerHeight*0.7, 15)">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Bunga Sederhana">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
+              <span class="font-label-sm text-[11px] text-white font-medium truncate">Bunga Sederhana 🌿</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Quick Action Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar shrink-0">
+        <button type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap shrink-0 shadow-xs" id="quickAddMessageBtn">
+          <span class="material-symbols-outlined text-[16px]">bookmark_add</span>
+          <span class="font-label-md text-label-md">+ Tambah Pesan Kenangan</span>
+        </button>
+        <button type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap shrink-0 shadow-xs" id="quickSendPrayerBtn">
+          <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+          <span class="font-label-md text-label-md">💌 Kirim Doa Hening</span>
+        </button>
+      </div>
+
+      <!-- 7. Bottom Sticky Chat Input Dock -->
+      <div class="sticky bottom-20 z-40 bg-surface/95 backdrop-blur-xl p-1.5 rounded-full border border-outline-variant/40 shadow-lg mt-1">
+        <form class="flex items-center gap-1.5 w-full" id="chat-form">
+          <button type="button" aria-label="Ganti Pengirim" class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed active:scale-90 transition-all bg-surface-container-low shrink-0" id="chatRoleToggleBtn" title="Pengirim: Erlang (Klik untuk ganti Cindy)">
+            <span class="material-symbols-outlined text-[20px]" id="roleIcon">person</span>
+          </button>
+          
+          <div class="relative flex-1 min-w-0 flex items-center bg-surface-container-lowest rounded-full px-3.5 py-0.5 border border-outline-variant/30 shadow-inner">
+            <input autocomplete="off" class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-body-md py-1.5 min-w-0" id="chat-input" placeholder="Tulis pesan kenangan ♡" type="text">
+            <button type="button" aria-label="Pilih emoji cinta" class="text-primary hover:scale-125 transition-transform p-1 shrink-0" id="chatHeartBtn">
+              <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
             </button>
           </div>
 
-        </div>
-      </section>
+          <button type="button" aria-label="Form Modal Tambah Pesan" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-90 transition-all bg-surface-container-low shrink-0" id="waOpenAddModalBtn" title="Form Tambah Pesan Lengkap">
+            <span class="material-symbols-outlined text-[20px]">add</span>
+          </button>
 
-      <!-- Sweet Melancholic Footer Note -->
-      <div class="footer-note">
-        <span>"Mungkin bukan aku orang yang tepat untuk kamu pilih, dan aku menerimanya... Aku bahagia kalau kamu bahagia. Even with no contact, my prayers and love are always with you." 🌿</span>
+          <button type="submit" aria-label="Kirim Pesan" class="h-10 px-4 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all shrink-0 font-label-md text-label-md font-bold" id="btn-send-message">
+            <span>Kirim</span>
+            <span class="material-symbols-outlined text-[16px]">send</span>
+          </button>
+        </form>
       </div>
 
-    </div>
+    </section>
+
   </main>
+
+  <!-- FIXED BOTTOM NAVIGATION BAR (Slide 2) -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-4px_16px_rgba(157,32,67,0.04)]">
+    <div class="flex justify-around items-center h-16 px-space-md max-w-2xl mx-auto">
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-primary font-semibold transition-colors" id="bottomNavBerandaBtn">
+        <span class="material-symbols-outlined text-[22px]">home</span>
+        <span class="font-label-sm text-[10px]">Beranda</span>
+      </button>
+
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors relative" id="bottomNavChatBtn">
+        <span class="material-symbols-outlined text-[22px]">forum</span>
+        <span class="font-label-sm text-[10px]">Obrolan</span>
+        <span class="absolute top-2 right-4 w-2 h-2 rounded-full bg-primary ring-2 ring-surface"></span>
+      </button>
+
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" id="bottomNavLetterBtn">
+        <span class="material-symbols-outlined text-[22px]">auto_stories</span>
+        <span class="font-label-sm text-[10px]">Surat</span>
+      </button>
+
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" id="bottomNavSettingsBtn">
+        <span class="material-symbols-outlined text-[22px]">settings</span>
+        <span class="font-label-sm text-[10px]">Pengaturan</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       MODALS PRESERVED: PREVIEW, SURAT, ALASAN, SETTINGS, ADD MESSAGE
+       ========================================================================= -->
 
   <!-- Modal: Preview / Perbesar Foto & Ganti Foto Profil 🖼️ -->
   <div class="modal-backdrop" id="photoPreviewModal">
@@ -401,7 +754,7 @@
             <button type="button" class="btn-emoji-tag" data-emoji="🍃">🍃</button>
             <button type="button" class="btn-emoji-tag" data-emoji="💚">💚</button>
             <button type="button" class="btn-emoji-tag" data-emoji="🕊️">🕊️</button>
-            <button type="button" data-emoji="✨" class="btn-emoji-tag">✨</button>
+            <button type="button" class="btn-emoji-tag" data-emoji="✨">✨</button>
           </div>
         </div>
 
@@ -429,12 +782,6 @@
           <span class="badge-title">Pengaturan Lagu Latar</span>
         </div>
 
-        <!-- Current Active Song Indicator -->
-        <div class="current-song-badge" id="currentSongBadge">
-          <span class="badge-pulse-dot"></span>
-          <span class="badge-label-song">Lagu Aktif: <strong id="activeSongName">Melodi Ketenangan Alam 🍃</strong></span>
-        </div>
-
         <!-- Quick 1-Click Preset Songs -->
         <div class="preset-song-wrapper">
           <label class="form-sub-label">Pilihan Cepat Lagu Penenang (1-Klik Sync ke Semua Perangkat):</label>
@@ -460,7 +807,7 @@
                 <small>Hangat &amp; Menenangkan</small>
               </div>
             </button>
-            <button type="button" class="preset-song-btn" data-song-id="forest" data-song-name="Gemericik Air & Alam Damai 🕊️" data-song-url="https://cdn.pixabay.com/download/audio/2021/09/06/audio_924bb3e3cb.mp3?filename=forest-lullaby-110624.mp3">
+            <button type="button" class="preset-song-btn" data-song-id="forest" data-song-name="Gemericik Air &amp; Alam Damai 🕊️" data-song-url="https://cdn.pixabay.com/download/audio/2021/09/06/audio_924bb3e3cb.mp3?filename=forest-lullaby-110624.mp3">
               <span class="preset-btn-icon">🕊️</span>
               <div class="preset-btn-info">
                 <strong>Hutan &amp; Gemericik</strong>
@@ -503,16 +850,16 @@
         </div>
       </div>
 
+      <!-- Hidden direct file pickers for profile preview modal -->
+      <input type="file" id="directBoyFileInput" accept="image/*" style="display:none;">
+      <input type="file" id="directGirlFileInput" accept="image/*" style="display:none;">
+
       <div class="settings-actions">
-        <button class="btn-primary" id="saveSettingsBtn">Terapkan Perubahan 🌿</button>
-        <button class="btn-secondary" id="resetSettingsBtn">Reset ke Default</button>
+        <button type="button" class="btn-secondary" id="resetSettingsBtn">Kembalikan Default</button>
+        <button type="button" class="btn-primary" id="saveSettingsBtn">Simpan Pengaturan 🍃</button>
       </div>
     </div>
   </div>
-
-  <!-- Hidden Direct File Inputs triggered by camera icon on photo frames -->
-  <input type="file" id="directBoyFileInput" accept="image/*" style="display:none;">
-  <input type="file" id="directGirlFileInput" accept="image/*" style="display:none;">
 
   <script src="script.js"></script>
 </body>
