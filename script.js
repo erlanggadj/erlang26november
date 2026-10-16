@@ -80,6 +80,7 @@
 
   // --- DOM ELEMENTS & ACTIVE STATE ---
   let currentActiveUserRole = localStorage.getItem('cilang_active_role') || 'Erlang';
+  let currentChatSender = currentActiveUserRole;
 
   const curtainOverlay = document.getElementById('curtainOverlay');
   const openCurtainBtn = document.getElementById('openCurtainBtn');
@@ -169,6 +170,50 @@
   const inputGirlUrl = document.getElementById('inputGirlUrl');
   const inputSongFile = document.getElementById('inputSongFile');
   const inputSongUrl = document.getElementById('inputSongUrl');
+
+  // Tabs & Dedicated iOS Room Chat Elements
+  const tabBeranda = document.getElementById('tabBeranda');
+  const tabRoomChat = document.getElementById('tabRoomChat');
+  const tabBerandaBtn = document.getElementById('tabBerandaBtn');
+  const tabRoomChatBtn = document.getElementById('tabRoomChatBtn');
+  const bottomNavBerandaBtn = document.getElementById('bottomNavBerandaBtn');
+  const bottomNavChatBtn = document.getElementById('bottomNavChatBtn');
+  const bannerToChatBtn = document.getElementById('bannerToChatBtn');
+
+  // Role Selection Modal Elements
+  const roleSelectModal = document.getElementById('roleSelectModal');
+  const closeRoleSelectModalBtn = document.getElementById('closeRoleSelectModalBtn');
+  const modalChooseRoleErlang = document.getElementById('modalChooseRoleErlang');
+  const modalChooseRoleCindy = document.getElementById('modalChooseRoleCindy');
+  const roleModalImgBoy = document.getElementById('roleModalImgBoy');
+  const roleModalImgGirl = document.getElementById('roleModalImgGirl');
+  const chatBackToBerandaBtn = document.getElementById('chatBackToBerandaBtn');
+  const chatHeaderSwitchRoleBtn = document.getElementById('chatHeaderSwitchRoleBtn');
+
+  // iOS Room Chat Header & Sticky Input Dock Elements
+  const waPartnerHeaderAvatar = document.getElementById('waPartnerHeaderAvatar');
+  const waContactName = document.getElementById('waContactName');
+  const waStatusText = document.getElementById('waStatusText');
+  const waPartnerAvatarFrame = document.getElementById('waPartnerAvatarFrame');
+  const bottomChatForm = document.getElementById('chat-form');
+  const bottomChatInput = document.getElementById('chat-input');
+  const chatRoleToggleBtn = document.getElementById('chatRoleToggleBtn');
+  const roleIcon = document.getElementById('roleIcon');
+  const chatHeartBtn = document.getElementById('chatHeartBtn');
+  const chatRoleSelectorPanel = document.getElementById('chatRoleSelectorPanel');
+  const chatInputPanel = document.getElementById('chatInputPanel');
+  const currentRoleBadge = document.getElementById('currentRoleBadge');
+  const btnChooseErlang = document.getElementById('btnChooseErlang');
+  const btnChooseCindy = document.getElementById('btnChooseCindy');
+  const btnChangeRole = document.getElementById('btnChangeRole');
+  const quickAddMessageBtn = document.getElementById('quickAddMessageBtn');
+  const quickSendPrayerBtn = document.getElementById('quickSendPrayerBtn');
+  const btnCall = document.getElementById('btn-call');
+  const btnSearchChat = document.getElementById('btn-search-chat');
+  const btnHeartBookmark = document.getElementById('btn-heart-bookmark');
+  const pinnedBanner = document.getElementById('pinnedBanner');
+  const appHeader = document.getElementById('appHeader');
+  const bottomNavBar = document.getElementById('bottomNavBar');
 
   // --- AUDIO SYNTHESIZER (Melancholic Sad Piano / Music Box) ---
   let audioCtx = null;
@@ -2120,24 +2165,34 @@
     }
   });
 
-  // --- TABS SWITCHING ENGINE & ROLE SELECT MODAL (BERANDA vs FULL-SCREEN IOS ROOM CHAT) ---
-  const tabBeranda = document.getElementById('tabBeranda');
-  const tabRoomChat = document.getElementById('tabRoomChat');
-  const tabBerandaBtn = document.getElementById('tabBerandaBtn');
-  const tabRoomChatBtn = document.getElementById('tabRoomChatBtn');
-  const bottomNavBerandaBtn = document.getElementById('bottomNavBerandaBtn');
-  const bottomNavChatBtn = document.getElementById('bottomNavChatBtn');
-  const bannerToChatBtn = document.getElementById('bannerToChatBtn');
+  // --- ROOM CHAT SENDER ROLE CONTROLLER ---
+  function selectSenderRole(role, shouldFocusAndPlaySfx = false) {
+    currentChatSender = role;
+    if (roleIcon) {
+      roleIcon.textContent = (role === 'Erlang') ? 'person' : 'face_3';
+    }
+    if (currentRoleBadge) {
+      currentRoleBadge.textContent = (role === 'Erlang') ? 'Erlang 🍃' : 'Cindy ✨';
+    }
+    if (bottomChatInput) {
+      bottomChatInput.placeholder = `Tulis pesan sebagai ${role}...`;
+    }
+    if (chatRoleToggleBtn) {
+      chatRoleToggleBtn.setAttribute('title', `Pengirim: ${role} (Klik untuk ganti)`);
+    }
+    if (chatRoleSelectorPanel) chatRoleSelectorPanel.classList.add('hidden');
+    if (chatInputPanel) chatInputPanel.classList.remove('hidden');
+    if (shouldFocusAndPlaySfx) {
+      if (bottomChatInput) bottomChatInput.focus();
+      playClickSfx(role === 'Erlang');
+    }
+  }
 
-  // Role Selection Modal Elements
-  const roleSelectModal = document.getElementById('roleSelectModal');
-  const closeRoleSelectModalBtn = document.getElementById('closeRoleSelectModalBtn');
-  const modalChooseRoleErlang = document.getElementById('modalChooseRoleErlang');
-  const modalChooseRoleCindy = document.getElementById('modalChooseRoleCindy');
-  const roleModalImgBoy = document.getElementById('roleModalImgBoy');
-  const roleModalImgGirl = document.getElementById('roleModalImgGirl');
-  const chatBackToBerandaBtn = document.getElementById('chatBackToBerandaBtn');
-  const chatHeaderSwitchRoleBtn = document.getElementById('chatHeaderSwitchRoleBtn');
+  function resetSenderRolePicker() {
+    if (chatInputPanel) chatInputPanel.classList.add('hidden');
+    if (chatRoleSelectorPanel) chatRoleSelectorPanel.classList.remove('hidden');
+    playClickSfx();
+  }
 
   function openRoleSelectModal() {
     if (roleModalImgBoy) {
@@ -2306,57 +2361,7 @@
     });
   }
 
-  // Direct Sticky Room Chat Input Engine (iOS Messages Style)
-  const bottomChatForm = document.getElementById('chat-form');
-  const bottomChatInput = document.getElementById('chat-input');
-  const chatRoleToggleBtn = document.getElementById('chatRoleToggleBtn');
-  const roleIcon = document.getElementById('roleIcon');
-  const chatHeartBtn = document.getElementById('chatHeartBtn');
-  const quickAddMessageBtn = document.getElementById('quickAddMessageBtn');
-  const quickSendPrayerBtn = document.getElementById('quickSendPrayerBtn');
-  const waPartnerAvatarFrame = document.getElementById('waPartnerAvatarFrame');
-  const btnCall = document.getElementById('btn-call');
-  const btnSearchChat = document.getElementById('btn-search-chat');
-  const btnHeartBookmark = document.getElementById('btn-heart-bookmark');
-  const pinnedBanner = document.getElementById('pinnedBanner');
-
-  let currentChatSender = currentActiveUserRole;
-
-  const chatRoleSelectorPanel = document.getElementById('chatRoleSelectorPanel');
-  const chatInputPanel = document.getElementById('chatInputPanel');
-  const btnChooseErlang = document.getElementById('btnChooseErlang');
-  const btnChooseCindy = document.getElementById('btnChooseCindy');
-  const btnChangeRole = document.getElementById('btnChangeRole');
-  const currentRoleBadge = document.getElementById('currentRoleBadge');
-
-  function selectSenderRole(role, shouldFocusAndPlaySfx = false) {
-    currentChatSender = role;
-    if (roleIcon) {
-      roleIcon.textContent = (role === 'Erlang') ? 'person' : 'face_3';
-    }
-    if (currentRoleBadge) {
-      currentRoleBadge.textContent = (role === 'Erlang') ? 'Erlang 🍃' : 'Cindy ✨';
-    }
-    if (bottomChatInput) {
-      bottomChatInput.placeholder = `Tulis pesan sebagai ${role}...`;
-    }
-    if (chatRoleToggleBtn) {
-      chatRoleToggleBtn.setAttribute('title', `Pengirim: ${role} (Klik untuk ganti)`);
-    }
-    if (chatRoleSelectorPanel) chatRoleSelectorPanel.classList.add('hidden');
-    if (chatInputPanel) chatInputPanel.classList.remove('hidden');
-    if (shouldFocusAndPlaySfx) {
-      if (bottomChatInput) bottomChatInput.focus();
-      playClickSfx(role === 'Erlang');
-    }
-  }
-
-  function resetSenderRolePicker() {
-    if (chatInputPanel) chatInputPanel.classList.add('hidden');
-    if (chatRoleSelectorPanel) chatRoleSelectorPanel.classList.remove('hidden');
-    playClickSfx();
-  }
-
+  // Room Chat Action Buttons & Role Switcher Event Listeners
   if (btnChooseErlang) {
     btnChooseErlang.addEventListener('click', () => selectSenderRole('Erlang', true));
   }

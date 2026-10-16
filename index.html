@@ -253,43 +253,43 @@
         <div class="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-secondary-fixed/50 blur-3xl pointer-events-none"></div>
         
         <div class="relative z-10 flex flex-col items-center gap-space-md">
-          <div class="flex items-center justify-between w-full max-w-sm px-space-xs">
+          <div class="flex items-center justify-around w-full max-w-md px-space-xs">
             
             <!-- Erlang Card -->
-            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-space-xs cursor-pointer group" id="boyFrame">
+            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-2 cursor-pointer group" id="boyFrame">
               <div class="relative photo-frame" title="Klik untuk melihat foto Erlang!">
-                <div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 ring-primary-fixed-dim/70 shadow-md group-hover:scale-105 transition-transform">
+                <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-surface-container p-1 ring-3 ring-primary-fixed-dim/80 shadow-lg group-hover:scale-105 transition-all duration-300">
                   <img class="w-full h-full object-cover rounded-full couple-img" id="imgBoy" src="assets/boy-placeholder.svg" alt="Foto Erlang" loading="lazy">
                 </div>
-                <div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
-                  <span class="material-symbols-outlined text-secondary text-[14px]">eco</span>
+                <div class="absolute bottom-1 right-1 bg-surface-container-lowest rounded-full p-1.5 shadow-md border border-outline-variant/40">
+                  <span class="material-symbols-outlined text-secondary text-[16px]">eco</span>
                 </div>
               </div>
-              <span class="font-title-md text-title-md text-on-surface font-semibold">Erlang</span>
-              <span class="font-label-sm text-label-sm text-secondary px-space-xs py-0.5 rounded-full bg-secondary-fixed/50 font-medium" id="labelBoy">Belajar Ikhlas 🍃</span>
+              <span class="font-headline-sm text-base sm:text-lg text-on-surface font-bold tracking-tight">Erlangga</span>
+              <span class="hidden" id="labelBoy" style="display:none;" aria-hidden="true"></span>
             </div>
 
             <!-- Center Glowing Heart Badge -->
-            <div class="flex flex-col items-center gap-1 cursor-pointer" id="centerBeatHeart" title="Ikhlas &amp; Tulus">
+            <div class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0" id="centerBeatHeart" title="Ikhlas &amp; Tulus">
               <div class="relative group flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest border border-outline-variant/40 shadow-sm active:scale-95 transition-all" id="interactiveHeartEmblem">
-                <span class="material-symbols-outlined text-primary text-[22px] animate-pulse" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                <span class="material-symbols-outlined text-primary text-[24px] animate-pulse" style="font-variation-settings: 'FILL' 1;">favorite</span>
                 <div class="absolute -inset-1 rounded-full bg-primary-fixed/40 blur-sm pointer-events-none"></div>
               </div>
-              <span class="font-label-sm text-label-sm text-primary tracking-wider font-semibold uppercase text-center mt-1">IKHLAS &amp; TULUS</span>
+              <span class="font-label-sm text-[10px] text-primary tracking-wider font-semibold uppercase text-center mt-0.5">IKHLAS &amp; TULUS</span>
             </div>
 
             <!-- Cindy Card -->
-            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-space-xs cursor-pointer group" id="girlFrame">
+            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-2 cursor-pointer group" id="girlFrame">
               <div class="relative photo-frame" title="Klik untuk melihat foto Cindy!">
-                <div class="w-20 h-20 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 ring-primary-fixed-dim/70 shadow-md group-hover:scale-105 transition-transform">
+                <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-surface-container p-1 ring-3 ring-primary-fixed-dim/80 shadow-lg group-hover:scale-105 transition-all duration-300">
                   <img class="w-full h-full object-cover rounded-full couple-img" id="imgGirl" src="assets/girl-placeholder.svg" alt="Foto Cindy" loading="lazy">
                 </div>
-                <div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
-                  <span class="material-symbols-outlined text-primary text-[14px]">auto_awesome</span>
+                <div class="absolute bottom-1 right-1 bg-surface-container-lowest rounded-full p-1.5 shadow-md border border-outline-variant/40">
+                  <span class="material-symbols-outlined text-primary text-[16px]">auto_awesome</span>
                 </div>
               </div>
-              <span class="font-title-md text-title-md text-on-surface font-semibold">Cindy</span>
-              <span class="font-label-sm text-label-sm text-primary px-space-xs py-0.5 rounded-full bg-primary-fixed/50 font-medium" id="labelGirl">Semoga Bahagia ✨</span>
+              <span class="font-headline-sm text-base sm:text-lg text-on-surface font-bold tracking-tight">Cindy</span>
+              <span class="hidden" id="labelGirl" style="display:none;" aria-hidden="true"></span>
             </div>
 
           </div>
