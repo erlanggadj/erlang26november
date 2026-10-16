@@ -223,19 +223,6 @@
 
       </div>
 
-      <!-- Row 2: Slim Top Tab Navigation Bar (Single Line, Never Wraps!) -->
-      <nav class="bg-surface-container-high/60 p-0.5 rounded-full flex items-center gap-1 border border-outline-variant/30 shadow-inner h-8 sm:h-9">
-        <button type="button" id="tabBerandaBtn" class="flex-1 flex items-center justify-center gap-1 py-1 px-2 rounded-full transition-all duration-200 h-full bg-surface-container-lowest text-primary shadow-2xs font-semibold whitespace-nowrap text-xs">
-          <span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
-          <span class="whitespace-nowrap">Beranda Kenangan</span>
-        </button>
-        <button type="button" id="tabRoomChatBtn" class="flex-1 flex items-center justify-center gap-1 py-1 px-2 rounded-full text-on-surface-variant hover:text-on-surface transition-all duration-200 h-full whitespace-nowrap text-xs relative">
-          <span class="material-symbols-outlined text-[15px]">chat_bubble</span>
-          <span class="whitespace-nowrap">Room Chat</span>
-          <span id="chatBadgeCount" class="hidden">0</span>
-        </button>
-      </nav>
-
     </div>
   </header>
 
@@ -516,6 +503,12 @@
 
       <!-- Hidden compatibility anchors for script.js IDs -->
       <div class="hidden" style="display:none !important;" aria-hidden="true">
+        <button id="tabBerandaBtn"></button>
+        <button id="tabRoomChatBtn"></button>
+        <span id="chatBadgeCount"></span>
+        <button id="quickAddMessageBtn"></button>
+        <button id="quickSendPrayerBtn"></button>
+        <button id="chatRoleToggleBtn"><span id="roleIcon"></span></button>
         <div id="waBoyAvatarWrap"><img id="waAvatarBoy" src="assets/boy-placeholder.svg" alt="Boy"></div>
         <div id="waGirlAvatarWrap"><img id="waAvatarGirl" src="assets/girl-placeholder.svg" alt="Girl"></div>
         <div id="chatRoleSelectorPanel">
@@ -567,44 +560,27 @@
           </button>
         </div>
 
-        <!-- Quick Action Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto px-3 py-1.5 no-scrollbar shrink-0">
-          <button type="button" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap text-xs shadow-2xs shrink-0" id="quickAddMessageBtn">
-            <span class="material-symbols-outlined text-[14px]">bookmark_add</span>
-            <span>+ Tambah Pesan</span>
-          </button>
-          <button type="button" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap text-xs shadow-2xs shrink-0" id="quickSendPrayerBtn">
-            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
-            <span>💌 Kirim Doa Hening</span>
-          </button>
-        </div>
-
       </div>
 
       <!-- 3. iOS Bottom Chat Input Bar (Full Width, Pinned above pb-safe) -->
       <div class="roomchat-ios-input-bar fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/30 pb-safe" id="chatStickyDock">
-        <div class="max-w-2xl mx-auto flex items-center gap-1.5 w-full px-2 py-1.5">
+        <div class="max-w-2xl mx-auto flex items-center gap-1.5 w-full px-3 py-2">
           
-          <form class="flex items-center gap-1.5 w-full" id="chat-form">
-            <!-- Switch sender role button -->
-            <button type="button" aria-label="Ganti Pengirim" class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed active:scale-90 transition-all bg-surface-container-low shrink-0" id="chatRoleToggleBtn" title="Ganti Pengirim">
-              <span class="material-symbols-outlined text-[18px]" id="roleIcon">person</span>
-            </button>
-            
-            <div class="relative flex-1 min-w-0 flex items-center bg-surface-container-lowest rounded-full px-3 py-0.5 border border-outline-variant/30 shadow-inner">
-              <input autocomplete="off" class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-xs sm:text-sm py-1.5 min-w-0" id="chat-input" placeholder="Tulis pesan..." type="text">
+          <form class="flex items-center gap-2 w-full" id="chat-form">
+            <div class="relative flex-1 min-w-0 flex items-center bg-surface-container-lowest rounded-full px-3.5 py-0.5 border border-outline-variant/30 shadow-inner">
+              <input autocomplete="off" class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-xs sm:text-sm py-2 min-w-0" id="chat-input" placeholder="Tulis pesan..." type="text">
               <button type="button" aria-label="Pilih emoji cinta" class="text-primary hover:scale-125 transition-transform p-1 shrink-0" id="chatHeartBtn">
-                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
               </button>
             </div>
 
-            <button type="button" aria-label="Form Modal Tambah Pesan" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-90 transition-all bg-surface-container-low shrink-0" id="waOpenAddModalBtn" title="Form Tambah Pesan Lengkap">
-              <span class="material-symbols-outlined text-[18px]">add</span>
+            <button type="button" aria-label="Form Modal Tambah Pesan" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-90 transition-all bg-surface-container-low shrink-0" id="waOpenAddModalBtn" title="Form Tambah Pesan Lengkap">
+              <span class="material-symbols-outlined text-[19px]">add</span>
             </button>
 
-            <button type="submit" aria-label="Kirim Pesan" class="h-8 px-3.5 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all shrink-0 font-label-md text-xs font-bold" id="btn-send-message">
+            <button type="submit" aria-label="Kirim Pesan" class="h-9 px-4 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all shrink-0 font-label-md text-xs font-bold" id="btn-send-message">
               <span>Kirim</span>
-              <span class="material-symbols-outlined text-[14px]">send</span>
+              <span class="material-symbols-outlined text-[15px]">send</span>
             </button>
           </form>
 
