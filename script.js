@@ -78,7 +78,9 @@
     '"Persembahan penuh ketulusan dan kedewasaan dari seorang IT guy yang lugu 🌻"'
   ];
 
-  // --- DOM ELEMENTS ---
+  // --- DOM ELEMENTS & ACTIVE STATE ---
+  let currentActiveUserRole = localStorage.getItem('cilang_active_role') || 'Erlang';
+
   const curtainOverlay = document.getElementById('curtainOverlay');
   const openCurtainBtn = document.getElementById('openCurtainBtn');
 
@@ -724,6 +726,12 @@
     if (waAvatarBoy) waAvatarBoy.src = src;
     const pickerAvatarBoy = document.getElementById('pickerAvatarBoy');
     if (pickerAvatarBoy) pickerAvatarBoy.src = src;
+    const roleModalImgBoy = document.getElementById('roleModalImgBoy');
+    if (roleModalImgBoy) roleModalImgBoy.src = src;
+    if (currentActiveUserRole === 'Cindy') {
+      const waPartnerHeaderAvatar = document.getElementById('waPartnerHeaderAvatar');
+      if (waPartnerHeaderAvatar) waPartnerHeaderAvatar.src = src;
+    }
   }
 
   function setGirlPhoto(src) {
@@ -731,6 +739,12 @@
     if (waAvatarGirl) waAvatarGirl.src = src;
     const pickerAvatarGirl = document.getElementById('pickerAvatarGirl');
     if (pickerAvatarGirl) pickerAvatarGirl.src = src;
+    const roleModalImgGirl = document.getElementById('roleModalImgGirl');
+    if (roleModalImgGirl) roleModalImgGirl.src = src;
+    if (currentActiveUserRole === 'Erlang') {
+      const waPartnerHeaderAvatar = document.getElementById('waPartnerHeaderAvatar');
+      if (waPartnerHeaderAvatar) waPartnerHeaderAvatar.src = src;
+    }
   }
 
   // --- HEARTBREAK COUNTER (Dihitung dari 2 Juli sampai Hari Ini) ---
@@ -1406,17 +1420,18 @@
     }, 280);
   }
 
-  // Helper: Build single message row DOM node
+  // Helper: Build single message row DOM node (Dynamic Role Perspective: Active Role on Right, Counterpart on Left)
   function createMessageRowElement(msg, isLatest) {
-    const isErlang = msg.sender === 'Erlang' || (msg.sender && msg.sender.includes('Erlang'));
+    const isSenderErlang = msg.sender === 'Erlang' || (msg.sender && msg.sender.includes('Erlang'));
+    const isMe = (currentActiveUserRole === 'Erlang') ? isSenderErlang : !isSenderErlang;
     const row = document.createElement('div');
-    row.className = `wa-row ${isErlang ? 'wa-row-erlang' : 'wa-row-cindy'}${isLatest ? ' wa-row-latest' : ''}`;
+    row.className = `wa-row ${isMe ? 'wa-row-me' : 'wa-row-partner'}${isLatest ? ' wa-row-latest' : ''}`;
     if (msg.id) row.dataset.msgId = msg.id;
 
-    const bubbleClass = `${isErlang ? 'wa-bubble-erlang' : 'wa-bubble-cindy'}${isLatest ? ' wa-bubble-latest' : ''}`;
-    const senderLabel = isErlang ? `${config.boyName} 🤵🏻` : `${config.girlName} 👸🏻`;
+    const bubbleClass = `${isMe ? 'wa-bubble-me' : 'wa-bubble-partner'}${isLatest ? ' wa-bubble-latest' : ''}`;
+    const senderLabel = isSenderErlang ? `${config.boyName || 'Erlangga'} 🤵🏻` : `${config.girlName || 'Cindy'} 👸🏻`;
 
-    const checkmark = (!isErlang) ? '<span class="wa-checkmarks" title="Terbaca">✓✓</span>' : '';
+    const checkmark = isMe ? '<span class="wa-checkmarks" title="Terkirim & Terbaca">✓✓</span>' : '';
     const latestBadge = isLatest ? '<span class="wa-latest-pill">Terbaru 📌</span>' : '';
 
     let watermarkText = '';
@@ -1481,11 +1496,16 @@
   }
 
   function updateMessageBadgeCount() {
-    const count = (chatMessages && Array.isArray(chatMessages)) ? chatMessages.length : 0;
+    // Total message counts removed per user specification
     const chatBadgeCount = document.getElementById('chatBadgeCount');
     const bannerChatCount = document.getElementById('bannerChatCount');
-    if (chatBadgeCount) chatBadgeCount.textContent = count;
-    if (bannerChatCount) bannerChatCount.textContent = `${count} Pesan`;
+    if (chatBadgeCount) {
+      chatBadgeCount.textContent = '';
+      chatBadgeCount.classList.add('hidden');
+    }
+    if (bannerChatCount) {
+      bannerChatCount.textContent = 'Obrolan 💬';
+    }
   }
 
   // Render WhatsApp Bubbles (Sort by timestamp, latest at bottom, lazy loading older messages)
@@ -1989,6 +2009,7 @@
   } catch (e) {}
 
   applyConfig();
+  updateRoomChatPerspective();
 
   // --- BACKGROUND CANVAS (LIGHTWEIGHT NATURE FALLING LEAVES & GOLDEN SPORES) ---
   const canvas = document.getElementById('loveCanvas');
@@ -2099,7 +2120,7 @@
     }
   });
 
-  // --- TABS SWITCHING ENGINE (BERANDA KENANGAN vs ROOM CHAT) ---
+  // --- TABS SWITCHING ENGINE & ROLE SELECT MODAL (BERANDA vs FULL-SCREEN IOS ROOM CHAT) ---
   const tabBeranda = document.getElementById('tabBeranda');
   const tabRoomChat = document.getElementById('tabRoomChat');
   const tabBerandaBtn = document.getElementById('tabBerandaBtn');
@@ -2108,9 +2129,80 @@
   const bottomNavChatBtn = document.getElementById('bottomNavChatBtn');
   const bannerToChatBtn = document.getElementById('bannerToChatBtn');
 
+  // Role Selection Modal Elements
+  const roleSelectModal = document.getElementById('roleSelectModal');
+  const closeRoleSelectModalBtn = document.getElementById('closeRoleSelectModalBtn');
+  const modalChooseRoleErlang = document.getElementById('modalChooseRoleErlang');
+  const modalChooseRoleCindy = document.getElementById('modalChooseRoleCindy');
+  const roleModalImgBoy = document.getElementById('roleModalImgBoy');
+  const roleModalImgGirl = document.getElementById('roleModalImgGirl');
+  const chatBackToBerandaBtn = document.getElementById('chatBackToBerandaBtn');
+  const chatHeaderSwitchRoleBtn = document.getElementById('chatHeaderSwitchRoleBtn');
+
+  function openRoleSelectModal() {
+    if (roleModalImgBoy) {
+      roleModalImgBoy.src = (imgBoy && imgBoy.src) ? imgBoy.src : (localStorage.getItem('savedBoyPhoto') || 'assets/boy-placeholder.svg');
+    }
+    if (roleModalImgGirl) {
+      roleModalImgGirl.src = (imgGirl && imgGirl.src) ? imgGirl.src : (localStorage.getItem('savedGirlPhoto') || 'assets/girl-placeholder.svg');
+    }
+    if (roleSelectModal) roleSelectModal.classList.add('active');
+    playClickSfx();
+  }
+
+  function closeRoleSelectModal() {
+    if (roleSelectModal) roleSelectModal.classList.remove('active');
+  }
+
+  function updateRoomChatPerspective() {
+    const waPartnerHeaderAvatar = document.getElementById('waPartnerHeaderAvatar');
+    const waContactName = document.getElementById('waContactName');
+    const waStatusText = document.getElementById('waStatusText');
+
+    if (currentActiveUserRole === 'Erlang') {
+      // User is Erlang -> Header displays Cindy (counterpart / lawannya role)
+      if (waContactName) waContactName.textContent = `${config.girlName || 'Cindy'} ✨`;
+      if (waStatusText) waStatusText.textContent = 'Online • Rumah Pulang ✨';
+      if (waPartnerHeaderAvatar) {
+        waPartnerHeaderAvatar.src = (imgGirl && imgGirl.src) ? imgGirl.src : (localStorage.getItem('savedGirlPhoto') || 'assets/girl-placeholder.svg');
+      }
+    } else {
+      // User is Cindy -> Header displays Erlang (counterpart / lawannya role)
+      if (waContactName) waContactName.textContent = `${config.boyName || 'Erlangga'} 🍃`;
+      if (waStatusText) waStatusText.textContent = 'Online • Belajar Ikhlas 🍃';
+      if (waPartnerHeaderAvatar) {
+        waPartnerHeaderAvatar.src = (imgBoy && imgBoy.src) ? imgBoy.src : (localStorage.getItem('savedBoyPhoto') || 'assets/boy-placeholder.svg');
+      }
+    }
+
+    // Default sender in input panel follows active user role
+    selectSenderRole(currentActiveUserRole, false);
+
+    // Re-render messages so bubbles align dynamically:
+    // User role owner on RIGHT (.wa-row-me), partner on LEFT (.wa-row-partner)
+    renderWhatsAppChat(false);
+  }
+
+  function enterRoomChatWithRole(role) {
+    currentActiveUserRole = role;
+    try {
+      localStorage.setItem('cilang_active_role', role);
+    } catch (e) {}
+    closeRoleSelectModal();
+    updateRoomChatPerspective();
+    switchTab('chat');
+    showActionToast(`Masuk sebagai ${role === 'Erlang' ? 'Erlangga 🍃' : 'Cindy ✨'}`);
+  }
+
   function switchTab(tabName) {
     playClickSfx();
+    const appHeader = document.getElementById('appHeader');
+    const bottomNavBar = document.getElementById('bottomNavBar');
+
     if (tabName === 'chat') {
+      // Room Chat is a dedicated full-screen view (like iOS Messages / WhatsApp)
+      if (appHeader) appHeader.classList.add('hidden');
+      if (bottomNavBar) bottomNavBar.classList.add('hidden');
       if (tabBeranda) tabBeranda.classList.add('hidden');
       if (tabRoomChat) tabRoomChat.classList.remove('hidden');
 
@@ -2128,10 +2220,15 @@
         bottomNavChatBtn.className = 'bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 transition-colors relative text-primary font-semibold';
       }
 
+      updateRoomChatPerspective();
+
       setTimeout(() => {
         scrollChatToBottom(false);
       }, 60);
     } else {
+      // Returning to Beranda restores the app header and bottom navigation
+      if (appHeader) appHeader.classList.remove('hidden');
+      if (bottomNavBar) bottomNavBar.classList.remove('hidden');
       if (tabRoomChat) tabRoomChat.classList.add('hidden');
       if (tabBeranda) tabBeranda.classList.remove('hidden');
 
@@ -2151,11 +2248,25 @@
     }
   }
 
+  // Navigation Event Triggers: Entering Room Chat triggers Role Selection Modal!
   if (tabBerandaBtn) tabBerandaBtn.addEventListener('click', () => switchTab('beranda'));
-  if (tabRoomChatBtn) tabRoomChatBtn.addEventListener('click', () => switchTab('chat'));
   if (bottomNavBerandaBtn) bottomNavBerandaBtn.addEventListener('click', () => switchTab('beranda'));
-  if (bottomNavChatBtn) bottomNavChatBtn.addEventListener('click', () => switchTab('chat'));
-  if (bannerToChatBtn) bannerToChatBtn.addEventListener('click', () => switchTab('chat'));
+  if (chatBackToBerandaBtn) chatBackToBerandaBtn.addEventListener('click', () => switchTab('beranda'));
+
+  if (tabRoomChatBtn) tabRoomChatBtn.addEventListener('click', openRoleSelectModal);
+  if (bottomNavChatBtn) bottomNavChatBtn.addEventListener('click', openRoleSelectModal);
+  if (bannerToChatBtn) bannerToChatBtn.addEventListener('click', openRoleSelectModal);
+  if (chatHeaderSwitchRoleBtn) chatHeaderSwitchRoleBtn.addEventListener('click', openRoleSelectModal);
+
+  // Role Selection Modal Actions
+  if (closeRoleSelectModalBtn) closeRoleSelectModalBtn.addEventListener('click', closeRoleSelectModal);
+  if (roleSelectModal) {
+    roleSelectModal.addEventListener('click', (e) => {
+      if (e.target === roleSelectModal) closeRoleSelectModal();
+    });
+  }
+  if (modalChooseRoleErlang) modalChooseRoleErlang.addEventListener('click', () => enterRoomChatWithRole('Erlang'));
+  if (modalChooseRoleCindy) modalChooseRoleCindy.addEventListener('click', () => enterRoomChatWithRole('Cindy'));
 
   // Toast Notice Helper
   function showActionToast(msg) {
@@ -2195,7 +2306,7 @@
     });
   }
 
-  // Direct Sticky Room Chat Input Engine (Slide 2)
+  // Direct Sticky Room Chat Input Engine (iOS Messages Style)
   const bottomChatForm = document.getElementById('chat-form');
   const bottomChatInput = document.getElementById('chat-input');
   const chatRoleToggleBtn = document.getElementById('chatRoleToggleBtn');
@@ -2209,7 +2320,7 @@
   const btnHeartBookmark = document.getElementById('btn-heart-bookmark');
   const pinnedBanner = document.getElementById('pinnedBanner');
 
-  let currentChatSender = 'Erlang';
+  let currentChatSender = currentActiveUserRole;
 
   const chatRoleSelectorPanel = document.getElementById('chatRoleSelectorPanel');
   const chatInputPanel = document.getElementById('chatInputPanel');
@@ -2218,7 +2329,7 @@
   const btnChangeRole = document.getElementById('btnChangeRole');
   const currentRoleBadge = document.getElementById('currentRoleBadge');
 
-  function selectSenderRole(role) {
+  function selectSenderRole(role, shouldFocusAndPlaySfx = false) {
     currentChatSender = role;
     if (roleIcon) {
       roleIcon.textContent = (role === 'Erlang') ? 'person' : 'face_3';
@@ -2234,8 +2345,10 @@
     }
     if (chatRoleSelectorPanel) chatRoleSelectorPanel.classList.add('hidden');
     if (chatInputPanel) chatInputPanel.classList.remove('hidden');
-    if (bottomChatInput) bottomChatInput.focus();
-    playClickSfx(role === 'Erlang');
+    if (shouldFocusAndPlaySfx) {
+      if (bottomChatInput) bottomChatInput.focus();
+      playClickSfx(role === 'Erlang');
+    }
   }
 
   function resetSenderRolePicker() {
@@ -2245,10 +2358,10 @@
   }
 
   if (btnChooseErlang) {
-    btnChooseErlang.addEventListener('click', () => selectSenderRole('Erlang'));
+    btnChooseErlang.addEventListener('click', () => selectSenderRole('Erlang', true));
   }
   if (btnChooseCindy) {
-    btnChooseCindy.addEventListener('click', () => selectSenderRole('Cindy'));
+    btnChooseCindy.addEventListener('click', () => selectSenderRole('Cindy', true));
   }
   if (btnChangeRole) {
     btnChangeRole.addEventListener('click', () => resetSenderRolePicker());
@@ -2257,18 +2370,8 @@
   if (chatRoleToggleBtn) {
     chatRoleToggleBtn.addEventListener('click', () => {
       currentChatSender = (currentChatSender === 'Erlang') ? 'Cindy' : 'Erlang';
-      if (roleIcon) {
-        roleIcon.textContent = (currentChatSender === 'Erlang') ? 'person' : 'face_3';
-      }
-      if (currentRoleBadge) {
-        currentRoleBadge.textContent = (currentChatSender === 'Erlang') ? 'Erlang 🍃' : 'Cindy ✨';
-      }
-      if (bottomChatInput) {
-        bottomChatInput.placeholder = `Tulis pesan sebagai ${currentChatSender}...`;
-      }
-      chatRoleToggleBtn.setAttribute('title', `Pengirim: ${currentChatSender} (Klik untuk ganti)`);
+      selectSenderRole(currentChatSender, true);
       showActionToast(`Pengirim aktif: ${currentChatSender} 💬`);
-      playClickSfx(currentChatSender === 'Erlang');
     });
   }
 
@@ -2310,7 +2413,7 @@
   }
   if (waPartnerAvatarFrame) {
     waPartnerAvatarFrame.addEventListener('click', () => {
-      openPhotoPreview('girl');
+      openPhotoPreview(currentActiveUserRole === 'Erlang' ? 'girl' : 'boy');
     });
   }
 

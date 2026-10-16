@@ -184,7 +184,7 @@
   </div>
 
   <!-- TOP FIXED HEADER: Sleek & Compact Bar (Title + Mini Music Player & Slim Tabs) -->
-  <header class="fixed top-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl pt-safe shadow-[0_2px_16px_rgba(157,32,67,0.06)] border-b border-outline-variant/30">
+  <header class="fixed top-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl pt-safe shadow-[0_2px_16px_rgba(157,32,67,0.06)] border-b border-outline-variant/30" id="appHeader">
     <div class="px-3 sm:px-gutter flex flex-col justify-between py-1.5 sm:py-2 gap-1.5 max-w-2xl mx-auto">
       
       <!-- Row 1: Left Couple Title & Micro Quote | Right Compact Music & Settings -->
@@ -232,7 +232,7 @@
         <button type="button" id="tabRoomChatBtn" class="flex-1 flex items-center justify-center gap-1 py-1 px-2 rounded-full text-on-surface-variant hover:text-on-surface transition-all duration-200 h-full whitespace-nowrap text-xs relative">
           <span class="material-symbols-outlined text-[15px]">chat_bubble</span>
           <span class="whitespace-nowrap">Room Chat</span>
-          <span id="chatBadgeCount" class="inline-flex items-center justify-center px-1.5 py-0.2 rounded-full bg-primary text-on-primary text-[10px] font-bold shadow-2xs">0</span>
+          <span id="chatBadgeCount" class="hidden">0</span>
         </button>
       </nav>
 
@@ -435,10 +435,10 @@
           <div class="flex flex-col min-w-0">
             <div class="flex items-center gap-space-xs">
               <span class="font-label-md text-label-md text-on-surface font-semibold truncate">Arsip Chat Kenangan</span>
-              <span class="px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold" id="bannerChatCount">0 Pesan</span>
+              <span class="px-1.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold" id="bannerChatCount">Obrolan 💬</span>
             </div>
             <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">
-              Percakapan tersimpan rapi di tab sebelah 💬
+              Ketuk untuk masuk ke ruang obrolan 💬
             </p>
           </div>
         </div>
@@ -464,154 +464,130 @@
     </section>
 
     <!-- =========================================================================
-         TAB 2: ROOM CHAT (Slide 2 - Tab Sebelah)
+         TAB 2: ROOM CHAT (Full-Screen Dedicated iOS-Style Messaging View)
          ========================================================================= -->
-    <section id="tabRoomChat" class="tab-pane hidden flex flex-col w-full gap-3">
+    <section id="tabRoomChat" class="tab-pane hidden flex flex-col w-full">
       
       <!-- Interactive Ambient Particles Layer -->
       <div class="fixed inset-0 pointer-events-none z-30 overflow-hidden" id="chat-heart-canvas"></div>
 
-      <!-- 1. Chat Partner Header Bar (Warm Romantic Glass Card: Duo Avatars Erlang & Cindy) -->
-      <div class="flex items-center justify-between gap-space-sm bg-surface-container-lowest/90 backdrop-blur-md px-3 sm:px-space-md py-2.5 rounded-lg border border-outline-variant/30 shadow-sm">
-        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
-          <div class="relative shrink-0 flex items-center cursor-pointer select-none" id="waPartnerAvatarFrame" title="Lihat Foto Profil Pasangan">
-            <!-- Duo Avatars: Erlang & Cindy (Overlapping Circles) -->
-            <div class="flex items-center -space-x-3.5 relative">
-              <div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container ring-2 ring-surface-container-lowest shadow-sm transition-transform hover:scale-105 z-10" id="waBoyAvatarWrap" title="Lihat foto Erlang">
-                <img class="w-full h-full object-cover" id="waAvatarBoy" src="assets/boy-placeholder.svg" alt="Erlang">
+      <!-- 1. Dedicated iOS Navigation Bar (Back Button < Beranda, Partner Profile & Action Icons) -->
+      <header class="roomchat-ios-navbar fixed top-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-b border-outline-variant/20 shadow-xs" id="roomChatIosHeader">
+        <div class="max-w-2xl mx-auto px-3 py-2 flex items-center justify-between gap-2">
+          
+          <!-- iOS Back Button to Beranda -->
+          <button type="button" id="chatBackToBerandaBtn" class="flex items-center text-primary hover:opacity-80 active:scale-95 transition-all font-medium py-1 -ml-1 shrink-0" title="Kembali ke Beranda">
+            <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+            <span class="font-semibold text-[15px]">Beranda</span>
+          </button>
+
+          <!-- Center: Dynamic Partner Profile (Shows Opposite Role!) -->
+          <div class="flex items-center gap-2 cursor-pointer min-w-0" id="waPartnerAvatarFrame" title="Lihat Foto Profil Pasangan">
+            <div class="relative w-9 h-9 rounded-full overflow-hidden bg-surface-container ring-1.5 ring-primary/20 shrink-0 shadow-2xs">
+              <img class="w-full h-full object-cover" id="waPartnerHeaderAvatar" src="assets/girl-placeholder.svg" alt="Partner">
+              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1.5 ring-surface"></span>
+            </div>
+            <div class="flex flex-col text-left min-w-0">
+              <div class="flex items-center gap-1">
+                <span class="font-semibold text-sm text-on-surface truncate" id="waContactName">Cindy ✨</span>
               </div>
-              <div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed ring-2 ring-surface-container-lowest shadow-sm transition-transform hover:scale-105 z-20" id="waGirlAvatarWrap" title="Lihat foto Cindy">
-                <img class="w-full h-full object-cover" id="waAvatarGirl" src="assets/girl-placeholder.svg" alt="Cindy">
-              </div>
-            </div>
-            <span class="absolute -bottom-0.5 -right-0.5 z-30 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest shadow-sm" title="Online"></span>
-          </div>
-          <div class="min-w-0 flex flex-col">
-            <div class="flex items-center gap-1.5">
-              <span class="font-title-md text-[15px] sm:text-[17px] text-on-surface font-semibold truncate" id="waContactName">Erlang &amp; Cindy 🌿</span>
-              <span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <p class="font-label-sm text-[11px] text-primary font-medium truncate" id="waStatusText">Online • Ruang Kenangan Berdua 💬</p>
+              <span class="text-[10.5px] text-emerald-600 font-medium truncate" id="waStatusText">Online</span>
             </div>
           </div>
-        </div>
 
-        <!-- Quick Action Bar -->
-        <div class="flex items-center gap-1 shrink-0">
-          <button type="button" aria-label="Panggil Suara Cindy" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-95 transition-all bg-surface-container-low" id="btn-call" title="Panggil Kenangan">
-            <span class="material-symbols-outlined text-[19px]">call</span>
-          </button>
-          <button type="button" aria-label="Cari Pesan Kenangan" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-95 transition-all bg-surface-container-low" id="btn-search-chat" title="Cari Pesan">
-            <span class="material-symbols-outlined text-[19px]">search</span>
-          </button>
-          <button type="button" aria-label="Simpan ke Kenangan Abadi" class="w-9 h-9 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed/60 active:scale-95 transition-all bg-primary-fixed/30" id="btn-heart-bookmark" title="Simpan Kenangan">
-            <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">bookmark_heart</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 2. Pinned Message Banner (Pesan Tersemat ♡) -->
-      <div class="relative overflow-hidden bg-gradient-to-r from-primary-fixed/60 via-surface-container-lowest to-primary-fixed/30 border border-outline-variant/40 px-3.5 py-2 rounded-lg shadow-sm flex items-center justify-between gap-2.5 cursor-pointer" id="pinnedBanner">
-        <div class="flex items-center gap-2 min-w-0">
-          <span class="material-symbols-outlined text-primary text-[18px] shrink-0" style="font-variation-settings: 'FILL' 1;">keep</span>
-          <div class="min-w-0 flex flex-col">
-            <span class="font-label-sm text-[10px] text-primary font-bold tracking-wider uppercase">PESAN TERSEMAT ♡</span>
-            <p class="font-body-sm text-[13px] text-on-surface truncate italic font-serif">"i love you (today is national boyfriend day)" — 10 Okt 2026</p>
+          <!-- Right: iOS Action Buttons & Quick Role Switcher -->
+          <div class="flex items-center gap-1 shrink-0">
+            <button type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/40 active:scale-95 transition-all" id="chatHeaderSwitchRoleBtn" title="Ganti Peran / Role">
+              <span class="material-symbols-outlined text-[19px]">cached</span>
+            </button>
+            <button type="button" aria-label="Panggil Kenangan" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/40 active:scale-95 transition-all" id="btn-call" title="Panggil Kenangan">
+              <span class="material-symbols-outlined text-[18px]">call</span>
+            </button>
+            <button type="button" aria-label="Cari Pesan" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all" id="btn-search-chat" title="Cari Pesan">
+              <span class="material-symbols-outlined text-[18px]">search</span>
+            </button>
+            <button type="button" aria-label="Simpan ke Kenangan Abadi" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary-fixed/60 active:scale-95 transition-all" id="btn-heart-bookmark" title="Simpan Kenangan">
+              <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark_heart</span>
+            </button>
           </div>
+
         </div>
-        <button type="button" aria-label="Lihat pesan tersimpan" class="shrink-0 text-on-surface-variant hover:text-primary p-1">
-          <span class="material-symbols-outlined text-[18px]">keyboard_arrow_right</span>
-        </button>
-      </div>
+      </header>
 
-      <!-- 3. Date Divider Badge -->
-      <div class="flex items-center justify-center my-1">
-        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/30 shadow-xs">
-          <span class="material-symbols-outlined text-primary text-[14px]">calendar_month</span>
-          <span class="font-label-md text-label-md text-on-surface-variant font-medium">10 Oktober 2026</span>
+      <!-- Hidden compatibility anchors for script.js IDs -->
+      <div class="hidden" style="display:none !important;" aria-hidden="true">
+        <div id="waBoyAvatarWrap"><img id="waAvatarBoy" src="assets/boy-placeholder.svg" alt="Boy"></div>
+        <div id="waGirlAvatarWrap"><img id="waAvatarGirl" src="assets/girl-placeholder.svg" alt="Girl"></div>
+        <div id="chatRoleSelectorPanel">
+          <img id="pickerAvatarBoy" src="assets/boy-placeholder.svg" alt="Boy">
+          <img id="pickerAvatarGirl" src="assets/girl-placeholder.svg" alt="Girl">
+          <button id="btnChooseErlang"></button>
+          <button id="btnChooseCindy"></button>
+        </div>
+        <div id="chatInputPanel">
+          <span id="currentRoleBadge"></span>
+          <button id="btnChangeRole"></button>
         </div>
       </div>
 
-      <!-- 4. Intimate Chat Bubble Stream (Scrollable container connected to Firebase!) -->
-      <div class="wa-chat-section flex flex-col relative w-full" id="waChatSection">
-        <div class="wa-messages-box max-h-[55vh] overflow-y-auto px-2 py-3 flex flex-col gap-3 rounded-xl border border-outline-variant/30 bg-surface-container-lowest/70 backdrop-blur-sm shadow-inner" id="waMessagesBox">
-          
-          <!-- Lazy loader indicator -->
-          <div class="wa-lazy-loader text-center text-xs text-on-surface-variant py-1" id="waLazyLoader"></div>
-          
-          <!-- Chat messages stream from Firebase -->
-          <div class="wa-messages-list flex flex-col gap-3" id="waMessagesList"></div>
-          
-          <!-- Bottom scroll anchor -->
-          <div id="waChatBottomAnchor"></div>
-        </div>
-
-        <!-- Floating jump to bottom button -->
-        <button type="button" class="wa-jump-bottom-btn" id="waJumpBottomBtn" title="Kembali ke pesan terbaru" aria-label="Ke Pesan Terbaru">
-          <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
-          <span class="text-xs">Pesan Terbaru</span>
-        </button>
-      </div>
-
-      <!-- 5. Quick Action Pills -->
-      <div class="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar shrink-0">
-        <button type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap shrink-0 shadow-xs" id="quickAddMessageBtn">
-          <span class="material-symbols-outlined text-[16px]">bookmark_add</span>
-          <span class="font-label-md text-label-md">+ Tambah Pesan Kenangan</span>
-        </button>
-        <button type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap shrink-0 shadow-xs" id="quickSendPrayerBtn">
-          <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
-          <span class="font-label-md text-label-md">💌 Kirim Doa Hening</span>
-        </button>
-      </div>
-
-      <!-- 6. Bottom Sticky Chat Input Dock with Role Selection Flow -->
-      <div class="chat-sticky-dock bg-surface/95 backdrop-blur-xl p-2 rounded-2xl border border-outline-variant/40 shadow-lg mt-1" id="chatStickyDock">
+      <!-- 2. Full Height Chat Content Area -->
+      <div class="roomchat-ios-content flex flex-col w-full max-w-2xl mx-auto flex-1">
         
-        <!-- STEP 1: Pilih Role Dulu Sebelum Input Keluar -->
-        <div id="chatRoleSelectorPanel" class="flex flex-col gap-1.5 w-full">
-          <div class="flex items-center justify-between px-1">
-            <span class="text-[11px] font-medium text-on-surface-variant flex items-center gap-1">
-              <span class="material-symbols-outlined text-[14px] text-primary">person_check</span>
-              Pilih role pengirim sebelum menulis:
-            </span>
-            <span class="text-[10px] text-primary font-semibold uppercase tracking-wider bg-primary-fixed/60 px-1.5 py-0.2 rounded-full">Pilih Role</span>
+        <!-- Pinned Message Banner (iOS Glass Style) -->
+        <div class="mx-3 mt-2 mb-1 bg-surface-container-low/90 backdrop-blur-md border border-outline-variant/30 px-3 py-1.5 rounded-xl shadow-2xs flex items-center justify-between gap-2 cursor-pointer" id="pinnedBanner">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="material-symbols-outlined text-primary text-[16px] shrink-0" style="font-variation-settings: 'FILL' 1;">keep</span>
+            <div class="min-w-0 flex flex-col">
+              <span class="text-[9.5px] text-primary font-bold tracking-wider uppercase">PESAN TERSEMAT ♡</span>
+              <p class="text-[12px] text-on-surface truncate italic font-serif">"i love you (today is national boyfriend day)" — 10 Okt 2026</p>
+            </div>
           </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[16px] shrink-0">chevron_right</span>
+        </div>
 
-          <div class="grid grid-cols-2 gap-2 w-full">
-            <button type="button" id="btnChooseErlang" class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-surface-container-low hover:bg-primary-fixed/30 border border-outline-variant/40 text-on-surface font-semibold text-xs active:scale-95 transition-all shadow-2xs group">
-              <div class="w-6 h-6 rounded-full overflow-hidden bg-surface-container ring-1 ring-outline-variant/40 shrink-0">
-                <img class="w-full h-full object-cover" id="pickerAvatarBoy" src="assets/boy-placeholder.svg" alt="Erlang">
-              </div>
-              <span class="truncate">Erlang 🍃</span>
-            </button>
-
-            <button type="button" id="btnChooseCindy" class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-surface-container-low hover:bg-primary-fixed/30 border border-outline-variant/40 text-on-surface font-semibold text-xs active:scale-95 transition-all shadow-2xs group">
-              <div class="w-6 h-6 rounded-full overflow-hidden bg-primary-fixed ring-1 ring-primary/30 shrink-0">
-                <img class="w-full h-full object-cover" id="pickerAvatarGirl" src="assets/girl-placeholder.svg" alt="Cindy">
-              </div>
-              <span class="truncate">Cindy ✨</span>
-            </button>
+        <!-- Date Divider -->
+        <div class="flex items-center justify-center my-1">
+          <div class="px-3 py-0.5 rounded-full bg-surface-container-low/80 backdrop-blur-xs border border-outline-variant/20 text-[11px] text-on-surface-variant font-medium shadow-2xs">
+            10 Oktober 2026
           </div>
         </div>
 
-        <!-- STEP 2: Input Text Keluar Setelah Role Dipilih (Initially Hidden) -->
-        <div id="chatInputPanel" class="hidden flex flex-col gap-1.5 w-full">
-          <div class="flex items-center justify-between px-1 text-[11px]">
-            <div class="flex items-center gap-1.5 min-w-0">
-              <span class="text-on-surface-variant">Menulis sebagai:</span>
-              <span class="font-bold text-primary px-2 py-0.2 rounded-full bg-primary-fixed/60 border border-primary/20 truncate" id="currentRoleBadge">Erlang 🍃</span>
-            </div>
-            <button type="button" class="text-primary hover:underline text-[11px] font-medium flex items-center gap-0.5 shrink-0" id="btnChangeRole" title="Ganti Role Pengirim">
-              <span>Ganti Role</span>
-              <span class="material-symbols-outlined text-[13px]">swap_horiz</span>
-            </button>
+        <!-- Messages Stream Area -->
+        <div class="wa-chat-section flex flex-col relative w-full flex-1 min-h-0" id="waChatSection">
+          <div class="wa-messages-box overflow-y-auto px-3 py-2 flex flex-col gap-2.5 w-full flex-1" id="waMessagesBox">
+            <div class="wa-lazy-loader text-center text-xs text-on-surface-variant py-1" id="waLazyLoader"></div>
+            <div class="wa-messages-list flex flex-col gap-2.5" id="waMessagesList"></div>
+            <div id="waChatBottomAnchor"></div>
           </div>
 
+          <!-- Floating jump to bottom button -->
+          <button type="button" class="wa-jump-bottom-btn" id="waJumpBottomBtn" title="Kembali ke pesan terbaru" aria-label="Ke Pesan Terbaru">
+            <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+            <span class="text-xs">Pesan Terbaru</span>
+          </button>
+        </div>
+
+        <!-- Quick Action Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto px-3 py-1.5 no-scrollbar shrink-0">
+          <button type="button" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap text-xs shadow-2xs shrink-0" id="quickAddMessageBtn">
+            <span class="material-symbols-outlined text-[14px]">bookmark_add</span>
+            <span>+ Tambah Pesan</span>
+          </button>
+          <button type="button" class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-low hover:bg-primary-fixed/40 text-primary border border-outline-variant/30 active:scale-95 transition-all text-nowrap text-xs shadow-2xs shrink-0" id="quickSendPrayerBtn">
+            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+            <span>💌 Kirim Doa Hening</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 3. iOS Bottom Chat Input Bar (Full Width, Pinned above pb-safe) -->
+      <div class="roomchat-ios-input-bar fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/30 pb-safe" id="chatStickyDock">
+        <div class="max-w-2xl mx-auto flex items-center gap-1.5 w-full px-2 py-1.5">
+          
           <form class="flex items-center gap-1.5 w-full" id="chat-form">
-            <button type="button" aria-label="Ganti Pengirim" class="w-9 h-9 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed active:scale-90 transition-all bg-surface-container-low shrink-0" id="chatRoleToggleBtn" title="Klik untuk ganti pengirim (Erlang / Cindy)">
+            <!-- Switch sender role button -->
+            <button type="button" aria-label="Ganti Pengirim" class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-primary-fixed active:scale-90 transition-all bg-surface-container-low shrink-0" id="chatRoleToggleBtn" title="Ganti Pengirim">
               <span class="material-symbols-outlined text-[18px]" id="roleIcon">person</span>
             </button>
             
@@ -622,17 +598,17 @@
               </button>
             </div>
 
-            <button type="button" aria-label="Form Modal Tambah Pesan" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-90 transition-all bg-surface-container-low shrink-0" id="waOpenAddModalBtn" title="Form Tambah Pesan Lengkap">
+            <button type="button" aria-label="Form Modal Tambah Pesan" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-90 transition-all bg-surface-container-low shrink-0" id="waOpenAddModalBtn" title="Form Tambah Pesan Lengkap">
               <span class="material-symbols-outlined text-[18px]">add</span>
             </button>
 
-            <button type="submit" aria-label="Kirim Pesan" class="h-9 px-3.5 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all shrink-0 font-label-md text-xs font-bold" id="btn-send-message">
+            <button type="submit" aria-label="Kirim Pesan" class="h-8 px-3.5 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all shrink-0 font-label-md text-xs font-bold" id="btn-send-message">
               <span>Kirim</span>
               <span class="material-symbols-outlined text-[14px]">send</span>
             </button>
           </form>
-        </div>
 
+        </div>
       </div>
 
     </section>
@@ -640,7 +616,7 @@
   </main>
 
   <!-- FIXED BOTTOM NAVIGATION BAR (Slide 2) -->
-  <nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-4px_16px_rgba(157,32,67,0.04)]">
+  <nav id="bottomNavBar" class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-4px_16px_rgba(157,32,67,0.04)]">
     <div class="flex justify-around items-center h-16 px-space-md max-w-2xl mx-auto">
       <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-primary font-semibold transition-colors" id="bottomNavBerandaBtn">
         <span class="material-symbols-outlined text-[22px]">home</span>
@@ -668,6 +644,47 @@
   <!-- =========================================================================
        MODALS PRESERVED: PREVIEW, SURAT, ALASAN, SETTINGS, ADD MESSAGE
        ========================================================================= -->
+
+  <!-- Modal: Pilih Role Masuk Room Chat (Erlang vs Cindy) 💬 -->
+  <div class="modal-backdrop" id="roleSelectModal">
+    <div class="modal-card max-w-sm w-[90%] text-center p-6 bg-surface/95 backdrop-blur-2xl rounded-3xl border border-outline-variant/40 shadow-2xl animate-scale-up">
+      <button class="modal-close" id="closeRoleSelectModalBtn" aria-label="Tutup Pilihan Role" title="Tutup">✕</button>
+      
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary font-label-md text-xs font-semibold mb-3">
+        <span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+        <span>Pilih Karaktermu</span>
+      </div>
+
+      <h3 class="font-headline-sm text-lg sm:text-xl font-bold text-on-surface mb-1">Masuk ke Room Chat</h3>
+      <p class="font-body-sm text-xs text-on-surface-variant mb-5">Pilih siapa dirimu hari ini untuk melihat dan menuliskan pesan kenangan:</p>
+
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <!-- Card Role Erlang -->
+        <button type="button" id="modalChooseRoleErlang" class="flex flex-col items-center p-3.5 rounded-2xl bg-surface-container-low hover:bg-primary/10 active:scale-95 border-2 border-transparent hover:border-primary/40 transition-all cursor-pointer group shadow-sm">
+          <div class="w-16 h-16 rounded-full p-0.5 ring-2 ring-primary/40 group-hover:ring-primary shadow-md overflow-hidden mb-2 bg-surface">
+            <img id="roleModalImgBoy" src="assets/boy-placeholder.svg" alt="Erlang" class="w-full h-full object-cover">
+          </div>
+          <span class="font-headline-sm font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Erlangga</span>
+          <span class="font-label-sm text-[10px] text-on-surface-variant/80 mt-0.5">🍃 Belajar Ikhlas</span>
+          <span class="mt-2 text-[11px] font-semibold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full">Pilih Erlang</span>
+        </button>
+
+        <!-- Card Role Cindy -->
+        <button type="button" id="modalChooseRoleCindy" class="flex flex-col items-center p-3.5 rounded-2xl bg-surface-container-low hover:bg-secondary/10 active:scale-95 border-2 border-transparent hover:border-secondary/40 transition-all cursor-pointer group shadow-sm">
+          <div class="w-16 h-16 rounded-full p-0.5 ring-2 ring-secondary/40 group-hover:ring-secondary shadow-md overflow-hidden mb-2 bg-surface">
+            <img id="roleModalImgGirl" src="assets/girl-placeholder.svg" alt="Cindy" class="w-full h-full object-cover">
+          </div>
+          <span class="font-headline-sm font-bold text-sm text-on-surface group-hover:text-secondary transition-colors">Cindy</span>
+          <span class="font-label-sm text-[10px] text-on-surface-variant/80 mt-0.5">✨ Rumah Pulang</span>
+          <span class="mt-2 text-[11px] font-semibold text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full">Pilih Cindy</span>
+        </button>
+      </div>
+
+      <p class="font-body-sm text-[11px] text-on-surface-variant/70 italic">
+        💡 Posisi balon pesanmu akan berada di sebelah kanan, dan pasanganmu di sebelah kiri.
+      </p>
+    </div>
+  </div>
 
   <!-- Modal: Preview / Perbesar Foto & Ganti Foto Profil 🖼️ -->
   <div class="modal-backdrop" id="photoPreviewModal">
