@@ -215,8 +215,8 @@
             </button>
           </div>
 
-          <!-- Settings Button -->
-          <button type="button" class="w-7 h-7 rounded-full bg-primary-fixed flex items-center justify-center shrink-0 border border-primary/20 text-primary shadow-2xs hover:scale-105 active:scale-95 transition-all" id="settingsBtn" title="Ganti Foto &amp; Lagu">
+          <!-- Profile Role Switch Button in Header -->
+          <button type="button" class="w-7 h-7 rounded-full bg-primary-fixed flex items-center justify-center shrink-0 border border-primary/20 text-primary shadow-2xs hover:scale-105 active:scale-95 transition-all" id="settingsBtn" title="Ganti Peran / Role (Erlang &amp; Cindy)">
             <span class="material-symbols-outlined text-[15px]">person</span>
           </button>
         </div>
@@ -235,64 +235,62 @@
     <section id="tabBeranda" class="tab-pane flex flex-col w-full gap-space-lg">
       
       <!-- 1. Couple Avatars Header Card with Ambient Romantic Glow -->
-      <div class="relative w-full overflow-hidden rounded-xl bg-gradient-to-b from-surface-container-lowest to-surface-container-low p-space-lg shadow-sm border border-outline-variant/40">
+      <div class="relative w-full overflow-hidden rounded-2xl bg-gradient-to-b from-surface-container-lowest to-surface-container-low p-3.5 sm:p-5 shadow-sm border border-outline-variant/40">
         <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-secondary-fixed/50 blur-3xl pointer-events-none"></div>
         
-        <div class="relative z-10 flex flex-col items-center gap-space-md">
-          <div class="flex items-center justify-around w-full max-w-md px-space-xs">
-            
-            <!-- Erlang Card -->
-            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-2 cursor-pointer group" id="boyFrame">
-              <div class="relative photo-frame" title="Klik untuk melihat foto Erlang!">
-                <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-surface-container p-1 ring-3 ring-primary-fixed-dim/80 shadow-lg group-hover:scale-105 transition-all duration-300">
-                  <img class="w-full h-full object-cover rounded-full couple-img" id="imgBoy" src="assets/boy-placeholder.svg" alt="Foto Erlang" loading="lazy">
-                </div>
-                <div class="absolute bottom-1 right-1 bg-surface-container-lowest rounded-full p-1.5 shadow-md border border-outline-variant/40">
-                  <span class="material-symbols-outlined text-secondary text-[16px]">eco</span>
-                </div>
+        <div class="relative z-10 flex items-center justify-center gap-2.5 sm:gap-6 w-full max-w-sm mx-auto">
+          
+          <!-- Erlang Card -->
+          <div class="photo-frame-wrapper flex flex-col items-center text-center gap-1.5 cursor-pointer group shrink-0" id="boyFrame">
+            <div class="relative photo-frame" title="Klik untuk melihat foto Erlang!">
+              <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 sm:ring-3 ring-primary-fixed-dim/80 shadow-md group-hover:scale-105 transition-all duration-300">
+                <img class="w-full h-full object-cover rounded-full couple-img" id="imgBoy" src="assets/boy-placeholder.svg" alt="Foto Erlang" loading="lazy">
               </div>
-              <span class="font-headline-sm text-base sm:text-lg text-on-surface font-bold tracking-tight">Erlangga</span>
-              <span class="hidden" id="labelBoy" style="display:none;" aria-hidden="true"></span>
-            </div>
-
-            <!-- Center Glowing Heart Badge -->
-            <div class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0" id="centerBeatHeart" title="Ikhlas &amp; Tulus">
-              <div class="relative group flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest border border-outline-variant/40 shadow-sm active:scale-95 transition-all" id="interactiveHeartEmblem">
-                <span class="material-symbols-outlined text-primary text-[24px] animate-pulse" style="font-variation-settings: 'FILL' 1;">favorite</span>
-                <div class="absolute -inset-1 rounded-full bg-primary-fixed/40 blur-sm pointer-events-none"></div>
+              <div class="absolute bottom-0 right-0 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
+                <span class="material-symbols-outlined text-secondary text-[12px] sm:text-[14px]">eco</span>
               </div>
-              <span class="font-label-sm text-[10px] text-primary tracking-wider font-semibold uppercase text-center mt-0.5">IKHLAS &amp; TULUS</span>
             </div>
-
-            <!-- Cindy Card -->
-            <div class="photo-frame-wrapper flex flex-col items-center text-center gap-2 cursor-pointer group" id="girlFrame">
-              <div class="relative photo-frame" title="Klik untuk melihat foto Cindy!">
-                <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-surface-container p-1 ring-3 ring-primary-fixed-dim/80 shadow-lg group-hover:scale-105 transition-all duration-300">
-                  <img class="w-full h-full object-cover rounded-full couple-img" id="imgGirl" src="assets/girl-placeholder.svg" alt="Foto Cindy" loading="lazy">
-                </div>
-                <div class="absolute bottom-1 right-1 bg-surface-container-lowest rounded-full p-1.5 shadow-md border border-outline-variant/40">
-                  <span class="material-symbols-outlined text-primary text-[16px]">auto_awesome</span>
-                </div>
-              </div>
-              <span class="font-headline-sm text-base sm:text-lg text-on-surface font-bold tracking-tight">Cindy</span>
-              <span class="hidden" id="labelGirl" style="display:none;" aria-hidden="true"></span>
-            </div>
-
+            <span class="font-headline-sm text-xs sm:text-sm text-on-surface font-bold tracking-tight">Erlangga</span>
+            <span class="hidden" id="labelBoy" style="display:none;" aria-hidden="true"></span>
           </div>
+
+          <!-- Center Glowing Heart Badge -->
+          <div class="flex flex-col items-center gap-1 cursor-pointer shrink-0" id="centerBeatHeart" title="Ikhlas &amp; Tulus">
+            <div class="relative group flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-surface-container-lowest border border-outline-variant/40 shadow-sm active:scale-95 transition-all" id="interactiveHeartEmblem">
+              <span class="material-symbols-outlined text-primary text-[19px] sm:text-[22px] animate-pulse" style="font-variation-settings: 'FILL' 1;">favorite</span>
+              <div class="absolute -inset-1 rounded-full bg-primary-fixed/40 blur-sm pointer-events-none"></div>
+            </div>
+            <span class="font-label-sm text-[8.5px] sm:text-[9.5px] text-primary tracking-wider font-semibold uppercase text-center leading-none">IKHLAS &amp; TULUS</span>
+          </div>
+
+          <!-- Cindy Card -->
+          <div class="photo-frame-wrapper flex flex-col items-center text-center gap-1.5 cursor-pointer group shrink-0" id="girlFrame">
+            <div class="relative photo-frame" title="Klik untuk melihat foto Cindy!">
+              <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-surface-container p-0.5 ring-2 sm:ring-3 ring-primary-fixed-dim/80 shadow-md group-hover:scale-105 transition-all duration-300">
+                <img class="w-full h-full object-cover rounded-full couple-img" id="imgGirl" src="assets/girl-placeholder.svg" alt="Foto Cindy" loading="lazy">
+              </div>
+              <div class="absolute bottom-0 right-0 bg-surface-container-lowest rounded-full p-1 shadow-sm border border-outline-variant/40">
+                <span class="material-symbols-outlined text-primary text-[12px] sm:text-[14px]">auto_awesome</span>
+              </div>
+            </div>
+            <span class="font-headline-sm text-xs sm:text-sm text-on-surface font-bold tracking-tight">Cindy</span>
+            <span class="hidden" id="labelGirl" style="display:none;" aria-hidden="true"></span>
+          </div>
+
         </div>
       </div>
 
       <!-- 2. Perjalanan Cerita & Linimasa Hati -->
-      <div class="flex flex-col gap-space-md bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-outline-variant/30 relative overflow-hidden">
+      <div class="flex flex-col gap-space-sm bg-surface-container-lowest rounded-xl p-3.5 sm:p-5 shadow-sm border border-outline-variant/30 relative overflow-hidden">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-space-xs">
-            <span class="material-symbols-outlined text-primary text-[20px]">timeline</span>
-            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold font-['Playfair_Display']">Linimasa Hati</h2>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-primary text-[18px]">timeline</span>
+            <h2 class="font-headline-sm text-xs sm:text-sm text-on-surface font-semibold font-['Playfair_Display']">Linimasa Hati</h2>
           </div>
-          <div class="flex items-center gap-1 px-space-md py-1 rounded-full bg-primary-fixed/60 text-primary border border-primary/20">
-            <span class="material-symbols-outlined text-[14px]">calendar_today</span>
-            <span class="font-label-sm text-label-sm font-semibold">86 Hari Cerita Kita</span>
+          <div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-fixed/60 text-primary border border-primary/20">
+            <span class="material-symbols-outlined text-[12px]">calendar_today</span>
+            <span class="font-label-sm text-[10px] sm:text-[11px] font-semibold">86 Hari Cerita Kita</span>
           </div>
         </div>
 
@@ -562,25 +560,32 @@
 
       </div>
 
-      <!-- 3. iOS Bottom Chat Input Bar (Full Width, Pinned above pb-safe) -->
-      <div class="roomchat-ios-input-bar fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/30 pb-safe" id="chatStickyDock">
-        <div class="max-w-2xl mx-auto flex items-center gap-1.5 w-full px-3 py-2">
+      <!-- 3. iOS Bottom Chat Input Bar (Full Width, WhatsApp iOS Style) -->
+      <div class="roomchat-ios-input-bar fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/30 pb-1.5" id="chatStickyDock">
+        <div class="max-w-2xl mx-auto flex items-center gap-1.5 w-full px-2.5 py-1.5">
           
-          <form class="flex items-center gap-2 w-full" id="chat-form">
-            <div class="relative flex-1 min-w-0 flex items-center bg-surface-container-lowest rounded-full px-3.5 py-0.5 border border-outline-variant/30 shadow-inner">
-              <input autocomplete="off" class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-xs sm:text-sm py-2 min-w-0" id="chat-input" placeholder="Tulis pesan..." type="text">
+          <form class="flex items-center gap-1.5 w-full" id="chat-form">
+            <!-- Text Input Capsule -->
+            <div class="relative flex-1 min-w-0 flex items-center bg-surface-container-lowest rounded-full px-3 py-0.5 border border-outline-variant/30 shadow-inner">
+              <input autocomplete="off" class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-xs sm:text-sm py-1.5 min-w-0" id="chat-input" placeholder="Tulis pesan..." type="text">
               <button type="button" aria-label="Pilih emoji cinta" class="text-primary hover:scale-125 transition-transform p-1 shrink-0" id="chatHeartBtn">
-                <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
               </button>
             </div>
 
-            <button type="button" aria-label="Form Modal Tambah Pesan" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary-fixed/50 active:scale-90 transition-all bg-surface-container-low shrink-0" id="waOpenAddModalBtn" title="Form Tambah Pesan Lengkap">
-              <span class="material-symbols-outlined text-[19px]">add</span>
+            <!-- Send button (ONLY ICON SEND, round iOS circle) -->
+            <button type="submit" aria-label="Kirim Pesan" class="w-8 h-8 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center shadow-sm active:scale-95 transition-all shrink-0" id="btn-send-message" title="Kirim">
+              <span class="material-symbols-outlined text-[16px]">send</span>
             </button>
 
-            <button type="submit" aria-label="Kirim Pesan" class="h-9 px-4 rounded-full bg-primary hover:bg-primary-container text-on-primary flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all shrink-0 font-label-md text-xs font-bold" id="btn-send-message">
-              <span>Kirim</span>
-              <span class="material-symbols-outlined text-[15px]">send</span>
+            <!-- Camera button (WhatsApp iOS style) -->
+            <button type="button" aria-label="Ambil Foto Kamera" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all bg-surface-container-low shrink-0" id="btnChatCamera" title="Kamera (Coming Soon)">
+              <span class="material-symbols-outlined text-[19px]">photo_camera</span>
+            </button>
+
+            <!-- Attachment / Lampiran button (Paling Kanan) -->
+            <button type="button" aria-label="Lampirkan Dokumen" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all bg-surface-container-low shrink-0" id="waOpenAddModalBtn" title="Lampiran (Coming Soon)">
+              <span class="material-symbols-outlined text-[19px]">attach_file</span>
             </button>
           </form>
 
@@ -591,35 +596,49 @@
 
   </main>
 
-  <!-- FIXED BOTTOM NAVIGATION BAR (Slide 2) -->
-  <nav id="bottomNavBar" class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-4px_16px_rgba(157,32,67,0.04)]">
-    <div class="flex justify-around items-center h-16 px-space-md max-w-2xl mx-auto">
-      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-primary font-semibold transition-colors" id="bottomNavBerandaBtn">
-        <span class="material-symbols-outlined text-[22px]">home</span>
-        <span class="font-label-sm text-[10px]">Beranda</span>
+  <!-- FIXED BOTTOM NAVIGATION BAR -->
+  <nav id="bottomNavBar" class="fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-4px_16px_rgba(157,32,67,0.04)] pb-0.5">
+    <div class="flex justify-around items-center h-12 sm:h-13 max-w-md mx-auto px-2">
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-14 h-10 text-primary font-semibold transition-colors" id="bottomNavBerandaBtn">
+        <span class="material-symbols-outlined text-[19px]">home</span>
+        <span class="font-label-sm text-[9.5px]">Beranda</span>
       </button>
 
-      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors relative" id="bottomNavChatBtn">
-        <span class="material-symbols-outlined text-[22px]">forum</span>
-        <span class="font-label-sm text-[10px]">Obrolan</span>
-        <span class="absolute top-2 right-4 w-2 h-2 rounded-full bg-primary ring-2 ring-surface"></span>
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-14 h-10 text-on-surface-variant hover:text-primary transition-colors relative" id="bottomNavChatBtn">
+        <span class="material-symbols-outlined text-[19px]">forum</span>
+        <span class="font-label-sm text-[9.5px]">Obrolan</span>
+        <span class="absolute top-1 right-3.5 w-1.5 h-1.5 rounded-full bg-primary ring-1.5 ring-surface"></span>
       </button>
 
-      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" id="bottomNavLetterBtn">
-        <span class="material-symbols-outlined text-[22px]">auto_stories</span>
-        <span class="font-label-sm text-[10px]">Surat</span>
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-14 h-10 text-on-surface-variant hover:text-primary transition-colors" id="bottomNavLetterBtn">
+        <span class="material-symbols-outlined text-[19px]">auto_stories</span>
+        <span class="font-label-sm text-[9.5px]">Surat</span>
       </button>
 
-      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-16 h-14 text-on-surface-variant hover:text-primary transition-colors" id="bottomNavSettingsBtn">
-        <span class="material-symbols-outlined text-[22px]">settings</span>
-        <span class="font-label-sm text-[10px]">Pengaturan</span>
+      <button type="button" class="bottom-nav-item flex flex-col items-center justify-center gap-0.5 w-14 h-10 text-on-surface-variant hover:text-primary transition-colors" id="bottomNavSettingsBtn">
+        <span class="material-symbols-outlined text-[19px]">settings</span>
+        <span class="font-label-sm text-[9.5px]">Pengaturan</span>
       </button>
     </div>
   </nav>
 
   <!-- =========================================================================
-       MODALS PRESERVED: PREVIEW, SURAT, ALASAN, SETTINGS, ADD MESSAGE
+       MODALS: COMING SOON, ROLE SELECT, PREVIEW, SURAT, ALASAN, SETTINGS, ADD MESSAGE
        ========================================================================= -->
+
+  <!-- Modal: Coming Soon Alert Dialog (iOS Style) -->
+  <div class="modal-backdrop" id="comingSoonModal">
+    <div class="modal-card max-w-xs w-[85%] text-center p-5 bg-surface/95 backdrop-blur-2xl rounded-3xl border border-outline-variant/30 shadow-2xl animate-scale-up">
+      <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+        <span class="material-symbols-outlined text-[24px]" id="comingSoonIcon">info</span>
+      </div>
+      <h3 class="font-headline-sm text-sm sm:text-base font-bold text-on-surface mb-1" id="comingSoonTitle">Fitur Segera Hadir</h3>
+      <p class="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed" id="comingSoonMessage">Nantikan pembaruan berikutnya untuk fitur ini! ✨</p>
+      <button type="button" class="w-full py-2 rounded-full bg-primary text-on-primary font-semibold text-xs active:scale-95 transition-all shadow-sm" id="closeComingSoonBtn">
+        Mengerti 🤍
+      </button>
+    </div>
+  </div>
 
   <!-- Modal: Pilih Role Masuk Room Chat (Erlang vs Cindy) 💬 -->
   <div class="modal-backdrop" id="roleSelectModal">

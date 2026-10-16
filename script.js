@@ -180,6 +180,14 @@
   const bottomNavChatBtn = document.getElementById('bottomNavChatBtn');
   const bannerToChatBtn = document.getElementById('bannerToChatBtn');
 
+  // Coming Soon Modal Elements & Camera Button
+  const comingSoonModal = document.getElementById('comingSoonModal');
+  const closeComingSoonBtn = document.getElementById('closeComingSoonBtn');
+  const comingSoonTitle = document.getElementById('comingSoonTitle');
+  const comingSoonMessage = document.getElementById('comingSoonMessage');
+  const comingSoonIcon = document.getElementById('comingSoonIcon');
+  const btnChatCamera = document.getElementById('btnChatCamera');
+
   // Role Selection Modal Elements
   const roleSelectModal = document.getElementById('roleSelectModal');
   const closeRoleSelectModalBtn = document.getElementById('closeRoleSelectModalBtn');
@@ -943,6 +951,11 @@
     spawnBurstHearts(rect.left + rect.width / 2, rect.top, 25);
     playClickSfx(true);
     scrollChatToBottom(false);
+
+    // Buka pemilihan role di awal agar user langsung memilih Erlang atau Cindy satu kali saja
+    setTimeout(() => {
+      openRoleSelectModal();
+    }, 400);
   });
 
   // Music toggle
@@ -1170,10 +1183,9 @@
     playClickSfx(true);
   });
 
-  // Settings Modal (Ganti Foto Cindy, Foto Erlang & Lagu MP3)
+  // Profile Role Switch in Header: Quick Role Switch (Erlang / Cindy) on Beranda
   settingsBtn.addEventListener('click', () => {
-    settingsModal.classList.add('active');
-    playClickSfx();
+    openRoleSelectModal();
   });
 
   closeSettingsBtn.addEventListener('click', () => {
@@ -1817,17 +1829,15 @@
     }
   }
 
-  // Open "Tambah Pesan" Modal
-  if (waOpenAddModalBtn && waAddMessageModal) {
-    waOpenAddModalBtn.addEventListener('click', () => {
-      if (modalMessageTextarea) {
-        modalMessageTextarea.value = '';
-      }
-      waAddMessageModal.classList.add('active');
-      setTimeout(() => {
-        if (modalMessageTextarea) modalMessageTextarea.focus();
-      }, 100);
-      playClickSfx();
+  // Lampiran Button (Paling Kanan) - Coming Soon
+  if (waOpenAddModalBtn) {
+    waOpenAddModalBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showComingSoon(
+        'Lampiran Kenangan 📎',
+        'Fitur melampirkan berkas & foto kenangan sedang dipersiapkan dan akan segera hadir! ✨',
+        'attach_file'
+      );
     });
   }
 
@@ -2238,15 +2248,22 @@
     renderWhatsAppChat(false);
   }
 
-  function enterRoomChatWithRole(role) {
+  function selectActiveRole(role, goToChat = false) {
     currentActiveUserRole = role;
     try {
       localStorage.setItem('cilang_active_role', role);
     } catch (e) {}
     closeRoleSelectModal();
     updateRoomChatPerspective();
-    switchTab('chat');
-    showActionToast(`Masuk sebagai ${role === 'Erlang' ? 'Erlangga 🍃' : 'Cindy ✨'}`);
+    if (goToChat) {
+      switchTab('chat');
+    }
+    showActionToast(`Peran aktif: ${role === 'Erlang' ? 'Erlangga 🍃' : 'Cindy ✨'}`);
+    spawnBurstHearts(window.innerWidth / 2, window.innerHeight / 2, 20);
+  }
+
+  function enterRoomChatWithRole(role) {
+    selectActiveRole(role, true);
   }
 
   function switchTab(tabName) {
@@ -2303,14 +2320,15 @@
     }
   }
 
-  // Navigation Event Triggers: Entering Room Chat triggers Role Selection Modal!
+  // Navigation Event Triggers:
   if (tabBerandaBtn) tabBerandaBtn.addEventListener('click', () => switchTab('beranda'));
   if (bottomNavBerandaBtn) bottomNavBerandaBtn.addEventListener('click', () => switchTab('beranda'));
   if (chatBackToBerandaBtn) chatBackToBerandaBtn.addEventListener('click', () => switchTab('beranda'));
 
-  if (tabRoomChatBtn) tabRoomChatBtn.addEventListener('click', openRoleSelectModal);
-  if (bottomNavChatBtn) bottomNavChatBtn.addEventListener('click', openRoleSelectModal);
-  if (bannerToChatBtn) bannerToChatBtn.addEventListener('click', openRoleSelectModal);
+  // Direct Entry into Room Chat (No role modal on every click)
+  if (tabRoomChatBtn) tabRoomChatBtn.addEventListener('click', () => switchTab('chat'));
+  if (bottomNavChatBtn) bottomNavChatBtn.addEventListener('click', () => switchTab('chat'));
+  if (bannerToChatBtn) bannerToChatBtn.addEventListener('click', () => switchTab('chat'));
   if (chatHeaderSwitchRoleBtn) chatHeaderSwitchRoleBtn.addEventListener('click', openRoleSelectModal);
 
   // Role Selection Modal Actions
@@ -2320,8 +2338,38 @@
       if (e.target === roleSelectModal) closeRoleSelectModal();
     });
   }
-  if (modalChooseRoleErlang) modalChooseRoleErlang.addEventListener('click', () => enterRoomChatWithRole('Erlang'));
-  if (modalChooseRoleCindy) modalChooseRoleCindy.addEventListener('click', () => enterRoomChatWithRole('Cindy'));
+  if (modalChooseRoleErlang) modalChooseRoleErlang.addEventListener('click', () => selectActiveRole('Erlang'));
+  if (modalChooseRoleCindy) modalChooseRoleCindy.addEventListener('click', () => selectActiveRole('Cindy'));
+
+  // --- COMING SOON ALERT DIALOG (iOS Style) ---
+  function showComingSoon(title, message, icon = 'info') {
+    if (comingSoonTitle) comingSoonTitle.textContent = title;
+    if (comingSoonMessage) comingSoonMessage.textContent = message;
+    if (comingSoonIcon) comingSoonIcon.textContent = icon;
+    if (comingSoonModal) comingSoonModal.classList.add('active');
+    playClickSfx();
+  }
+
+  function closeComingSoon() {
+    if (comingSoonModal) comingSoonModal.classList.remove('active');
+  }
+
+  if (closeComingSoonBtn) closeComingSoonBtn.addEventListener('click', closeComingSoon);
+  if (comingSoonModal) {
+    comingSoonModal.addEventListener('click', (e) => {
+      if (e.target === comingSoonModal) closeComingSoon();
+    });
+  }
+
+  if (btnChatCamera) {
+    btnChatCamera.addEventListener('click', () => {
+      showComingSoon(
+        'Kamera Foto 📷',
+        'Fitur mengambil & melampirkan foto kenangan langsung dari kamera akan segera hadir! 🌸',
+        'photo_camera'
+      );
+    });
+  }
 
   // Toast Notice Helper
   function showActionToast(msg) {
@@ -2424,8 +2472,11 @@
 
   if (btnCall) {
     btnCall.addEventListener('click', () => {
-      showActionToast('Doa hening menghubungkan rasa kita... 🕊️');
-      playClickSfx(true);
+      showComingSoon(
+        'Panggilan Kenangan 📞',
+        'Fitur panggilan suara kenangan sedang dipersiapkan dan akan segera hadir! 🕊️',
+        'call'
+      );
     });
   }
 

@@ -68,8 +68,8 @@ body {
 
 /* Responsive Content Layout & Safe Spacing (Prevent Header/Navbar Overlap) */
 .serenade-main-content {
-  padding-top: calc(96px + env(safe-area-inset-top, 0px)) !important;
-  padding-bottom: calc(115px + env(safe-area-inset-bottom, 0px)) !important;
+  padding-top: calc(64px + env(safe-area-inset-top, 0px)) !important;
+  padding-bottom: 70px !important;
   min-height: 100vh;
   position: relative;
   width: 100%;
@@ -77,8 +77,8 @@ body {
 
 @media (min-width: 640px) {
   .serenade-main-content {
-    padding-top: calc(92px + env(safe-area-inset-top, 0px)) !important;
-    padding-bottom: calc(105px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-top: calc(68px + env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: 74px !important;
   }
 }
 
