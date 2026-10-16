@@ -215,9 +215,10 @@
             </button>
           </div>
 
-          <!-- Profile Role Switch Button in Header -->
-          <button type="button" class="w-7 h-7 rounded-full bg-primary-fixed flex items-center justify-center shrink-0 border border-primary/20 text-primary shadow-2xs hover:scale-105 active:scale-95 transition-all" id="settingsBtn" title="Ganti Peran / Role (Erlang &amp; Cindy)">
-            <span class="material-symbols-outlined text-[15px]">person</span>
+          <!-- Profile Role Switch Button in Header (Displays Active Role Avatar) -->
+          <button type="button" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden p-0.5 border-2 border-primary/40 bg-surface-container-low shadow-2xs hover:scale-105 active:scale-95 transition-all relative flex items-center justify-center shrink-0 cursor-pointer" id="settingsBtn" title="Peran Aktif: Erlangga (Ketuk untuk ganti peran)">
+            <img id="headerActiveRoleImg" src="assets/boy-placeholder.svg" alt="Role Aktif" class="w-full h-full object-cover rounded-full">
+            <span class="material-symbols-outlined text-[15px] hidden" id="headerRoleFallbackIcon">person</span>
           </button>
         </div>
 
@@ -642,36 +643,55 @@
 
   <!-- Modal: Pilih Role Masuk Room Chat (Erlang vs Cindy) 💬 -->
   <div class="modal-backdrop" id="roleSelectModal">
-    <div class="modal-card max-w-sm w-[90%] text-center p-6 bg-surface/95 backdrop-blur-2xl rounded-3xl border border-outline-variant/40 shadow-2xl animate-scale-up">
+    <div class="modal-card max-w-sm w-[90%] text-center p-5 sm:p-6 bg-surface/95 backdrop-blur-2xl rounded-3xl border border-outline-variant/40 shadow-2xl animate-scale-up">
       <button class="modal-close" id="closeRoleSelectModalBtn" aria-label="Tutup Pilihan Role" title="Tutup">✕</button>
       
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary font-label-md text-xs font-semibold mb-3">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary font-label-md text-xs font-semibold mb-2">
         <span class="material-symbols-outlined text-[16px]">how_to_reg</span>
         <span>Pilih Karaktermu</span>
       </div>
 
-      <h3 class="font-headline-sm text-lg sm:text-xl font-bold text-on-surface mb-1">Masuk ke Room Chat</h3>
-      <p class="font-body-sm text-xs text-on-surface-variant mb-5">Pilih siapa dirimu hari ini untuk melihat dan menuliskan pesan kenangan:</p>
+      <h3 class="font-headline-sm text-base sm:text-lg font-bold text-on-surface mb-0.5">Pilih Peranmu</h3>
+      <p class="font-body-sm text-[11.5px] text-on-surface-variant mb-3">Tentukan siapa dirimu hari ini untuk membaca dan mengirim pesan:</p>
 
-      <div class="grid grid-cols-2 gap-3 mb-4">
+      <!-- Status Peran Aktif Saat Ini -->
+      <div class="mb-4 px-3 py-1.5 rounded-xl bg-surface-container/70 text-xs text-on-surface flex items-center justify-center gap-1.5 border border-outline-variant/30" id="roleCurrentActiveBanner">
+        <span class="text-on-surface-variant text-[11px]">Peran saat ini:</span>
+        <span class="inline-flex items-center gap-1 font-bold text-primary text-[12px]" id="roleCurrentActiveText">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          <span id="roleCurrentActiveName">Erlangga 🍃</span>
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mb-3.5">
         <!-- Card Role Erlang -->
-        <button type="button" id="modalChooseRoleErlang" class="flex flex-col items-center p-3.5 rounded-2xl bg-surface-container-low hover:bg-primary/10 active:scale-95 border-2 border-transparent hover:border-primary/40 transition-all cursor-pointer group shadow-sm">
-          <div class="w-16 h-16 rounded-full p-0.5 ring-2 ring-primary/40 group-hover:ring-primary shadow-md overflow-hidden mb-2 bg-surface">
+        <button type="button" id="modalChooseRoleErlang" class="flex flex-col items-center p-3.5 rounded-2xl bg-surface-container-low hover:bg-primary/10 active:scale-95 border-2 border-transparent transition-all cursor-pointer group shadow-sm relative">
+          <!-- Active Badge Pin -->
+          <div id="badgeActiveErlang" class="absolute -top-2.5 right-2 bg-primary text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-0.5 hidden">
+            <span class="material-symbols-outlined text-[11px]">check</span>
+            <span>Aktif</span>
+          </div>
+          <div id="avatarRingErlang" class="w-16 h-16 rounded-full p-0.5 ring-2 ring-primary/40 group-hover:ring-primary shadow-md overflow-hidden mb-2 bg-surface transition-all">
             <img id="roleModalImgBoy" src="assets/boy-placeholder.svg" alt="Erlang" class="w-full h-full object-cover">
           </div>
           <span class="font-headline-sm font-bold text-sm text-on-surface group-hover:text-primary transition-colors">Erlangga</span>
           <span class="font-label-sm text-[10px] text-on-surface-variant/80 mt-0.5">🍃 Belajar Ikhlas</span>
-          <span class="mt-2 text-[11px] font-semibold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full">Pilih Erlang</span>
+          <span id="btnTextErlang" class="mt-2 text-[11px] font-semibold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full transition-all">Pilih Erlang</span>
         </button>
 
         <!-- Card Role Cindy -->
-        <button type="button" id="modalChooseRoleCindy" class="flex flex-col items-center p-3.5 rounded-2xl bg-surface-container-low hover:bg-secondary/10 active:scale-95 border-2 border-transparent hover:border-secondary/40 transition-all cursor-pointer group shadow-sm">
-          <div class="w-16 h-16 rounded-full p-0.5 ring-2 ring-secondary/40 group-hover:ring-secondary shadow-md overflow-hidden mb-2 bg-surface">
+        <button type="button" id="modalChooseRoleCindy" class="flex flex-col items-center p-3.5 rounded-2xl bg-surface-container-low hover:bg-secondary/10 active:scale-95 border-2 border-transparent transition-all cursor-pointer group shadow-sm relative">
+          <!-- Active Badge Pin -->
+          <div id="badgeActiveCindy" class="absolute -top-2.5 right-2 bg-secondary text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-0.5 hidden">
+            <span class="material-symbols-outlined text-[11px]">check</span>
+            <span>Aktif</span>
+          </div>
+          <div id="avatarRingCindy" class="w-16 h-16 rounded-full p-0.5 ring-2 ring-secondary/40 group-hover:ring-secondary shadow-md overflow-hidden mb-2 bg-surface transition-all">
             <img id="roleModalImgGirl" src="assets/girl-placeholder.svg" alt="Cindy" class="w-full h-full object-cover">
           </div>
           <span class="font-headline-sm font-bold text-sm text-on-surface group-hover:text-secondary transition-colors">Cindy</span>
           <span class="font-label-sm text-[10px] text-on-surface-variant/80 mt-0.5">✨ Rumah Pulang</span>
-          <span class="mt-2 text-[11px] font-semibold text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full">Pilih Cindy</span>
+          <span id="btnTextCindy" class="mt-2 text-[11px] font-semibold text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full transition-all">Pilih Cindy</span>
         </button>
       </div>
 

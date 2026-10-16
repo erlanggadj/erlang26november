@@ -944,3 +944,21 @@ body {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+/* ==========================================================================
+   ROLE SELECTOR ACTIVE HIGHLIGHTS (ERLANG VS CINDY)
+   ========================================================================== */
+.role-card-active-erlang {
+  border-color: #9d2043 !important;
+  box-shadow: 0 0 0 3px rgba(157, 32, 67, 0.28), 0 8px 20px rgba(157, 32, 67, 0.12) !important;
+  background-color: rgba(157, 32, 67, 0.08) !important;
+  transform: scale(1.02);
+}
+
+.role-card-active-cindy {
+  border-color: #54634d !important;
+  box-shadow: 0 0 0 3px rgba(84, 99, 77, 0.28), 0 8px 20px rgba(84, 99, 77, 0.12) !important;
+  background-color: rgba(84, 99, 77, 0.08) !important;
+  transform: scale(1.02);
+}
+

@@ -785,6 +785,7 @@
       const waPartnerHeaderAvatar = document.getElementById('waPartnerHeaderAvatar');
       if (waPartnerHeaderAvatar) waPartnerHeaderAvatar.src = src;
     }
+    updateHeaderActiveRoleAvatar();
   }
 
   function setGirlPhoto(src) {
@@ -798,6 +799,7 @@
       const waPartnerHeaderAvatar = document.getElementById('waPartnerHeaderAvatar');
       if (waPartnerHeaderAvatar) waPartnerHeaderAvatar.src = src;
     }
+    updateHeaderActiveRoleAvatar();
   }
 
   // --- HEARTBREAK COUNTER (Dihitung dari 2 Juli sampai Hari Ini) ---
@@ -2065,6 +2067,8 @@
 
   applyConfig();
   updateRoomChatPerspective();
+  updateHeaderActiveRoleAvatar();
+  updateRoleModalActiveState();
 
   // --- BACKGROUND CANVAS (LIGHTWEIGHT NATURE FALLING LEAVES & GOLDEN SPORES) ---
   const canvas = document.getElementById('loveCanvas');
@@ -2204,6 +2208,105 @@
     playClickSfx();
   }
 
+  function updateHeaderActiveRoleAvatar() {
+    const headerActiveRoleImg = document.getElementById('headerActiveRoleImg');
+    const settingsBtn = document.getElementById('settingsBtn');
+    if (!headerActiveRoleImg || !settingsBtn) return;
+
+    if (currentActiveUserRole === 'Erlang') {
+      const boySrc = (imgBoy && imgBoy.src) ? imgBoy.src : (localStorage.getItem('savedBoyPhoto') || 'assets/boy-placeholder.svg');
+      headerActiveRoleImg.src = boySrc;
+      headerActiveRoleImg.alt = 'Role Erlangga Aktif';
+      settingsBtn.title = 'Peran Aktif: Erlangga 🍃 (Ketuk untuk ganti peran)';
+      settingsBtn.className = 'w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden p-0.5 border-2 border-primary ring-2 ring-primary/25 bg-surface-container-low shadow-2xs hover:scale-105 active:scale-95 transition-all relative flex items-center justify-center shrink-0 cursor-pointer';
+    } else {
+      const girlSrc = (imgGirl && imgGirl.src) ? imgGirl.src : (localStorage.getItem('savedGirlPhoto') || 'assets/girl-placeholder.svg');
+      headerActiveRoleImg.src = girlSrc;
+      headerActiveRoleImg.alt = 'Role Cindy Aktif';
+      settingsBtn.title = 'Peran Aktif: Cindy ✨ (Ketuk untuk ganti peran)';
+      settingsBtn.className = 'w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden p-0.5 border-2 border-secondary ring-2 ring-secondary/25 bg-surface-container-low shadow-2xs hover:scale-105 active:scale-95 transition-all relative flex items-center justify-center shrink-0 cursor-pointer';
+    }
+  }
+
+  function updateRoleModalActiveState() {
+    const modalChooseRoleErlang = document.getElementById('modalChooseRoleErlang');
+    const modalChooseRoleCindy = document.getElementById('modalChooseRoleCindy');
+    const badgeActiveErlang = document.getElementById('badgeActiveErlang');
+    const badgeActiveCindy = document.getElementById('badgeActiveCindy');
+    const avatarRingErlang = document.getElementById('avatarRingErlang');
+    const avatarRingCindy = document.getElementById('avatarRingCindy');
+    const btnTextErlang = document.getElementById('btnTextErlang');
+    const btnTextCindy = document.getElementById('btnTextCindy');
+    const roleCurrentActiveName = document.getElementById('roleCurrentActiveName');
+    const roleCurrentActiveText = document.getElementById('roleCurrentActiveText');
+
+    if (currentActiveUserRole === 'Erlang') {
+      // Highlight Erlang with outline and badge
+      if (modalChooseRoleErlang) {
+        modalChooseRoleErlang.classList.add('role-card-active-erlang');
+        modalChooseRoleErlang.classList.remove('border-transparent');
+      }
+      if (badgeActiveErlang) badgeActiveErlang.classList.remove('hidden');
+      if (avatarRingErlang) {
+        avatarRingErlang.className = 'w-16 h-16 rounded-full p-0.5 ring-3 ring-primary shadow-lg overflow-hidden mb-2 bg-surface transition-all';
+      }
+      if (btnTextErlang) {
+        btnTextErlang.className = 'mt-2 text-[11px] font-bold text-white bg-primary px-3 py-0.5 rounded-full shadow-xs flex items-center gap-1';
+        btnTextErlang.innerHTML = '<span class="material-symbols-outlined text-[13px]">done</span> Sedang Dipilih';
+      }
+
+      // Normal Cindy
+      if (modalChooseRoleCindy) {
+        modalChooseRoleCindy.classList.remove('role-card-active-cindy');
+        modalChooseRoleCindy.classList.add('border-transparent');
+      }
+      if (badgeActiveCindy) badgeActiveCindy.classList.add('hidden');
+      if (avatarRingCindy) {
+        avatarRingCindy.className = 'w-16 h-16 rounded-full p-0.5 ring-2 ring-secondary/40 group-hover:ring-secondary shadow-md overflow-hidden mb-2 bg-surface transition-all';
+      }
+      if (btnTextCindy) {
+        btnTextCindy.className = 'mt-2 text-[11px] font-semibold text-secondary bg-secondary/15 px-2.5 py-0.5 rounded-full hover:bg-secondary hover:text-white transition-all';
+        btnTextCindy.textContent = 'Beralih ke Cindy';
+      }
+
+      // Banner text
+      if (roleCurrentActiveName) roleCurrentActiveName.textContent = 'Erlangga 🍃';
+      if (roleCurrentActiveText) roleCurrentActiveText.className = 'inline-flex items-center gap-1 font-bold text-primary text-[12px]';
+    } else {
+      // Highlight Cindy with outline and badge
+      if (modalChooseRoleCindy) {
+        modalChooseRoleCindy.classList.add('role-card-active-cindy');
+        modalChooseRoleCindy.classList.remove('border-transparent');
+      }
+      if (badgeActiveCindy) badgeActiveCindy.classList.remove('hidden');
+      if (avatarRingCindy) {
+        avatarRingCindy.className = 'w-16 h-16 rounded-full p-0.5 ring-3 ring-secondary shadow-lg overflow-hidden mb-2 bg-surface transition-all';
+      }
+      if (btnTextCindy) {
+        btnTextCindy.className = 'mt-2 text-[11px] font-bold text-white bg-secondary px-3 py-0.5 rounded-full shadow-xs flex items-center gap-1';
+        btnTextCindy.innerHTML = '<span class="material-symbols-outlined text-[13px]">done</span> Sedang Dipilih';
+      }
+
+      // Normal Erlang
+      if (modalChooseRoleErlang) {
+        modalChooseRoleErlang.classList.remove('role-card-active-erlang');
+        modalChooseRoleErlang.classList.add('border-transparent');
+      }
+      if (badgeActiveErlang) badgeActiveErlang.classList.add('hidden');
+      if (avatarRingErlang) {
+        avatarRingErlang.className = 'w-16 h-16 rounded-full p-0.5 ring-2 ring-primary/40 group-hover:ring-primary shadow-md overflow-hidden mb-2 bg-surface transition-all';
+      }
+      if (btnTextErlang) {
+        btnTextErlang.className = 'mt-2 text-[11px] font-semibold text-primary bg-primary/15 px-2.5 py-0.5 rounded-full hover:bg-primary hover:text-white transition-all';
+        btnTextErlang.textContent = 'Beralih ke Erlang';
+      }
+
+      // Banner text
+      if (roleCurrentActiveName) roleCurrentActiveName.textContent = 'Cindy ✨';
+      if (roleCurrentActiveText) roleCurrentActiveText.className = 'inline-flex items-center gap-1 font-bold text-secondary text-[12px]';
+    }
+  }
+
   function openRoleSelectModal() {
     if (roleModalImgBoy) {
       roleModalImgBoy.src = (imgBoy && imgBoy.src) ? imgBoy.src : (localStorage.getItem('savedBoyPhoto') || 'assets/boy-placeholder.svg');
@@ -2211,6 +2314,7 @@
     if (roleModalImgGirl) {
       roleModalImgGirl.src = (imgGirl && imgGirl.src) ? imgGirl.src : (localStorage.getItem('savedGirlPhoto') || 'assets/girl-placeholder.svg');
     }
+    updateRoleModalActiveState();
     if (roleSelectModal) roleSelectModal.classList.add('active');
     playClickSfx();
   }
@@ -2255,6 +2359,8 @@
     } catch (e) {}
     closeRoleSelectModal();
     updateRoomChatPerspective();
+    updateHeaderActiveRoleAvatar();
+    updateRoleModalActiveState();
     if (goToChat) {
       switchTab('chat');
     }
